@@ -1,0 +1,137 @@
+.nav-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: 0.6s;
+    z-index: 1;
+    max-width: 100%;
+    width: 100%;
+}
+.nav-header .nav-menu a {
+    margin: 0px 35px;
+    font-size: 20px;
+    font-weight: bold;
+    align-self: center;
+    text-align: center;
+    &hover {
+        background-color: aqua;
+    }
+    button {
+        font-size: 15px;
+        font-weight: bold;
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border: 1px solid white;
+        border-radius: 50px;
+        transition: 1s;
+    }
+}
+.img-navbar {
+    width: 300px;
+    height: 100px;
+    margin: 0 30px;
+    transition: 1s;
+}
+.img-navbar-fix {
+    width: 180px;
+    height: 70px;
+    margin: 0 30px;
+    transition: 1s;
+}
+
+.nav-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: 1s ease-in-out;
+    max-width: 97%;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    margin: 20px;
+    z-index: 10;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+.nav-fixed .nav-menu a {
+    margin: 0px 35px;
+    font-size: 18px;
+    font-weight: bold;
+    align-self: center;
+    text-align: center;
+    color: black;
+    button {
+        font-size: 17px;
+        font-weight: bold;
+        background-color: red;
+        padding: 10px 20px;
+        color: white;
+        border: 1px solid white;
+        border-radius: 50px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .nav-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: 0.6s;
+        z-index: 1;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    a.nav-link {
+        color: black;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .nav-menu a button {
+        font-size: 15px;
+        font-weight: 600;
+        margin-top: 10px;
+        background-color: red;
+        color: white;
+        padding: 10px;
+        border: 1px solid white;
+        border-radius: 10px;
+    }
+    .nav-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: 1s ease-in-out;
+        width: 94%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 15px;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        z-index: 1;
+    }
+    .img-navbar {
+        width: 200px;
+        height: 80px;
+        margin: none;
+    }
+}
+@media only screen and (max-width: 410px) {
+    .img-navbar {
+        width: 100px;
+        height: 40px;
+        margin: none;
+    }
+    .nav-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: 1s ease-in-out;
+        width: 90%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 15px;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        z-index: 1;
+    }
+}

@@ -1,0 +1,52 @@
+.card-lecture {
+    position: "relative";
+    z-index: inherit;
+    display: block;
+    margin: 0 auto;
+    .img {
+        width: 18rem;
+        height: 100%;
+    }
+    &:hover {
+        box-shadow: unset;
+        transition: 0.5s all;
+        .des-lecture {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+            padding: 10px;
+            color: white;
+            bottom: 0px;
+            -webkit-transition: 0.3s ease-in;
+            -o-transition: 0.3s ease-in;
+            transition: 0.3s ease-in;
+            align-items: center;
+        }
+    }
+}
+.des-lecture {
+    position: absolute;
+    bottom: -200px;
+    display: hidden;
+    padding: 10px;
+    .des-detail-lecture {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        font-size: 18px;
+        text-align: left;
+        margin: 6px 0;
+        font-weight: 400;
+    }
+    .career-lecture {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 6px 0;
+    }
+    .title-lecture {
+        font-size: 25px;
+        font-weight: bold;
+        margin: 6px 0;
+    }
+}
+

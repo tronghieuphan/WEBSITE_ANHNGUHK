@@ -1,0 +1,7 @@
+/node_modules
+/vender
+/.idea
+.idea/
+.env
+
+CACHE
