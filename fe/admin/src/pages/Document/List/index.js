@@ -12,7 +12,6 @@ import "./style.scss";
 import SearchData from "../../../components/Search";
 function DocumentList() {
     const [listDocument, setListDocument] = useState([]);
-    console.log('listDocument: ', listDocument);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [datafind, setDataFind] = useState("");

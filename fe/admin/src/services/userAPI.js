@@ -36,7 +36,9 @@ const userAPI = {
     find: (obj) => {
         return axios.post(`http://localhost:9000/find-user`, obj);
     },
-    
+    findUserType: (obj) => {
+        return axios.post(`http://localhost:9000/findbytypeuser`, obj);
+    },
 };
 
 export default userAPI;

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import getCookie from "../../cookie/getCookie";
 import Swal from "sweetalert2";
 import consultAPI from "../../services/consultAPI";
-import { info, successDialog } from "../Dialog/Dialog";
+import { info, infoRes } from "../Dialog/Dialog";
 function BtnRegister(props) {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
@@ -22,7 +22,9 @@ function BtnRegister(props) {
     const handleCreate = async (obj) => {
         const data = await consultAPI.create(obj);
         if (data.data.message === "Create Successfully") {
-            successDialog();
+            infoRes(
+                "Bạn đã đăng ký khóa học thành công, vui lòng đến trung tâm đúng lịch hẹn. Nếu sau 5 ngày bạn không đến trung tâm sẽ hủy lịch hẹn của bạn. Xin cảm ơn !"
+            );
             setValueRegis(data.data.data);
         }
     };

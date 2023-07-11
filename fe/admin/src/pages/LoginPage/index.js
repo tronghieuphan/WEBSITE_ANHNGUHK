@@ -11,32 +11,37 @@ function LoginPage() {
     const user = getCookie("useradmin") ? JSON.parse(getCookie("useradmin")) : null;
     // const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleSubmit = async (e, res) => {
-        if (e.userName === undefined || e.passWord === undefined) {
-            toast.error("Nhập thông tin đầy đủ nào");
+    const handleSubmit = async (e) => {
+        let checkType = await userAPI.find({ datafind: e.userName });
+        if (checkType.data.data[0].typeUser === "0" || checkType.data.data[0].typeUser === "1") {
+            toast.error("Tài khoản không tồn tại !");
         } else {
-            let a = await userAPI.login(e);
-            if (a.data.message === "Username Not Exist") {
-                toast.error("Tài khoản không tồn tại");
+            if (e.userName === undefined || e.passWord === undefined) {
+                toast.error("Nhập thông tin đầy đủ nào");
             } else {
-                if (a.data.message === "Fail Password") {
-                    toast.error("Mật khẩu không chính xác");
+                let a = await userAPI.login(e);
+                if (a.data.message === "Username Not Exist") {
+                    toast.error("Tài khoản không tồn tại");
                 } else {
-                    let obj;
-                    if (a.data.data.typeUser === "3" && a.data.data.department === "Đào tạo")
-                        obj = {
-                            ...a.data.data,
-                            codeUser: 1,
-                        };
-                    else {
-                        obj = {
-                            ...a.data.data,
-                            codeUser: 0,
-                        };
+                    if (a.data.message === "Fail Password") {
+                        toast.error("Mật khẩu không chính xác");
+                    } else {
+                        let obj;
+                        if (a.data.data.typeUser === "3" && a.data.data.department === "Đào tạo")
+                            obj = {
+                                ...a.data.data,
+                                codeUser: 1,
+                            };
+                        else {
+                            obj = {
+                                ...a.data.data,
+                                codeUser: 0,
+                            };
+                        }
+                        setCookie("useradmin", JSON.stringify(obj));
+                        toast.success("Đăng nhập thàng công");
+                        navigate(`/home`);
                     }
-                    setCookie("useradmin", JSON.stringify(obj));
-                    toast.success("Đăng nhập thàng công");
-                    navigate(`/home`);
                 }
             }
         }

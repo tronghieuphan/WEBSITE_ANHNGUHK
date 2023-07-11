@@ -1,4 +1,4 @@
-import { Table, Button, Popconfirm, Tooltip, Switch } from "antd";
+import { Table, Button, Popconfirm, Tooltip, Switch, message, Select } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
@@ -9,9 +9,11 @@ import courseAPI from "../../../services/courseAPI";
 import { setDataCourse } from "../../../slices/dataAdd";
 import DetailCourse from "../Detail";
 import { VND } from "../../../utils/formatVND";
+import typeAPI from "../../../services/typeAPI ";
 
 function CourseList() {
     const [listCourse, setListCourse] = useState([]);
+    const [listType, setListType] = useState([]);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
 
@@ -27,9 +29,19 @@ function CourseList() {
             throw new Error(err);
         }
     };
-
+    const getAllType = async () => {
+        try {
+            setLoading(true);
+            const response = await typeAPI.getAll();
+            setListType(response.data.data);
+            setLoading(false);
+        } catch (err) {
+            throw new Error(err);
+        }
+    };
     useEffect(() => {
         getAllCourse();
+        getAllType();
     }, []);
 
     // XỬ LÝ DELETE
@@ -71,6 +83,24 @@ function CourseList() {
         dispatch(setDataCourse(record));
         setOpen(true);
     };
+
+    const handleChange = async (key, obj) => {
+        let data;
+        if (key === "1") {
+            data = await getAllCourse();
+        } else {
+            setLoading(true);
+            data = await courseAPI.getCourseBeLongType({ datafind: key });
+            setListCourse(data.data.data);
+            setLoading(false);
+        }
+        message.success(`Bạn đã chọn ${obj.label}`);
+    };
+    const items = [{ id: "1", nameType: "Tất cả" }];
+    listType?.map((item) => {
+        items.push({ id: item.id, nameType: item.nameType });
+    });
+
     const columns = [
         {
             title: "ID",
@@ -261,16 +291,16 @@ function CourseList() {
         },
         {
             title: "Mã đối tượng",
-            dataIndex: "classifyId",
-            render: (classifyId) => <div style={{ width: "80px" }}>{classifyId}</div>,
+            dataIndex: "classify",
+            render: (classify) => <div style={{ width: "80px" }}>{classify?.nameClassify}</div>,
         },
         {
-            title: "Mã loại",
+            title: "Loại khóa học",
             dataIndex: "type",
-            render: (type) => <div style={{ width: "80px" }}>{type.nameType}</div>,
+            render: (type) => <div style={{ width: "80px" }}>{type?.nameType}</div>,
         },
         {
-            title: "Mã khuyến mãi",
+            title: "Khuyến mãi áp dụng",
             dataIndex: "discount",
             render: (discount) => (
                 <div style={{ width: "80px" }}>{discount?.percent ? discount?.percent : "0"}%</div>
@@ -328,9 +358,24 @@ function CourseList() {
                 <div className="text-muted">
                     <div className="">
                         <p className="fs-4 fw-bold">DANH SÁCH KHÓA HỌC</p>
-                        <Button className="bg-light" onClick={handleDataCreate}>
-                            <FontAwesomeIcon icon={faPlus} className="text-dark" />
-                        </Button>
+                        <div className="row">
+                            <div className="col-md-8">
+                                <Button className="bg-light" onClick={handleDataCreate}>
+                                    <FontAwesomeIcon icon={faPlus} className="text-dark" />
+                                </Button>
+                            </div>
+                            <div className="col-md-4 text-end">
+                                <Select
+                                    defaultValue="Chọn loại khóa học"
+                                   
+                                    onChange={handleChange}
+                                    options={items.map((item) => ({
+                                        label: item.nameType,
+                                        value: item.id,
+                                    }))}
+                                />
+                            </div>
+                        </div>
 
                         <DetailCourse
                             handleCreate={handleCreate}

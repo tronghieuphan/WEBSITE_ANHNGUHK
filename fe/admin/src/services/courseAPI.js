@@ -18,7 +18,9 @@ const courseAPI = {
     getCourseBy: (obj) => {
         return axios.post(`http://localhost:9000/getby-course`, obj);
     },
-    
+    getCourseBeLongType: (obj) => {
+        return axios.post(`http://localhost:9000/getby-coursebelongtype`, obj);
+    },
 };
 
 export default courseAPI;

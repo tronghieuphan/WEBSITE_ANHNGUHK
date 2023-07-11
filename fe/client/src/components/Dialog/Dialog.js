@@ -56,7 +56,17 @@ export const info = (title, content) => {
         },
     });
 };
-
+export const infoRes = (content) => {
+    Swal.fire({
+        icon: "success",
+        text: content,
+        showConfirmButton: false,
+        timer: 2500,
+        customClass: {
+            title: "fs-5 text-success",
+        },
+    });
+};
 export const successInfo = (title) => {
     Swal.fire({
         icon: "success",

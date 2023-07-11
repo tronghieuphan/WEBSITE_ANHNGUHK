@@ -11,6 +11,7 @@ import userAPI from "../../../services/userAPI";
 import TableUser from "../../../components/Table";
 import DetailUser from "../Detail";
 import getCookie from "../../../cookie/getCookie";
+import SearchData from "../../../components/Search";
 function UserList() {
     const user = getCookie("useradmin") ? JSON.parse(getCookie("useradmin")) : null;
     const [staffConsult, setValeTypeConsult] = useState(false);
@@ -18,8 +19,8 @@ function UserList() {
     const [admin, setValeTypeAdmin] = useState(false);
     const [listUser, setListUser] = useState([]);
     const [typeUser, setTypeUser] = useState({ typeUser: user?.codeUser });
+    const [datafind, setDataFind] = useState("");
 
-    console.log("typeUser: ", typeUser);
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
@@ -51,16 +52,23 @@ function UserList() {
             throw new Error(err);
         }
     };
+    const findUser = async (obj) => {
+        setLoading(true);
+        const response = await userAPI.findUserType(obj);
+        setListUser(response.data.data);
+        setLoading(false);
+    };
     useEffect(() => {
         handlePreUser();
     }, []);
     useEffect(() => {
         getAll_TypeUser(typeUser);
     }, [typeUser]);
-
+    useEffect(() => {
+        findUser({ typeUser: typeUser.typeUser, datafind: datafind });
+    }, [datafind]);
     // XỬ LÝ DELETE
     const handleDelete = async (record) => {
-        console.log(record);
         const data = await userAPI.delete(record.id);
         if (data.data.message === "Delete Successfully") {
             deleteSuccess();
@@ -223,7 +231,6 @@ function UserList() {
         ];
     }
 
-
     const onChange = (key) => {
         let obj = {
             typeUser: key,
@@ -241,9 +248,16 @@ function UserList() {
                 <div className="text-muted">
                     <div className="">
                         <p className="fs-4 fw-bold">THÔNG TIN NGƯỜI DÙNG</p>
-                        <Button className="bg-light" onClick={handleDataCreate}>
-                            <FontAwesomeIcon icon={faPlus} className="text-dark" />
-                        </Button>
+                        <div className="row">
+                            <div className="col-md-8">
+                                <Button className="bg-light" onClick={handleDataCreate}>
+                                    <FontAwesomeIcon icon={faPlus} className="text-dark" />
+                                </Button>
+                            </div>
+                            <div className="col-md-4 text-end">
+                                <SearchData setDataFind={setDataFind} />
+                            </div>
+                        </div>
                         <hr className="w-100 " />
                         <DetailUser
                             handleCreate={handleCreate}
