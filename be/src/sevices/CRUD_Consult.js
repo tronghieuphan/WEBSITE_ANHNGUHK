@@ -1,4 +1,4 @@
-import express from "express";
+import express, { request } from "express";
 import db from "../models/index";
 import randomId from "./randomId";
 import emailService from "./sendEmail";
@@ -97,9 +97,61 @@ let handleConsult = async (data) => {
         }
     });
 };
-
+let handleDateWait = async () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.consult.findAll({
+                include: [{ model: db.user }, { model: db.classes }],
+            });
+            data.map(async (item) => {
+                let datenow = new Date();
+                let dateArrive = new Date(item.dateArrive);
+                let datefuture = new Date(
+                    new Date(item.dateArrive).setDate(new Date(item.dateArrive).getDate() + 5)
+                );
+                if (
+                    datenow.getDate() == dateArrive.getDate() &&
+                    datenow.getMonth() == dateArrive.getMonth() &&
+                    datenow.getFullYear() == dateArrive.getFullYear()
+                ) {
+                    let classesid = await db.classes.findOne({
+                        where: {
+                            id: item.classesId,
+                        },
+                    });
+                    let objmail = {
+                        ...item,
+                        fullname: user.firstName + " " + user.lastName,
+                        email: user.email,
+                        classes: classesid.nameClasses,
+                    };
+                    await emailService.AlertDateConsult(objmail);
+                } else if (
+                    datefuture.getDate() == dateArrive.getDate() &&
+                    datefuture.getMonth() == dateArrive.getMonth() &&
+                    datefuture.getFullYear() == dateArrive.getFullYear()
+                ) {
+                    let objmail = {
+                        fullname: user.firstName + " " + user.lastName,
+                        email: user.email,
+                    };
+                    await db.consult.destroy({
+                        where: {
+                            id: item.id,
+                        },
+                    });
+                    await emailService.CancelConsult(objmail);
+                }
+            });
+            resolve({ data: data });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
 module.exports = {
     createConsult,
     getAllConsult,
     handleConsult,
+    handleDateWait,
 };

@@ -484,6 +484,47 @@ let findUser = (datafind) => {
                 data = await db.user.findAll({
                     where: {
                         [Op.or]: [
+                            // {
+                            //     phone: { [Op.substring]: datafind.datafind },
+                            // },
+                            // {
+                            //     lastName: { [Op.substring]: datafind.datafind },
+                            // },
+                            {
+                                email: { [Op.substring]: datafind.datafind },
+                            },
+                            {
+                                userName: datafind.datafind,
+                            },
+                        ],
+                    },
+                });
+            }
+            if (data) {
+                resolve({ message: "Find Successfully", data: data });
+            } else {
+                resolve({ message: "Find Fail" });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+let findTypeByUser = (datafind) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data;
+            if (datafind === "") {
+                data = await db.user.findAll({
+                    where: {
+                        typeUser: datafind.typeUser,
+                    },
+                });
+            } else {
+                data = await db.user.findAll({
+                    where: {
+                        typeUser: datafind.typeUser,
+                        [Op.or]: [
                             {
                                 phone: { [Op.substring]: datafind.datafind },
                             },
@@ -619,4 +660,5 @@ module.exports = {
     forgetPassword,
     changePasswordForget,
     studentRes,
+    findTypeByUser,
 };

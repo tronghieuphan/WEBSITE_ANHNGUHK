@@ -140,7 +140,7 @@ let sendConsultRes = async (dataSend) => {
                    <span>Khóa học đăng ký: <span style="font-weight:bold"> ${dataSend.classes}</span></span><br>
                    <span>Ngày bạn có hẹn với trung tâm: <span style="font-weight:bold"> ${dataSend.dateArrive}</span></span><br>
                    <span>Vào lúc: <span style="font-weight:bold"> ${dataSend.timeArrive}</span></span><br>
-
+                   <span>Bạn vui lòng đến trung tâm đúng hẹn. Nếu sau 5 ngày kể từ ngày bạn có hẹn với trung tâm bạn không đến được thì trung tâm sẽ hủy việc đăng ký này của bạn !</span><br>
 <hr style="border-top: 1px dashed black">                   
 <p>Trung tâm hẹn bạn sớm đến trung tâm để được tư vấn nhanh chóng và tiến hành đăng ký khóa học.
                  <br>  <span style="font-style:italic">Thời gian tiếp học viên:<br> <ul><li style="font-weight:bold; color:red">8:00 AM - 9:00 PM</li></ul>
@@ -230,6 +230,154 @@ let sendForgetPassword = async (dataSend) => {
         </div>
     </div>
 
+        `,
+    });
+};
+let AlertDateConsult = async (dataSend) => {
+    console.log(dataSend.email);
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: process.env.EMAIL_APP,
+            pass: process.env.EMAIL_APP_PASSWORRD,
+        },
+    });
+
+    let info = await transporter.sendMail({
+        from: '"Anh Ngữ HK" <hkeducation.090801@gmail.com>', // sender address
+        to: dataSend.email, // list of receivers
+        subject: "HK EDU GỬI MÃ XÁC NHẬN QUÊN MẬT KHẨU", // Subject line
+        html: `
+        <div style="width: 100%">
+        <div
+            style="
+                width: 100%;
+                border: 1px solid black;
+                border-radius: 10px;
+                display: block;
+                margin: 0px auto;
+            "
+        >
+            <img
+                src="https://res.cloudinary.com/dt2bxtoc3/image/upload/v1685297009/img-web/logo_rba9o7.png"
+                style="
+                    width: 150px;
+                    height: 70px;
+                    margin: 10px auto;
+                    display: block;
+                "
+                alt=""
+            />
+            <hr style="width: 90%; margin: 0px auto"   />
+            <div style=" padding: 10px 40px"><p style="text-align:center; font-size:20px; font-weight:bold">
+                    THÔNG BÁO LỊCH HẸN
+                </p>
+                <p style="font-style: italic ">Xin chào <span style="font-weight:bold; font-style:italic"> 
+                ${dataSend.fullname}</span> !</p>
+                <p>Hôm nay bạn có lịch hẹn cùng với chúng tôi tại trung tâm HKEDU</p>
+                                <p>Thông tin bạn đã đăng ký tư vấn:</p>
+
+                <div
+                    style="
+                        width: fit-content;
+                        display: block;
+                        line-height:30px
+                    "
+                >
+                  
+                     <hr style="border-top: 1px dashed black">
+                 
+                   <span>Họ và tên: <span style="font-weight:bold; font-style:italic">${dataSend.fullname}</span></span><br>
+                   <span>Mục tiêu: <span style="font-weight:bold"> ${dataSend.target}</span></span><br>
+                   <span>Thời gian mong muốn: <span style="font-weight:bold"> ${dataSend.timeComplete}</span></span><br>
+                   <span>Khóa học đăng ký: <span style="font-weight:bold"> ${dataSend.classes}</span></span><br>
+                   <span>Ngày bạn có hẹn với trung tâm: <span style="font-weight:bold"> ${dataSend.dateArrive}</span></span><br>
+                   <span>Vào lúc: <span style="font-weight:bold"> ${dataSend.timeArrive}</span></span><br>
+
+<hr style="border-top: 1px dashed black">                   
+<p>Trung tâm hẹn bạn sớm đến trung tâm để được tư vấn nhanh chóng và tiến hành đăng ký khóa học.
+                 <br>  <span style="font-style:italic">Thời gian tiếp học viên:<br> <ul><li style="font-weight:bold; color:red">8:00 AM - 9:00 PM</li></ul>
+                   </div>    
+                <p style=" font-weight: bold; font-style: italic; font-size: 15px ">
+                    Trân trọng !
+                </p>
+                <p style=" font-weight: bold; font-style: italic; font-size: 10px ">
+                    TRUNG TÂM ANH NGỮ HKEDU - Với chúng tôi thành công là tất cả !
+                </p>
+            </div>
+        </div>
+    </div>
+        `,
+    });
+};
+let CancelConsult = async (dataSend) => {
+    console.log(dataSend.email);
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: process.env.EMAIL_APP,
+            pass: process.env.EMAIL_APP_PASSWORRD,
+        },
+    });
+
+    let info = await transporter.sendMail({
+        from: '"Anh Ngữ HK" <hkeducation.090801@gmail.com>', // sender address
+        to: dataSend.email, // list of receivers
+        subject: "HK EDU GỬI MÃ XÁC NHẬN QUÊN MẬT KHẨU", // Subject line
+        html: `
+        <div style="width: 100%">
+        <div
+            style="
+                width: 100%;
+                border: 1px solid black;
+                border-radius: 10px;
+                display: block;
+                margin: 0px auto;
+            "
+        >
+            <img
+                src="https://res.cloudinary.com/dt2bxtoc3/image/upload/v1685297009/img-web/logo_rba9o7.png"
+                style="
+                    width: 150px;
+                    height: 70px;
+                    margin: 10px auto;
+                    display: block;
+                "
+                alt=""
+            />
+            <hr style="width: 90%; margin: 0px auto"   />
+            <div style=" padding: 10px 40px"><p style="text-align:center; font-size:20px; font-weight:bold">
+                    THÔNG BÁO HỦY LỊCH HẸN
+                </p>
+                <p style="font-style: italic ">Xin chào <span style="font-weight:bold; font-style:italic"> 
+                ${dataSend.fullname}</span> !</p>
+                <p  style="                      
+                        line-height:30px
+                    ">Bạn đã đăng ký lịch hẹn với trung tâm chúng tôi nhưng có thể bạn gặp một vài trục trặc gì đó làm bạn không thể đến trung tâm được chúng tôi rất tiêc về điều này!</p>                         
+                <div
+                    style="
+                        width: fit-content;
+                        display: block;
+                        line-height:30px
+                    "
+                >
+                     <hr style="border-top: 1px dashed black">           
+<p>Trung tâm mong bạn có thể đặt một lịch hẹn mới để chúng tôi có thể tư vấn nhanh chóng và tiến hành đăng ký khóa học.
+                 <br>  <span style="font-style:italic">Thời gian tiếp học viên:<br> <ul><li style="font-weight:bold; color:red">8:00 AM - 9:00 PM</li></ul>
+              </div>
+                <p style=" font-weight: bold; font-style: italic; font-size: 15px ">
+                    Trân trọng !
+                </p>
+                <p style=" font-weight: bold; font-style: italic; font-size: 10px ">
+                    TRUNG TÂM ANH NGỮ HKEDU - Với chúng tôi thành công là tất cả !
+                </p>
+            </div>
+        </div>
+    </div>
         `,
     });
 };
@@ -390,4 +538,6 @@ module.exports = {
     sendForgetPassword,
     sendUpdateUser,
     sendCalenderClass,
+    AlertDateConsult,
+    CancelConsult,
 };

@@ -162,13 +162,19 @@ let findDiscount = (datafind) => {
 let handleDate = async () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let date = new Date().getTime();
+            let date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth();
+            let year = date.getFullYear();
             let listDiscount = await db.discount.findAll({
                 include: [{ model: db.course }],
             });
             listDiscount.forEach(async (item) => {
-                let end_Date = new Date(item.endDate).getTime();
-                if (end_Date < date) {
+                let end_Date = new Date(item.endDate);
+                let dayend = end_Date.getDate();
+                let monthend = end_Date.getMonth();
+                let yearend = end_Date.getFullYear();
+                if (day > dayend || month > monthend || year > yearend) {
                     await db.discount.update(
                         {
                             active: false,

@@ -211,7 +211,7 @@ let getCourseBeLongType = (datafind) => {
     return new Promise(async (resolve, reject) => {
         try {
             let data = await db.course.findAll({
-                include: [{ model: db.discount, attribute: ["percent"] }],
+                include: [{ model: db.discount, attribute: ["percent"] }, { model: db.type }],
                 where: {
                     typeId: datafind.datafind,
                 },

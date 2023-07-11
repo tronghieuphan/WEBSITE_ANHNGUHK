@@ -36,6 +36,7 @@ let initWebRotes = (app) => {
     router.post("/find-userbyid", userController.find_UserById);
     router.post("/update-active", userController.update_Active);
     router.post("/student-res", userController.student_Res);
+    router.post("/findbytypeuser", userController.find_ByTypeUser);
 
     //TÀI LIỆU
     router.post("/create-document", documentController.create_Document);
@@ -94,6 +95,7 @@ let initWebRotes = (app) => {
     router.post("/create-consult", consultController.create_Consult);
     router.get("/getall-consult", consultController.getAll_Consult);
     router.post("/accept-consult", consultController.accept_Consult);
+    router.post("/datewait-consult", consultController.dateWait_Consult);
 
     //PHIẾU ĐĂNG KÝ
     router.post("/create-registration", registrationController.create_Registration);

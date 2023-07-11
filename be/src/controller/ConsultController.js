@@ -12,8 +12,14 @@ let accept_Consult = async (req, res) => {
     let Consult = await CRUD_Consult.handleConsult(req.body);
     res.status(200).json(Consult);
 };
+let dateWait_Consult = async (req, res) => {
+    let Consult = await CRUD_Consult.handleDateWait();
+    res.status(200).json(Consult);
+};
+
 module.exports = {
     create_Consult,
     getAll_Consult,
     accept_Consult,
+    dateWait_Consult,
 };

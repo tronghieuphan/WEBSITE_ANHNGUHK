@@ -64,6 +64,11 @@ let student_Res = async (req, res) => {
     let Registrafind = await CRUD_User.studentRes(req.body);
     res.status(200).json(Registrafind);
 };
+let find_ByTypeUser = async (req, res) => {
+    let User = await CRUD_User.findTypeByUser(req.body);
+    res.status(200).json(User);
+};
+
 module.exports = {
     create_User,
     create_UserAdmin,
@@ -80,4 +85,5 @@ module.exports = {
     forget_Password,
     changePassForget_User,
     student_Res,
+    find_ByTypeUser,
 };
