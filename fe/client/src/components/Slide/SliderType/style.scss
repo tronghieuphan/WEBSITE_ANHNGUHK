@@ -1,0 +1,20 @@
+.slick-arrow:before {
+    content: "" !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.slick-prev:before {
+    background-image: url("../../../assets/image/left-arrow.png");
+    background-repeat: no-repeat;
+    font-weight: bold;
+}
+
+.slick-next:before {
+    background-image: url("../../../assets/image/right-arrow.png");
+    background-repeat: no-repeat;
+    font-weight: bold;
+}
+

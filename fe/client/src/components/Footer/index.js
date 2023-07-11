@@ -12,7 +12,7 @@ function Footer() {
                     <span className="fs-5">Xem thông tin chi tiết của trung tâm chúng tôi</span>
                 </div>
                 <div className="d-flex align-items-center table-footer-link">
-                    <Link className="text-decoration-none">
+                    <Link className="text-decoration-none" to="/about">
                         <div
                             className="px-4 py-2 text-light fw-bold border border-light rounded-pill fs-6"
                             style={{ backgroundColor: "#086EE8" }}

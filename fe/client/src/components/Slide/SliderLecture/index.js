@@ -3,46 +3,23 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CardLecture from "../../Card/CardLecture";
-import teacher from "../../../assets/image/teacher.jpg";
-import "./style.scss"
+import "./style.scss";
+import { useEffect, useState } from "react";
+import userAPI from "../../../services/userAPI";
 function SliderLecture() {
-    const course = [
-        {
-            img: teacher,
-            lecture: "Giảng viên",
-            name: "Trọng hiếu",
-            description:
-                "Chương trình luyện thi TOEIC chất lượng cao cho người bắt đầu. Cam kết đầu ra từ 550 - 650+ trong thời gian ngắn.",
-        },
-        {
-            img: teacher,
-            lecture: "Giảng viên",
-            name: "Trọng hiếu",
-            description:
-                "Chương trình luyện thi TOEIC chất lượng cao cho người bắt đầu. Cam kết đầu ra từ 550 - 650+ trong thời gian ngắn.",
-        },
-        {
-            img: teacher,
-            lecture: "Giảng viên",
-            name: "Trọng hiếu",
-            description:
-                "Chương trình luyện thi TOEIC chất lượng cao cho người bắt đầu. Cam kết đầu ra từ 550 - 650+ trong thời gian ngắn.",
-        },
-        {
-            img: teacher,
-            lecture: "Giảng viên",
-            name: "Trọng hiếu",
-            description:
-                "Chương trình luyện thi TOEIC chất lượng cao cho người bắt đầu. Cam kết đầu ra từ 550 - 650+ trong thời gian ngắn.",
-        },
-        {
-            img: teacher,
-            lecture: "Giảng viên",
-            name: "Trọng hiếu",
-            description:
-                "Chương trình luyện thi TOEIC chất lượng cao cho người bắt đầu. Cam kết đầu ra từ 550 - 650+ trong thời gian ngắn.",
-        },
-    ];
+    const [listLecture, setListLecture] = useState();
+
+    const getAllLecture = async () => {
+        try {
+            const response = await userAPI.getAllTypeUser({ typeUser: "2" });
+            setListLecture(response.data.data);
+        } catch (err) {
+            throw new Error(err);
+        }
+    };
+    useEffect(() => {
+        getAllLecture();
+    }, []);
     const settings = {
         dots: true,
         infinite: true,
@@ -55,16 +32,16 @@ function SliderLecture() {
         initialSlide: 0,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1220,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToScroll: 1,
                     infinite: true,
                     dots: true,
                 },
             },
             {
-                breakpoint: 600,
+                breakpoint: 980,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
@@ -72,7 +49,7 @@ function SliderLecture() {
                 },
             },
             {
-                breakpoint: 480,
+                breakpoint: 630,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
@@ -83,8 +60,8 @@ function SliderLecture() {
     return (
         <div>
             <Slider {...settings}>
-                {course.map((value) => (
-                    <div key={value.name}>
+                {listLecture?.map((value) => (
+                    <div key={value.id} className="d-flex justify-content-center">
                         <h3>
                             <CardLecture data={value} />
                         </h3>

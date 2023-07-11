@@ -1,5 +1,5 @@
 function LoginRegisterLayout({ children }) {
-    // return <>{children}</>;
+    return <>{children}</>;
 }
 
 export default LoginRegisterLayout;

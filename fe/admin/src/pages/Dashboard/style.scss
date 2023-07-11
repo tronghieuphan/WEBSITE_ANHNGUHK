@@ -1,0 +1,70 @@
+.box-dashboard {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+}
+.border1 {
+    border-left: 5px solid #7189ff;
+    border-right: 5px solid #7189ff;
+}
+.border3 {
+    border-left: 5px solid #ffea7a;
+    border-right: 5px solid #ffea7a;
+}
+.border2 {
+    border-left: 5px solid #76c5ff;
+    border-right: 5px solid #76c5ff;
+}
+.border4 {
+    border-left: 5px solid #4cde98;
+    border-right: 5px solid #4cde98;
+}
+.bg-dashboard-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.bg-dash-icon1 {
+    background-color: #dbdfff;
+    .color1 {
+        color: #4f6cff;
+    }
+}
+.bg-dash-icon3 {
+    background-color: #fff8ec;
+    .color3 {
+        color: #ffe400;
+    }
+}
+.bg-dash-icon2 {
+    background-color: #e5f3fa;
+    .color2 {
+        color: #159ffc;
+    }
+}
+.bg-dash-icon4 {
+    background-color: #edfcf4;
+    .color4 {
+        color: #4cde98;
+    }
+}
+.title-dash {
+    font-size: 14px;
+}
+.w-98 {
+    width: 98%;
+}
+.w-24 {
+    width: 26%;
+}
+.box-chart-line {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    height: 100%;
+}
+.box-chart-icon {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}

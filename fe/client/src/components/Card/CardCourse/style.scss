@@ -1,7 +1,11 @@
-.card-course:hover{
+.card-course:hover {
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.16);
     transition: 1s all;
-    
 }
-
-
+@media only screen and (max-width: 900px) {
+    .title-center {
+        display: block;
+        margin: auto;
+        text-align: center;
+    }
+}

@@ -13,8 +13,16 @@
     font-weight: bold;
     align-self: center;
     text-align: center;
-    &hover {
-        background-color: aqua;
+    text-decoration: none;
+    color: white;
+    &:hover {
+        background-color: white;
+        border: 1px solid rgb(217, 217, 217);
+        color: rgb(35, 86, 255);
+        font-size: 22px;
+        transition: 0.2s ease-in-out;
+        padding: 5px 10px;
+        border-radius: 25px;
     }
     button {
         font-size: 15px;
@@ -60,6 +68,7 @@
     align-self: center;
     text-align: center;
     color: black;
+    text-decoration: none;
     button {
         font-size: 17px;
         font-weight: bold;
@@ -70,14 +79,16 @@
         border-radius: 50px;
     }
 }
-
+span.ant-dropdown-menu-title-content {
+    text-align: center;
+}
 @media only screen and (max-width: 1200px) {
     .nav-header {
         position: fixed;
         top: 0;
         left: 0;
         transition: 0.6s;
-        z-index: 1;
+        z-index: 10;
         max-width: 100%;
         width: 100%;
     }
@@ -96,7 +107,6 @@
         color: white;
         padding: 10px;
         border: 1px solid white;
-        border-radius: 10px;
     }
     .nav-fixed {
         position: fixed;
@@ -105,15 +115,45 @@
         transition: 1s ease-in-out;
         width: 94%;
         background-color: rgb(255, 255, 255);
-        border-radius: 15px;
         border-top: 1px solid black;
         border-bottom: 1px solid black;
-        z-index: 1;
+        z-index: 10;
     }
     .img-navbar {
         width: 200px;
         height: 80px;
         margin: none;
+    }
+
+    .nav-menu a {
+        margin: 0px 35px;
+        font-size: 18px;
+        font-weight: bold;
+        align-self: left;
+        line-height: 50px;
+        text-decoration: none;
+        color: rgb(8, 103, 255);
+        &:hover {
+            background-color: rgb(178, 210, 255);
+            border: 1px solid rgb(217, 217, 217);
+            color: rgb(0, 60, 255);
+            transition: 0.2s;
+            padding: 3px 10px;
+        }
+        button {
+            font-size: 15px;
+            font-weight: bold;
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid white;
+            border-radius: 50px;
+            transition: 1s;
+        }
+    }
+    .btnlogin {
+        display: flex;
+        justify-content: center;
     }
 }
 @media only screen and (max-width: 410px) {
@@ -132,6 +172,23 @@
         border-radius: 15px;
         border-top: 1px solid black;
         border-bottom: 1px solid black;
-        z-index: 1;
+        z-index: 10;
+    }
+    .nav-menu a {
+        margin: 0px 35px;
+        font-size: 15px;
+        align-self: center;
+        text-align: center;
+        text-decoration: none;
+        color: rgb(1, 73, 255);
+        &:hover {
+            background-color: rgb(176, 213, 255);
+            border: 1px solid rgb(217, 217, 217);
+            color: rgb(255, 255, 255);
+            font-size: 22px;
+            transition: 0.2s ease-in-out;
+            padding: 5px 10px;
+            border-radius: 25px;
+        }
     }
 }

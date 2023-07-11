@@ -1,0 +1,38 @@
+.nav-link-fill {
+    text-decoration: none;
+    text-align: center;
+    margin: 0px 3px;
+    .border-fill {
+        padding: 0px 40px;
+        color: #ffffff;
+        padding: 18px;
+        width: fit-content;
+    }
+}
+.nav-link-fill .border-fill:hover {
+    background-color: #ffffff;
+    color: #1476fd;
+    border-radius: 40px;
+    padding: 18px;
+    margin: 0px 5px;
+}
+.nav-link-fill.active .border-fill {
+    background-color: #ffffff;
+    color: #1476fd;
+    border-radius: 40px;
+    transition: 1s all;
+    font-weight: bold;
+    margin: 0px 5px;
+    padding: 18px;
+}
+
+.box-document {
+    padding: 5px 0;
+    background: rgb(35, 147, 255);
+    background: linear-gradient(110deg, rgba(35, 147, 255, 1) 5%, rgba(0, 98, 215, 1) 79%);
+    display: block;
+    margin: 50px auto;
+    border-radius: 40px;
+    width: max-content;
+    text-align: center;
+}

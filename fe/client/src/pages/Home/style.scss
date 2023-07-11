@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    background: url("../../assets/image/test1.jpg");
+    background: url("../../assets/image/2_2.jpg");
     background-size: cover;
 }
 
@@ -13,8 +13,7 @@
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
         rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
         rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-    // border-top-right-radius: 30px;
-    // border-bottom-right-radius: 30px;
+
     border-radius: 30px;
 }
 
@@ -46,7 +45,7 @@ svg.svg-inline--fa.fa-circle-check {
 .home-register-button {
     width: 150px;
     aspect-ratio: 1;
-    background-color: rgb(255, 255, 255, 0.8);
+    background-color: rgb(255, 255, 255, 0);
     outline-offset: calc(150px / -2);
     cursor: pointer;
     transition: 0.5s;
@@ -57,7 +56,7 @@ svg.svg-inline--fa.fa-circle-check {
     margin: 10px;
     font-size: 20px;
     font-weight: bold;
-    color: #f10105;
+    color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px,
         rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
         rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -80,11 +79,18 @@ svg.svg-inline--fa.fa-circle-check {
 
 .text-title {
     text-align: center;
-    margin: 60px 0;
+    margin: 40px 0;
     font-style: italic;
     .title-span-1 {
         font-weight: bold;
-        font-size: 50px;
+        font-size: 45px;
+        padding: 2%;
+        background-color: #cfedff;
+        margin: 0px 3%;
+        border-radius: 100px;
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+      -webkit-text-stroke: 1px rgb(40, 39, 39); 
+      color: rgb(0, 128, 255);
     }
     .title-span-2 {
         font-weight: 400;

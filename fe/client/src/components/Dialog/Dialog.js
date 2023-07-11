@@ -31,3 +31,40 @@ export const exist = () => {
         text: "Dữ liệu đã tồn tại trong hệ thống ",
     });
 };
+
+export const errorInfo = (title, content) => {
+    Swal.fire({
+        icon: "error",
+        title: title,
+        text: content,
+        showConfirmButton: false,
+        timer: 2500,
+        customClass: {
+            title: "fs-5 text-error",
+        },
+    });
+};
+export const info = (title, content) => {
+    Swal.fire({
+        icon: "warning",
+        title: title,
+        text: content,
+        showConfirmButton: false,
+        timer: 2500,
+        customClass: {
+            title: "fs-5 text-warning",
+        },
+    });
+};
+
+export const successInfo = (title) => {
+    Swal.fire({
+        icon: "success",
+        title: title,
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+            title: "fs-5 text-success",
+        },
+    });
+};

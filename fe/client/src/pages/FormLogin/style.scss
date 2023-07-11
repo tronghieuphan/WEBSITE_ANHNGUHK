@@ -1,0 +1,49 @@
+.bg-login {
+    background-image: url("../../assets/image/bg-login.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.bg-icon {
+    background-color: #1677ff;
+}
+.content-center {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+}
+.color-text1 {
+    color: rgb(94, 91, 101);
+}
+.color-text2 {
+    color: rgb(94, 97, 127);
+}
+// Login
+.box {
+    width: 40%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+//Register
+
+.padding-fn {
+    padding-right: 10%;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .box {
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .box {
+        width: 90%;
+    }
+    .bg-login {
+        background-image: url("../../assets/image/bg-login-mobile.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+}

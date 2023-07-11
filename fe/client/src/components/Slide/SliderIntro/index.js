@@ -3,41 +3,53 @@ import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./style.scss";
 const Slide = () => {
-    const images = [
-        "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-        "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
-        "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-        "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-    ];
-
     return (
         <div>
-            <Fade duration={1000} transitionDuration={1600}>
+            <Fade duration={2000} transitionDuration={2000} autoplay={true}>
                 <div className="each-slide">
                     <div>
-                        <img src={images[0]} />
+                        <img src="https://res.cloudinary.com/dt2bxtoc3/image/upload/v1687294693/03-min_z4gzcq.png" />
                     </div>
-                    <p>
-                        fsavvvvv vvv vvvvvvvvvvv vvvvvvvvv vvvvvvvvv vvvvvvv vvvvvvvvvvffff ffffffffff ffffffffffffff fffffffff ffffffffffff
+                    <p style={{ width: "40%" }}>
+                        <div className="fs-5 " style={{lineHeight:"40px"}}>
+                            <span className="fw-bold">Cơ sở vật chất hiện đại</span> <br />
+                            <div className="fs-6 w-75 d-block m-auto">
+                                Với trung trâm anh ngữ HK EDU thì trung tâm sẽ đầu tư trang thiết bị
+                                hiện đại đễ hổ trợ tốt nhất cho các học viên tham gia học tập.
+                            </div>
+                        </div>
                     </p>
                 </div>
                 <div className="each-slide">
-                    <p>Second Slide</p>
+                    <p style={{ width: "40%" }}>
+                        <div className="fs-5 " style={{lineHeight:"40px"}}>
+                            <span className="fw-bold">Tự tin giao tiếp trong mọi nơi</span> <br />
+                            <div className="fs-6 w-75 d-block m-auto">
+                                Sau các khoa học trung tâm đảm bảo các học viên sẽ có được nhưng
+                                kiến thức nên tảng trang bị cho bản thân có thể tự tin giao tiếp
+                                vưới người bản xứ
+                            </div>
+                        </div>
+                    </p>
+
                     <div>
-                        <img src={images[1]} />
+                        <img src="https://res.cloudinary.com/dt2bxtoc3/image/upload/v1687294689/khoi-dong-nam-hoc-moi-voi-apollo-english1439790135_lfmfuh.jpg" />
                     </div>
                 </div>
                 <div className="each-slide">
                     <div>
-                        <img src={images[2]} />
+                        <img src="https://res.cloudinary.com/dt2bxtoc3/image/upload/v1687294689/cung-cap-giao-vien-nuoc-ngoai-tphcm_pmemsn.jpg" />
                     </div>
-                    <p>Third Slide</p>
-                </div>
-                <div className="each-slide">
-                    <p>Four Slide</p>
-                    <div>
-                        <img src={images[3]} />
-                    </div>
+                    <p style={{ width: "40%" }}>
+                        <div className="fs-5 " style={{lineHeight:"40px"}}>
+                            <span className="fw-bold">Nhiều giảng viên nhiệt tình và tận tâm</span>{" "}
+                            <br />
+                            <div className="fs-6 w-75 d-block m-auto">
+                                Trung tâm luôn tâm trong thể phục vụ tốt nhất cho học viên nên các
+                                giảng viên tại trung tâm sẽ nhiệt tình giúp đữo mỗi khi học viên cần
+                            </div>
+                        </div>
+                    </p>
                 </div>
             </Fade>
         </div>

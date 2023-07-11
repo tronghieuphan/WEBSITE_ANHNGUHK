@@ -1,0 +1,36 @@
+.file {
+    width: 80%;
+    height: 500px;
+}
+.imgdocument {
+    width: 300px;
+}
+.line {
+    line-height: 50px;
+}
+.information{
+    background-color: #2A8BED;
+    padding: 10px;
+    width: 100%;
+}
+@media only screen and (max-width: 897px) {
+    .tablet-layout-detail-document {
+        .tablet-content-infor {
+            text-align: center;
+            margin: auto;
+            width: 100%;
+            .line {
+                line-height: 20px;
+            }
+        }
+    }
+    .imgdocument {
+        width: 150px;
+    }
+    .line-title {
+        line-height: 30px;
+    }
+    .fw-bold{
+        display: -webkit-inline-box;
+    }
+}

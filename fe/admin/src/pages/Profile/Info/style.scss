@@ -1,0 +1,23 @@
+.w-45 {
+    width: 45%;
+}
+.w-49 {
+    width: 49%;
+}
+.w-15 {
+    width: 15%;
+}
+.infor {
+    p {
+        display: flex;
+        div:first-child {
+            width: 150px;
+            // display: block;
+            // margin-left: 100px;
+        }
+        div:last-child {
+            text-align: left;
+            width: fit-content;
+        }
+    }
+}

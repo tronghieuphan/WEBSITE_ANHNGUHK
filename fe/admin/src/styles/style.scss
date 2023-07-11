@@ -1,0 +1,30 @@
+.bd-radius {
+    border-radius: 20px;
+}
+.bg-content {
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+body {
+    height: 100vh;
+}
+.ant-table .ant-table-container .ant-table-content table thead.ant-table-thead .ant-table-cell {
+    background-color: #f6f4f4;
+    color: #000000;
+    border: 0.5px solid rgb(235, 235, 235);
+}
+.des {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+.des-hidden {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

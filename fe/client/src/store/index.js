@@ -1,9 +1,12 @@
-// import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import dataAdd from "../slices/dataAdd";
 
-// const rootReducer = {};
+const rootReducer = {
+    dataAdd: dataAdd,
+};
 
-// const store = configureStore({
-//     reducer: rootReducer,
-// });
+const store = configureStore({
+    reducer: rootReducer,
+});
 
-// export default store;
+export default store;

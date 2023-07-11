@@ -1,0 +1,51 @@
+.w-45 {
+    width: 45%;
+}
+.w-49 {
+    width: 49%;
+}
+.w-15 {
+    width: 15%;
+}
+.infor {
+    p {
+        display: flex;
+        div:first-child {
+            width: 150px;
+            // display: block;
+            // margin-left: 100px;
+        }
+        div:last-child {
+            text-align: left;
+            width: fit-content;
+        }
+    }
+}
+.border {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.box-registed {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-left: 5px solid rgb(9, 99, 254);
+}
+.w-85 {
+    width: 85%;
+}
+.box-point {
+    border: 1px black solid;
+    padding: 10px;
+    margin: 10px;
+    width: 50%;
+    margin: auto;
+    div:first-child {
+        font-size: 60px;
+        text-align: center;
+        font-weight: bold;
+    }
+    div:last-child {
+        text-align: center;
+        span{
+            font-weight: 700;
+        }
+    }
+}

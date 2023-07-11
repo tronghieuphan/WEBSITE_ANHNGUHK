@@ -1,0 +1,43 @@
+.ant-segmented.css-dev-only-do-not-override-yp8pcc {
+    padding: 5px 0;
+    background: rgb(35, 147, 255);
+    background: linear-gradient(110deg, rgba(35, 147, 255, 1) 5%, rgba(0, 98, 215, 1) 79%);
+    display: block;
+    margin: 40px auto;
+    border-radius: 40px;
+    width: max-content;
+    text-align: center;
+}
+label.ant-segmented-item {
+    padding: 20px 40px;
+    margin: 0 5px;
+    border-radius: 40px;
+}
+label.ant-segmented-item:hover {
+    padding: 20px 40px;
+    border-radius: 60px;
+    margin: 0 5px;
+    color: rgb(35, 147, 255);
+    background-color: #ffffff;
+    font-weight: bold;
+    .text {
+        color: rgb(35, 147, 255);
+        font-weight: bold;
+    }
+}
+.text {
+    color: #ffffff;
+    font-weight: bold;
+  transition: 1s;
+    
+}
+label.ant-segmented-item.ant-segmented-item-selected {
+    padding: 20px 40px;
+    border-radius: 60px;
+    margin: 0 5px;
+    color: #000;
+    .text {
+        color: rgb(35, 147, 255);
+        font-weight: bold;
+    }
+}

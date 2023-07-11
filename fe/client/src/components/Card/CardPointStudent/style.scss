@@ -1,0 +1,22 @@
+.card-point:hover {
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.16);
+    transition: 1s all;
+}
+
+.geeks {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.geeks img {
+    height: 170px;
+    transition: 0.5s all ease-in-out;
+}
+
+.geeks:hover img {
+    transform: scale(1.2);
+}
+.ant-image-mask {
+    height: fit-content;
+}

@@ -1,0 +1,39 @@
+.box-img1 {
+    border: 1px solid rgb(203, 203, 203);
+    position: relative;
+    width: 200px;
+    height: 250px;
+    z-index: 0;
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+.text-image {
+    color: rgb(214, 214, 214);
+}
+.img-preview {
+    position: "absolute";
+    top: 0%;
+    left: 0%;
+    width: 500px;
+    height: 100%;
+}
+div#image {
+    text-align: center;
+    justify-content: center;
+    display: block;
+    margin: auto;
+}
+.img input[type="file"] {
+    outline: none;
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    opacity: 1;
+    border: none;
+    height: 100%;
+    opacity: 0;
+}
+.tox .tox-statusbar__branding svg {
+    display: none;
+}

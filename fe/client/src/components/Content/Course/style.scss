@@ -1,0 +1,137 @@
+//content
+.w-70 {
+    width: 70%;
+}
+.w-80 {
+    width: 80%;
+}
+.w-60 {
+    width: 60%;
+}
+.text-course {
+    p:first-child {
+        color: #135fd0;
+        font-weight: bold;
+    }
+    p:last-child {
+        font-weight: 500;
+        color: #444444;
+    }
+}
+//table
+.table-content-course {
+    border-collapse: collapse;
+    // border: 0.5px solid rgb(226, 226, 226);
+    tr th {
+        background-color: rgb(20, 88, 246);
+        color: #ffffff;
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 12px;
+    }
+    tr th:first-child {
+        background-color: rgb(20, 88, 246);
+        color: #ffffff;
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 12px;
+        width: 20%;
+    }
+    tr td:first-child {
+        color: #000000;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        padding: 10px;
+    }
+    tr td:last-child {
+        border-left: 0.5px solid rgb(223, 223, 223);
+    }
+    tr td {
+        background-color: #ffffff;
+    }
+}
+
+// table calender course
+thead.ant-table-thead {
+    background-color: aqua;
+}
+
+.ant-table .ant-table-container .ant-table-content table thead.ant-table-thead .ant-table-cell {
+    background-color: #135fd0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+td.ant-table-cell {
+    text-align: center;
+}
+
+.table-des-skill {
+    border: #e2e2e2 solid 1px;
+    border-collapse: collapse;
+    tr {
+        border: #dddddd solid 1px;
+        td:first-child {
+            font-weight: bold;
+        }
+        td:last-child {
+            padding: 15px 5px;
+        }
+    }ul li {
+    list-style-type: disc;
+}
+
+}
+
+
+
+/* CSS */
+.button-18 {
+  align-items: center;
+  background-color: #ff2222;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.button-18:hover,
+.button-18:focus { 
+  background-color: #ff2222;
+  color: #ffffff;
+}
+
+.button-18:active {
+  background: #df1919;
+  color: rgb(255, 255, 255, .7);
+}
+
+.button-18:disabled { 
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, .08);
+  color: rgba(0, 0, 0, .3);
+}

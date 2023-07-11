@@ -1,16 +1,15 @@
 import React from "react";
-import NavbarMenu from "../../components/Navbar/NavbarMenu";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+import NavbarMenu from "../../components/Navbar";
+import Footer from "../../components/Footer";
+
 function HomePageLayout({ children }) {
     return (
         <>
-            {/* <Header />
-            <NavbarMenu isAtHomePage={true} />
+            <NavbarMenu />
             {children}
-            <Footer /> */}
+            <Footer />
         </>
-    )
+    );
 }
 
 export default HomePageLayout;

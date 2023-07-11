@@ -1,17 +1,20 @@
-import HomePage from "../pages/HomePage/HomePage";
-import DetailUser from "../pages/Profile/DetailUser";
-import LoginPage from "../pages/FormLogin/LoginPage";
-import DetailProduct from "../pages/DetailProduct/DetailProduct";
+import About from "../pages/About";
+import Course from "../pages/Course";
+import Document from "../pages/Document";
+import DetailDocument from "../pages/Document/DetailDocument";
+import ForgetPass from "../pages/FormLogin/ForgetPass";
+import LoginPage from "../pages/FormLogin/Login";
 import RegisterPage from "../pages/FormLogin/Register";
-import CartShopping from "../pages/CardShopping/CardShopping";
-import ListCard from "../pages/ShowListCard/ListCard";
-import Check from "../pages/CheckOrder/Check";
-import ListSearch from "../pages/ShowListCard/ListSearch";
+import Home from "../pages/Home";
+import Lecture from "../pages/Lecture";
+import Outstanding from "../pages/Outstanding";
+import Profile from "../pages/Profile";
+import Review from "../pages/Review";
 
 const PageWeb = [
     {
         path: "/",
-        page: HomePage,
+        page: Home,
         isHomePageLayout: true,
     },
     {
@@ -20,39 +23,55 @@ const PageWeb = [
         isLoginRegisterLayout: true,
     },
     {
+        path: "/forgetpass",
+        page: ForgetPass,
+        isLoginRegisterLayout: true,
+    },
+    {
         path: "/register",
         page: RegisterPage,
         isLoginRegisterLayout: true,
     },
     {
-        path: "/shopping",
-        page: CartShopping,
-        isHomePageLayout: true,
+        path: "/document",
+        page: Document,
+        isPageLayout: true,
     },
     {
-        path: "/product-details",
-        page: DetailProduct,
-        isHomePageLayout: true,
+        path: "/document/detail/:idType/:nameDocumentID",
+        page: DetailDocument,
+        isPageLayout: true,
     },
     {
-        path: "/user-details",
-        page: DetailUser,
-        isHomePageLayout: true,
+        path: "/course/:idType",
+        page: Course,
+        isPageLayout: true,
     },
     {
-        path: "/list-card",
-        page: ListCard,
-        isHomePageLayout: true,
+        path: "/profile",
+        page: Profile,
+        isPageLayout: true,
     },
     {
-        path: "/list-search",
-        page: ListSearch,
-        isHomePageLayout: true,
+        path: "/lecture",
+        page: Lecture,
+        isPageLayout: true,
     },
     {
-        path: "/check",
-        page: Check,
-        isHomePageLayout: true,
+        path: "/review",
+        page: Review,
+        isPageLayout: true,
+    },
+    {
+        path: "/outstanding",
+        page: Outstanding,
+        isPageLayout: true,
+    },
+
+    {
+        path: "/about",
+        page: About,
+        isPageLayout: true,
     },
 ];
 

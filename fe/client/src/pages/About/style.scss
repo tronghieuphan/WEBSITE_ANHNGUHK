@@ -1,0 +1,21 @@
+.mid {
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+}
+.btn-map {
+    display: block;
+    margin: auto;
+    border: none;
+    background-color: #1476fd;
+    border-radius: 50px;
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    &:hover {
+        background-color: white;
+        border: 2px solid #1476fd;
+        color: #1476fd;
+        font-weight: bold;
+    }
+}

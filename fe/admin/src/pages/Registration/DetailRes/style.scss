@@ -1,0 +1,70 @@
+.box-regis {
+    border: 0.5px solid black;
+    background-color: white;
+}
+.content {
+    font-family: "Times New Roman", Times, serif;
+
+    padding: 50px;
+}
+.label-regis {
+    line-height: 18px;
+    font-weight: bold;
+    div:nth-child(1) {
+        font-size: 15px;
+    }
+    div:nth-child(2) {
+        font-size: 14px;
+        font-style: italic;
+    }
+    div:nth-child(3) {
+        font-size: 10px;
+        font-style: italic;
+    }
+}
+
+.title-customer {
+    background-color: #0092fe;
+    color: white;
+    padding: 8px;
+    font-weight: bold;
+}
+.info {
+    div {
+        margin: 10px 0px;
+        div {
+            span {
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+.table {
+    text-align: center;
+    border: 1px solid black;
+    margin: 20px 0;
+    tr {
+        th:first-child {
+            width: 5%;
+            padding: 10px;
+        }
+    }
+    tr {
+        th {
+            border: 0.2px solid rgb(212, 212, 212);
+            background-color: rgb(242, 242, 242);
+        }
+    }
+    tr {
+        td {
+            border: 0.2px solid rgb(212, 212, 212);
+        }
+    }
+    tr:last-child {
+        td {
+            font-weight: bold;
+        }
+    }
+}

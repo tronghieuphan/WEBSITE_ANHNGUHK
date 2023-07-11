@@ -1,50 +1,56 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import teacher from "../../../assets/image/teacher.jpg";
+import CardComment from "../../Card/CardComment";
+import reviewAPI from "../../../services/reviewAPI";
+import "./style.scss";
+import { useEffect, useState } from "react";
+function SliderComment() {
+    const [listReview, setListReview] = useState();
 
-export default class MultipleItems extends Component {
-  render() {
+    const getAllReview = async () => {
+        try {
+            const response = await reviewAPI.getReview();
+            setListReview(response.data.data);
+        } catch (err) {
+            throw new Error(err);
+        }
+    };
+    useEffect(() => {
+        getAllReview();
+    }, []);
+
     const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 0,
+        responsive: [
+            {
+                breakpoint: 1000,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 1,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+        ],
     };
     return (
-      <div>
-        <h2> Multiple items </h2>
-        <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
-          <div>
-            <h3>9</h3>
-          </div>
-        </Slider>
-      </div>
+        <div>
+            <Slider {...settings}>
+                {listReview?.map((value) => (
+                    <div key={value.id}>
+                        <CardComment data={value} />
+                    </div>
+                ))}
+            </Slider>
+        </div>
     );
-  }
 }
+
+export default SliderComment;
