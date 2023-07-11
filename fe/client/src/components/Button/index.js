@@ -63,7 +63,7 @@ function BtnRegister(props) {
         let monthchoose = new Date(datetrue).getMonth();
         let yearchoose = new Date(datetrue).getFullYear();
         if (time[0] < 8 || time[0] > 21 || time[0] === 0) {
-            info("Trung  !");
+            info("Trung tâm tạm nghỉ vào những giờ này !");
             setTime(false);
         } else {
             if (datenow === datechoose && monthchoose === monthnow && yearchoose === yearnow) {
