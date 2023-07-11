@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-    class account extends Model {
+    class outstanding extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -9,20 +9,21 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            // account.belongsTo(models.user, { foreignKey: "accountId" });
-
+            outstanding.belongsTo(models.user, { foreignKey: "studentId" });
+            outstanding.belongsTo(models.type, { foreignKey: "typeId" });
         }
     }
-    account.init(
+    outstanding.init(
         {
-            username: DataTypes.STRING(30),
-            password: DataTypes.STRING,
-            active: DataTypes.BOOLEAN,
+            point: DataTypes.FLOAT,
+            image: DataTypes.TEXT,
+            studentId: DataTypes.STRING(8),
+            typeId: DataTypes.STRING(8),
         },
         {
             sequelize,
-            modelName: "account",
+            modelName: "outstanding",
         }
     );
-    return account;
+    return outstanding;
 };

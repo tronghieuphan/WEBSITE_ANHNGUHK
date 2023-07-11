@@ -13,10 +13,7 @@ module.exports = {
                 allowNull: false,
                 primaryKey: true,
             },
-            hour: {
-                type: Sequelize.TIME,
-                allowNull: false,
-            },
+           
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

@@ -9,15 +9,15 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            // review.belongsTo(models.user, { foreignKey: "userId" });
+            review.belongsTo(models.user, { foreignKey: "studentId" });
         }
     }
     review.init(
         {
             description: DataTypes.TEXT,
             active: DataTypes.BOOLEAN,
-            star: DataTypes.INTEGER,
-            userId: DataTypes.STRING(8),
+            star: DataTypes.FLOAT,
+            studentId: DataTypes.STRING(8),
         },
         {
             sequelize,

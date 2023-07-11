@@ -9,27 +9,34 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            // classes.belongsTo(models.course, { foreignKey: "courseId" });
+            classes.belongsTo(models.course, { foreignKey: "courseId" });
             // classes.belongsTo(models.user, { foreignKey: "lectureId" });
-            // classes.belongsToMany(models.weekday, {
-            //     through: models.detailClassesWeek,
-            //     foreignKey: "classesId",
-            // });
-            // classes.belongsToMany(models.user, {
-            //     through: models.detailClassesStudent,
-            //     foreignKey: "classesId",
-            // });
-
+            classes.hasMany(models.consult, { foreignKey: "classesId" });
+            classes.hasMany(models.point, { foreignKey: "classesId" });
+            classes.belongsToMany(models.weekday, {
+                through: models.detailClassesWeek,
+                foreignKey: "classesId",
+            });
+            classes.hasMany(models.detailClassesWeek, { foreignKey: "classesId" });
+            classes.belongsToMany(models.user, {
+                through: models.detailClassesStudent,
+                foreignKey: "classesId",
+            });
         }
     }
+
     classes.init(
         {
             nameClasses: DataTypes.STRING(30),
-            startDate:DataTypes.DATE,
-            endDate:DataTypes.DATE,
-            price:DataTypes.INTEGER,
-            courseId:DataTypes.STRING(8),
-            lectureId:DataTypes.STRING(8),
+            startDate: DataTypes.DATEONLY,
+            endDate: DataTypes.DATEONLY,
+            startHour: DataTypes.TIME,
+            endHour: DataTypes.TIME,
+            quantity: DataTypes.INTEGER,
+            quantityRes: DataTypes.INTEGER,
+            active: DataTypes.BOOLEAN,
+            courseId: DataTypes.STRING(8),
+            lectureId: DataTypes.STRING(8),
         },
         {
             sequelize,

@@ -16,15 +16,30 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },
+            paymentDate: {
+                type: Sequelize.DATE,
+                allowNull: false,
+            },
+            active: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+            },
+            method: {
+                type: Sequelize.STRING(50),
+                allowNull: false,
+            },
+            note: {
+                type: Sequelize.TEXT,
+            },
             studentId: {
                 type: Sequelize.STRING(8),
                 allowNull: false,
             },
-            staffId: {
+            staffRegis: {
                 type: Sequelize.STRING(8),
                 allowNull: false,
             },
-            methodId: {
+            staffPayment: {
                 type: Sequelize.STRING(8),
                 allowNull: false,
             },

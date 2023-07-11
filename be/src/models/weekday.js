@@ -9,10 +9,11 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            // weekday.belongsToMany(models.weekday, {
-            //     through: models.detailClassesWeek,
-            //     foreignKey: "weekdayId",
-            // });
+            weekday.belongsToMany(models.classes, {
+                through: models.detailClassesWeek,
+                foreignKey: "weekdayId",
+            });
+
         }
     }
     weekday.init(

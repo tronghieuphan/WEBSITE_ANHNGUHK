@@ -10,16 +10,16 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             // point.belongsTo(models.course, { foreignKey: "discountId" });
-            // point.belongsTo(models.user, { foreignKey: "userId" });
-
+            point.belongsTo(models.user, { foreignKey: "studentId" });
+            point.belongsTo(models.classes, { foreignKey: "classesId" });
         }
     }
     point.init(
         {
-            numberPoint:DataTypes.FLOAT,
-            result:DataTypes.STRING(20),
-            studentId:DataTypes.STRING(8),
-            courseId:DataTypes.STRING(8),
+            numberPoint: DataTypes.FLOAT,
+            result: DataTypes.STRING(20),
+            studentId: DataTypes.STRING(8),
+            classesId: DataTypes.STRING(8),
         },
         {
             sequelize,

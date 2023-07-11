@@ -17,7 +17,7 @@ module.exports = {
                 allowNull: false,
             },
             releaseDate: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
             image: {
@@ -32,12 +32,16 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },
-            file: {
+            filepdf: {
+                type: Sequelize.TEXT,
+                allowNull: false,
+            },
+            fileview: {
                 type: Sequelize.TEXT,
                 allowNull: false,
             },
             level: {
-                type: Sequelize.STRING,
+                type: Sequelize.STRING(20),
                 allowNull: false,
             },
             similarTopic: {
@@ -56,6 +60,10 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE,
             },
+        });
+        await queryInterface.addIndex("documents", {
+            fields: [{ name: "nameDocument", length: 100 }],
+            type: "FULLTEXT",
         });
     },
     async down(queryInterface, Sequelize) {

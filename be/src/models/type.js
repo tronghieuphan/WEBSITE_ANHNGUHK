@@ -9,14 +9,16 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            // type.hasMany(models.document, { foreignKey: "typeId" });
-            // type.hasMany(models.course, { foreignKey: "typeId" });
-
+            type.hasMany(models.document, { foreignKey: "typeId" });
+            type.hasMany(models.course, { foreignKey: "typeId" });
+            type.hasMany(models.outstanding, { foreignKey: "typeId" });
         }
     }
     type.init(
         {
-            nameType: DataTypes.STRING(20),
+            nameType: DataTypes.STRING(50),
+            description: DataTypes.TEXT,
+            image:DataTypes.TEXT,
         },
         {
             sequelize,

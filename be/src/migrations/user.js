@@ -21,16 +21,18 @@ module.exports = {
                 allowNull: false,
             },
             dateBirth: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
             email: {
                 type: Sequelize.STRING(50),
                 allowNull: false,
+                unique: true,
             },
             phone: {
                 type: Sequelize.STRING(15),
                 allowNull: false,
+                unique: true,
             },
             street: {
                 type: Sequelize.STRING(30),
@@ -46,6 +48,9 @@ module.exports = {
             city: {
                 type: Sequelize.STRING(30),
                 allowNull: false,
+            },
+            workPlace: {
+                type: Sequelize.STRING(100),
             },
             position: {
                 type: Sequelize.STRING(30),
@@ -66,12 +71,23 @@ module.exports = {
                 type: Sequelize.STRING(1),
                 allowNull: false,
             },
-            image: {
-                type: Sequelize.TEXT,
+            active: {
+                type: Sequelize.BOOLEAN,
+            },
+            department: {
+                type: Sequelize.STRING(50),
                 allowNull: false,
             },
-            accountId: {
-                type: Sequelize.STRING(8),
+            image: {
+                type: Sequelize.TEXT,
+            },
+            userName: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                unique: true,
+            },
+            passWord: {
+                type: Sequelize.STRING,
                 allowNull: false,
             },
             createdAt: {

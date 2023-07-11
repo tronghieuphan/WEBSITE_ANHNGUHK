@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     }
     detailRegistration.init(
         {
-            paymentDate: DataTypes.DATE,
             quantity: DataTypes.INTEGER,
-            note: DataTypes.TEXT,
+            amountCourse: DataTypes.INTEGER,
+            priceDiscount: DataTypes.INTEGER,
             registerId: DataTypes.STRING(8),
             courseId: DataTypes.STRING(8),
         },

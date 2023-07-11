@@ -9,21 +9,27 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            // registration.belongsTo(models.registration, { foreignKey: "studentId" });
-            // registration.belongsTo(models.registration, { foreignKey: "staffId" });
-            // registration.belongsToMany(models.course, {
-            //     through: models.detailRegistration,
-            //     foreignKey: "registerId",
-            // });
+            registration.belongsTo(models.user, { foreignKey: "studentId" });
+            registration.belongsTo(models.registration, { foreignKey: "staffRegis" });
+            registration.belongsTo(models.registration, { foreignKey: "staffPayment" });
+
+            registration.belongsToMany(models.course, {
+                through: models.detailRegistration,
+                foreignKey: "registerId",
+            });
         }
     }
     registration.init(
         {
+            paymentDate: DataTypes.DATE,
             regisDate: DataTypes.DATE,
             total: DataTypes.INTEGER,
+            active: DataTypes.BOOLEAN,
+            note: DataTypes.TEXT,
+            method: DataTypes.STRING(50),
             studentId: DataTypes.STRING(8),
-            staffId: DataTypes.STRING(8),
-            methodId: DataTypes.STRING(8),
+            staffRegis: DataTypes.STRING(8),
+            staffPayment: DataTypes.STRING(8),
         },
         {
             sequelize,

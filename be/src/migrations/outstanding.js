@@ -2,16 +2,27 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable("detailDiscountStudents", {
+        await queryInterface.createTable("outstandings", {
+            id: {
+                allowNull: false,
+                primaryKey: true,
+                type: Sequelize.STRING(8),
+            },
+            point: {
+                type: Sequelize.FLOAT,
+                allowNull: false,
+            },
+            image: {
+                type: Sequelize.TEXT,
+                allowNull: false,
+            },
             studentId: {
                 type: Sequelize.STRING(8),
                 allowNull: false,
-                primaryKey: true,
             },
-            discountId: {
+            typeId: {
                 type: Sequelize.STRING(8),
                 allowNull: false,
-                primaryKey: true,
             },
             createdAt: {
                 allowNull: false,
@@ -24,6 +35,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable("detailDiscountStudents");
+        await queryInterface.dropTable("outstandings");
     },
 };

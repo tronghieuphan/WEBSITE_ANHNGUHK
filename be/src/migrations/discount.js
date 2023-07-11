@@ -21,18 +21,15 @@ module.exports = {
                 type: Sequelize.STRING(10),
                 allowNull: false,
             },
-            startDade: {
-                type: Sequelize.DATE,
+            startDate: {
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
             endDate: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
-            condition: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
+           
             description: {
                 type: Sequelize.TEXT,
                 allowNull: false,

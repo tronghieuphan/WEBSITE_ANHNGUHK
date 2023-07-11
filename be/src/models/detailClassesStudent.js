@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     }
     detailClassesStudent.init(
         {
-            studentId:DataTypes.STRING(8),
-            classesId:DataTypes.STRING(8)
+            studentId: DataTypes.STRING(8),
+            classesId: DataTypes.STRING(8),
         },
         {
             sequelize,

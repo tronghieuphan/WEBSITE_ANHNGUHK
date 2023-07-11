@@ -18,10 +18,10 @@ module.exports = {
                 allowNull: false,
             },
             star: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.FLOAT,
                 allowNull: false,
             },
-            userId: {
+            studentId: {
                 type: Sequelize.STRING(8),
                 allowNull: false,
             },

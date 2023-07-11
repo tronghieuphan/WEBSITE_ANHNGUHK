@@ -2,27 +2,42 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable("classess", {
+        await queryInterface.createTable("classes", {
             id: {
                 allowNull: false,
                 primaryKey: true,
                 type: Sequelize.STRING(8),
             },
-
             nameClasses: {
                 type: Sequelize.STRING(30),
                 allowNull: false,
             },
             startDate: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
             endDate: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: false,
             },
-            price: {
+            startHour: {
+                type: Sequelize.TIME,
+                allowNull: false,
+            },
+            endHour: {
+                type: Sequelize.TIME,
+                allowNull: false,
+            },
+            quantity: {
                 type: Sequelize.INTEGER,
+                allowNull: false,
+            },
+            quantityRes: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
+            active: {
+                type: Sequelize.BOOLEAN,
                 allowNull: false,
             },
             courseId: {
@@ -44,6 +59,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable("classess");
+        await queryInterface.dropTable("classes");
     },
 };

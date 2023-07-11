@@ -3,17 +3,16 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable("detailRegistrations", {
-            paymentDate: {
-                type: Sequelize.DATE,
-                allowNull: false,
-            },
             quantity: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },
-            note: {
-                type: Sequelize.TEXT,
-                allowNull: false,
+
+            priceDiscount: {
+                type: Sequelize.INTEGER,
+            },
+            amountCourse: {
+                type: Sequelize.INTEGER,
             },
             registerId: {
                 type: Sequelize.STRING(8),

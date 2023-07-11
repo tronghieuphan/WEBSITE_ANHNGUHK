@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             classesId: DataTypes.STRING(8),
             weekdayId: DataTypes.STRING(8),
-            hour: DataTypes.TIME,
+           
         },
         {
             sequelize,

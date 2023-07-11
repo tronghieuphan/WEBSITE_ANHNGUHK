@@ -21,7 +21,7 @@ module.exports = {
                 type: Sequelize.STRING(8),
                 allowNull: false,
             },
-            courseId: {
+            classesId: {
                 type: Sequelize.STRING(8),
                 allowNull: false,
             },

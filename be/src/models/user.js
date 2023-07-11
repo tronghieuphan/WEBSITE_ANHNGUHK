@@ -9,21 +9,18 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            
-            // user.hasMany(models.point, { foreignKey: "userId" });
-            // user.hasOne(models.account, { foreignKey: "accountId" });
+            user.hasMany(models.point, { foreignKey: "studentId" });
             // user.hasMany(models.classes, { foreignKey: "lectureId" });
-            // user.hasMany(models.registration, { foreignKey: "studentId" });
-            // user.hasMany(models.registration, { foreignKey: "staffId" });
-            // user.hasMany(models.review, { foreignKey: "userId" });
-            // user.belongsToMany(models.classes, {
-            //     through: models.detailClassesStudent,
-            //     foreignKey: "studentId",
-            // });
-            // user.belongsToMany(models.discount, {
-            //     through: models.detailDiscountStudent,
-            //     foreignKey: "studentId",
-            // });
+            user.hasMany(models.registration, { foreignKey: "studentId" });
+            user.hasMany(models.registration, { foreignKey: "staffRegis" });
+            user.hasMany(models.registration, { foreignKey: "staffPayment" });
+            user.hasMany(models.review, { foreignKey: "studentId" });
+            user.hasMany(models.outstanding, { foreignKey: "studentId" });
+            user.hasMany(models.consult, { foreignKey: "userId" });
+            user.belongsToMany(models.classes, {
+                through: models.detailClassesStudent,
+                foreignKey: "studentId",
+            });
         }
     }
     user.init(
@@ -31,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
             firstName: DataTypes.STRING(30),
             lastName: DataTypes.STRING(30),
             gender: DataTypes.BOOLEAN,
-            dateBirth: DataTypes.DATE,
+            dateBirth: DataTypes.DATEONLY,
             email: DataTypes.STRING(50),
             phone: DataTypes.STRING(15),
             street: DataTypes.STRING(30),
@@ -39,13 +36,17 @@ module.exports = (sequelize, DataTypes) => {
             district: DataTypes.STRING(30),
             city: DataTypes.STRING(30),
             image: DataTypes.TEXT,
+            workPlace: DataTypes.STRING(100),
+            active: DataTypes.BOOLEAN,
             experience: DataTypes.STRING,
             specialize: DataTypes.STRING,
-            description:DataTypes.TEXT,
+            description: DataTypes.TEXT,
             position: DataTypes.STRING(30),
+            department: DataTypes.STRING(50),
             degree: DataTypes.STRING,
             typeUser: DataTypes.STRING(1),
-            accountId: DataTypes.STRING(8),
+            userName: DataTypes.STRING,
+            passWord: DataTypes.STRING,
         },
         {
             sequelize,
