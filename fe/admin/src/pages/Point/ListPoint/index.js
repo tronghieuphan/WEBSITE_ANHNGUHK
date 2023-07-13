@@ -1,10 +1,21 @@
-import { Table, Button, Popconfirm } from "antd";
+import { Table, Button, Popconfirm, Tooltip } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt, faEdit, faPlus, faFileExport } from "@fortawesome/free-solid-svg-icons";
+import {
+    faTrashAlt,
+    faEdit,
+    faPlus,
+    faFileExport,
+    faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useParams, useNavigate } from "react-router-dom";
-import { successDialog, deleteSuccess, exist } from "../../../components/Dialog/Dialog";
+import {
+    successDialog,
+    deleteSuccess,
+    exist,
+    successInfo,
+} from "../../../components/Dialog/Dialog";
 import { useDispatch } from "react-redux";
 import pointAPI from "../../../services/pointAPI";
 import DetailPoint from "../Detail";
@@ -18,7 +29,6 @@ function PointListClass() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [allPointClass, setAllPointClass] = useState([]);
-    console.log("allPointClass: ", allPointClass);
     const [listPointClass, setListPointClass] = useState([]);
     const [infoClasses, setInfoClasses] = useState();
     const [open, setOpen] = useState(false);
@@ -79,6 +89,13 @@ function PointListClass() {
         if (data.data.message === "Update Successfully") {
             successDialog();
             getAllPointClass();
+        }
+    };
+
+    const handleSendMailAll = async () => {
+        let data = await pointAPI.sendMail({ id: idClasses });
+        if (data.data.message === "Send Successfully") {
+            successInfo("Thông báo hoàn tất !");
         }
     };
     const handleAddStore = (record) => {
@@ -178,7 +195,12 @@ function PointListClass() {
                                 >
                                     Quay lại
                                 </Button>
-                                <Button className="bg-light mx-2" onClick={handleExportFile}>
+                                <Tooltip placement="top" title="Gửi lịch học">
+                                    <Button className="bg-light mx-2" onClick={handleSendMailAll}>
+                                        <FontAwesomeIcon icon={faEnvelope} className="text-dark" />
+                                    </Button>
+                                </Tooltip>
+                                <Button className="bg-light" onClick={handleExportFile}>
                                     <FontAwesomeIcon icon={faFileExport} className="text-dark" />
                                 </Button>
                                 <Button className="bg-light mx-2" onClick={handleDataCreate}>

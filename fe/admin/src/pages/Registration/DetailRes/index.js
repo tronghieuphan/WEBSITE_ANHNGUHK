@@ -130,7 +130,27 @@ function DetailRegPrint(props) {
                             </div>
                             <div className="text-end fst-italic">MAPDK:{regis?.id}</div>
                         </div>
-                        <div className="my-4 fw-bold fs-4 text-center"> PHIẾU ĐĂNG KÝ KHÓA HỌC</div>
+                        <div className="my-4 fw-bold fs-4 text-center">
+                            PHIẾU ĐĂNG KÝ KHÓA HỌC
+                            {regis?.activeCancel ? (
+                                <>
+                                    <br />
+                                    <div
+                                        style={{
+                                            color: "red",
+                                            fontSize: "20px",
+                                            textAlign: "center",
+                                            fontWeight: "bold",
+                                        }}
+                                    >
+                                        [ ĐÃ HỦY ]
+                                    </div>{" "}
+                                </>
+                            ) : (
+                                ""
+                            )}
+                        </div>
+
                         <div className="title-customer">THÔNG TIN KHÁCH HÀNG</div>
                         <div className="info row w-100">
                             <div className="col-md-4">

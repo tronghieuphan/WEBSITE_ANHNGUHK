@@ -1,4 +1,4 @@
-import { Modal, Button, Form, Input, Select } from "antd";
+import { Modal, Button, Form, Input, Select, Checkbox } from "antd";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -12,7 +12,10 @@ function DetailPoint(props) {
     const [listClasses, setListClasses] = useState([]);
     const [listStudent, setListStudent] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [cblisten, setCbListen] = useState(false);
+    const [cbreading, setCbReading] = useState(false);
+    const [cbwriting, setCbWriting] = useState(false);
+    const [cbspeaking, setCbSpeaking] = useState(false);
     const getAllStudent = async () => {
         try {
             setLoading(true);
@@ -42,6 +45,10 @@ function DetailPoint(props) {
             id: point.id,
             numberPoint: point.numberPoint,
             result: point.result,
+            skillListening: point.skillListening,
+            skillReading: point.skillReading,
+            skillSpeaking: point.skillSpeaking,
+            skillWriting: point.skillWriting,
             classesId: point.classesId,
             studentId: point.studentId,
         });
@@ -129,13 +136,78 @@ function DetailPoint(props) {
                             }))}
                         />
                     </Form.Item>
-                    <Form.Item
-                        label="Điểm số"
-                        name="numberPoint"
-                        rules={[{ required: true, message: "Vui lòng nhập thông tin !" }]}
-                    >
-                        <Input />
+                    <Form.Item label="Điểm số" name="numberPoint">
+                        <Input type="number" readOnly="true" />
                     </Form.Item>
+                    <hr />
+                    <p>Điểm số chi tiết</p>
+                    {point.skillReading === 0 ? (
+                        <Checkbox onChange={() => setCbReading(!cbreading)}>Reading Skill</Checkbox>
+                    ) : (
+                        ""
+                    )}
+                    {cbreading || point.skillReading !== 0 ? (
+                        <Form.Item
+                            label="Kỹ năng đọc"
+                            name="skillReading"
+                            rules={[{ required: true, message: "Vui lòng nhập thông tin !" }]}
+                        >
+                            <Input type="number" />
+                        </Form.Item>
+                    ) : (
+                        ""
+                    )}
+                    {point.skillListening === 0 ? (
+                        <Checkbox onChange={() => setCbListen(!cblisten)}>Listening Skill</Checkbox>
+                    ) : (
+                        ""
+                    )}
+                    {cblisten || point.skillListening !== 0 ? (
+                        <Form.Item
+                            label="Kỹ năng nghe"
+                            name="skillListening"
+                            rules={[{ required: true, message: "Vui lòng nhập thông tin !" }]}
+                        >
+                            <Input type="number" />
+                        </Form.Item>
+                    ) : (
+                        ""
+                    )}{" "}
+                    {point.skillWriting === 0 ? (
+                        <Checkbox onChange={() => setCbWriting(!cbwriting)}>Writing Skill</Checkbox>
+                    ) : (
+                        ""
+                    )}
+                    {cbwriting || point.skillWriting !== 0 ? (
+                        <Form.Item
+                            label="Kỹ năng viết"
+                            name="skillWriting"
+                            rules={[{ required: true, message: "Vui lòng nhập thông tin !" }]}
+                        >
+                            <Input type="number" />
+                        </Form.Item>
+                    ) : (
+                        ""
+                    )}
+                    {point.skillWriting === 0 ? (
+                        <Checkbox onChange={() => setCbSpeaking(!cbspeaking)}>
+                            Speaking Skill
+                        </Checkbox>
+                    ) : (
+                        ""
+                    )}
+                    {cbspeaking || point.skillSpeaking !== 0 ? (
+                        <Form.Item
+                            label="Kỹ năng nói"
+                            name="skillSpeaking"
+                            rules={[{ required: true, message: "Vui lòng nhập thông tin !" }]}
+                        >
+                            <Input type="number" />
+                        </Form.Item>
+                    ) : (
+                        ""
+                    )}
+                    <hr />
                     <Form.Item name="result" label="Đánh giá">
                         <Select
                             showSearch

@@ -14,6 +14,7 @@ export const dataAddSlice = createSlice({
         user: [],
         outstanding: [],
         registration: [],
+        consult: [],
     },
     reducers: {
         setDataWeekday: (state, action) => {
@@ -55,6 +56,9 @@ export const dataAddSlice = createSlice({
         setDataRegistration: (state, action) => {
             state.registration = action.payload;
         },
+        setDataConsult: (state, action) => {
+            state.consult = action.payload;
+        },
     },
 });
 export const {
@@ -71,5 +75,6 @@ export const {
     setDataUser,
     setDataOutstanding,
     setDataRegistration,
+    setDataConsult,
 } = dataAddSlice.actions;
 export default dataAddSlice.reducer;

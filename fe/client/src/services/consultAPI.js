@@ -9,6 +9,9 @@ const consultAPI = {
     create: (obj) => {
         return axios.post(`http://localhost:9000/create-consult`, obj);
     },
+    checkStaff: (obj) => {
+        return axios.post(`http://localhost:9000/checkstaff-consult`, obj);
+    },
 };
 
 export default consultAPI;

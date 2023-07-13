@@ -42,7 +42,6 @@ function DetailCousre(props) {
 
     const [listType, setListType] = useState([]);
     const [listDiscount, setListDiscount] = useState([]);
-    console.log('listDiscount: ', listDiscount);
     const [listClassify, setListClassify] = useState([]);
 
     const [valueType, setValueType] = useState();

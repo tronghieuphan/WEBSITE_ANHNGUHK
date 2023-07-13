@@ -1,4 +1,4 @@
-import { Table, Button } from "antd";
+import { Table, Button, Popconfirm } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
@@ -82,11 +82,21 @@ function RegistrationList() {
             getAllRegistration();
         }
     };
+
+    const handleCancel = async (e, obj) => {
+        const data = await registrationAPI.cancel(obj);
+        if (data.data.message === "Update Successfully") {
+            successInfo("Bạn đã hủy đăng ký này !");
+        }
+        getAllRegistration();
+    };
+
     //XỬ LÝ DỮ LIỆU
     const handleDataCreate = () => {
         setOpen(true);
         dispatch(setDataRegistration([]));
     };
+
     const handleAddStore = (record) => {
         dispatch(setDataRegistration(record));
         getRegisById(record);
@@ -165,6 +175,36 @@ function RegistrationList() {
                         >
                             Chờ xác nhận
                         </Button>
+                    )}
+                </div>
+            ),
+        },
+        ,
+        {
+            title: "Hủy đăng ký",
+            dataIndex: "activeCancel",
+            align: "center",
+            fixed: "right",
+            render: (activeCancel, record) => (
+                <div
+                    style={{
+                        width: "120px",
+                    }}
+                    className="mx-auto"
+                >
+                    {activeCancel ? (
+                        <Button type="dashed" danger>
+                            Đã hủy
+                        </Button>
+                    ) : (
+                        <Popconfirm
+                            title="Bạn có muốn hủy đăng ký?"
+                            onConfirm={(activeCancel) => handleCancel(activeCancel, record)}
+                        >
+                            <Button type="primary" danger>
+                                Hủy
+                            </Button>
+                        </Popconfirm>
                     )}
                 </div>
             ),

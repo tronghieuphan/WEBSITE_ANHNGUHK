@@ -1,20 +1,18 @@
 import "./style.scss";
-import { Modal, Form, Input } from "antd";
+import { Modal, Form, Input, Select, List } from "antd";
 import { useEffect, useState } from "react";
 import { VND } from "../../utils/formatVND";
-import { useNavigate } from "react-router-dom";
 import getCookie from "../../cookie/getCookie";
 import Swal from "sweetalert2";
 import consultAPI from "../../services/consultAPI";
 import { info, infoRes } from "../Dialog/Dialog";
+import timeDataArrive from "../../utils/data";
 function BtnRegister(props) {
-    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
-    const [valueRegis, setValueRegis] = useState();
+    // const [valueRegis, setValueRegis] = useState();
     const [date, setDate] = useState(false);
-    const [time, setTime] = useState(false);
-    const [datetrue, setValueDate] = useState();
-
+    const [checkStaff, setCheckStaff] = useState([]);
+    console.log("checkStaff: ", checkStaff);
     const { record, data } = props;
     const [form] = Form.useForm();
     const user = getCookie("user") ? JSON.parse(getCookie("user")) : null;
@@ -25,11 +23,14 @@ function BtnRegister(props) {
             infoRes(
                 "Bạn đã đăng ký khóa học thành công, vui lòng đến trung tâm đúng lịch hẹn. Nếu sau 5 ngày bạn không đến trung tâm sẽ hủy lịch hẹn của bạn. Xin cảm ơn !"
             );
-            setValueRegis(data.data.data);
+            // setValueRegis(data.data.data);
         }
     };
+    const handleClick = (value) => {
+        console.log(value);
+    };
 
-    const handleDateArrive = (e) => {
+    const handleDateArrive = async (e) => {
         let datenow = new Date();
         let datechoose = new Date(e.target.value);
         let datenow_day = datenow.getDate();
@@ -47,49 +48,33 @@ function BtnRegister(props) {
             setDate(false);
         } else {
             setDate(true);
-            setValueDate(e.target.value);
+            let a = await consultAPI.checkStaff({ dateArrive: e.target.value });
+            setCheckStaff(a.data.data);
         }
     };
-    const handleTimeArrive = (e) => {
-        let hournow = new Date().getHours();
-        let minutenow = new Date().getMinutes();
-        if (hournow < 10) {
-            hournow = "0" + hournow;
-        }
-        let timechoose = e.target.value;
-        let time = timechoose.split(":");
-        let datenow = new Date().getDate();
-        let monthnow = new Date().getMonth();
-        let yearnow = new Date().getFullYear();
-        let datechoose = new Date(datetrue).getDate();
-        let monthchoose = new Date(datetrue).getMonth();
-        let yearchoose = new Date(datetrue).getFullYear();
-        if (time[0] < 8 || time[0] > 21 || time[0] === 0) {
-            info("Trung tâm tạm nghỉ vào những giờ này !");
-            setTime(false);
-        } else {
-            if (datenow === datechoose && monthchoose === monthnow && yearchoose === yearnow) {
-                if (time[0] < hournow.toString()) {
-                    info("Thời gian không hợp lý");
-                    setTime(false);
-                } else if (time[0] === hournow.toString()) {
-                    if (time[1] <= minutenow.toString()) {
-                        info("Thời gian không hợp lý");
-                        setTime(false);
-                    }
-                } else {
-                    setTime(true);
+    let handleAddKey = [];
+    timeDataArrive.map((item) => {
+        let slip = item.split(":");
+        let x = parseInt(slip[0] + slip[2]);
+        handleAddKey.push({ key: x, time: item });
+    });
+    let listTime = [];
+
+    if (checkStaff.length === 0) {
+        listTime = handleAddKey;
+    } else {
+        checkStaff.map((item) => {
+            handleAddKey.map((item1) => {
+                if (item.key != item1.key) {
+                    listTime.push(item1);
                 }
-            } else if (datenow < datechoose) {
-                setTime(true);
-            }
-        }
-    };
+            });
+        });
+    }
+
     const handleSubmit = (e) => {
         if (date === false) {
             info("Ngày chọn không hợp lý");
-        } else if (time === false) {
-            info("Thời gian không hợp lý");
         } else {
             let obj = {
                 ...e,
@@ -227,7 +212,7 @@ function BtnRegister(props) {
                                         <Form.Item
                                             name="dateArrive"
                                             label="Ngày bạn sẽ đến:"
-                                            className={date ? "col-md-8" : "col-md-12"}
+                                            className={date ? "col-md-6" : "col-md-12"}
                                             rules={[
                                                 {
                                                     required: true,
@@ -240,16 +225,32 @@ function BtnRegister(props) {
                                         {date ? (
                                             <Form.Item
                                                 name="timeArrive"
-                                                label="Vào lúc:"
-                                                className="col-md-4"
+                                                label="Vào lúc:
+                                                
+                                                ."
+                                                className="col-md-6"
                                                 rules={[
                                                     {
                                                         required: true,
-                                                        message: "Vui lòng chọn thời gian !",
+                                                        message: "Mời bạn chọn giờ !",
                                                     },
                                                 ]}
                                             >
-                                                <Input type="time" onChange={handleTimeArrive} />
+                                                <Select
+                                                    showSearch
+                                                    placeholder="Chọn khung giờ bạn muốn"
+                                                    optionFilterProp="children"
+                                                    onChange={handleClick}
+                                                    filterOption={(input, option) =>
+                                                        (option?.label ?? "")
+                                                            .toLowerCase()
+                                                            .includes(input.toLowerCase())
+                                                    }
+                                                    options={listTime.map((item) => ({
+                                                        label: item.time,
+                                                        value: item.time,
+                                                    }))}
+                                                />
                                             </Form.Item>
                                         ) : (
                                             ""

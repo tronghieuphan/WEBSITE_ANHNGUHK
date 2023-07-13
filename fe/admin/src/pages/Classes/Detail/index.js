@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import courseAPI from "../../../services/courseAPI";
 import weekdayAPI from "../../../services/weekdayAPI";
 import userAPI from "../../../services/userAPI";
-import { error, errorInfo, info } from "../../../components/Dialog/Dialog";
+import { error, info } from "../../../components/Dialog/Dialog";
 import classesAPI from "../../../services/classesAPI";
 import CardCalender from "../../../components/Card/CardCalender";
 
@@ -31,7 +31,6 @@ function DetailClasses(props) {
     const [listCourse, setListCourse] = useState([]);
 
     const [listCalenderLec, setListCalenderLec] = useState();
-    console.log("listCalenderLec: ", listCalenderLec);
 
     const [timeStart, setTimeStart] = useState();
     const [timeEnd, setTimeEnd] = useState();

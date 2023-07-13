@@ -9,9 +9,9 @@ const registrationAPI = {
     create: (obj) => {
         return axios.post(`http://localhost:9000/create-registration`, obj);
     },
-    update: (obj) => {
-        return axios.put(`http://localhost:9000/update-registration`, obj);
-    },
+    // update: (obj) => {
+    //     return axios.put(`http://localhost:9000/update-registration`, obj);
+    // },
     delete: (id) => {
         return axios.delete(`http://localhost:9000/delete-registration/${id}`);
     },
@@ -32,6 +32,9 @@ const registrationAPI = {
     },
     checkClasses: (obj) => {
         return axios.post(`http://localhost:9000/check-classes`, obj);
+    },
+    cancel: (obj) => {
+        return axios.put(`http://localhost:9000/update-registration`, obj);
     },
 };
 

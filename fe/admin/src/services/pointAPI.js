@@ -21,6 +21,9 @@ const pointAPI = {
     getListPointClass: (obj) => {
         return axios.post(`http://localhost:9000/getlist-pointclass`, obj);
     },
+    sendMail: (obj) => {
+        return axios.post(`http://localhost:9000/send-mailpoint`, obj);
+    },
 };
 
 export default pointAPI;

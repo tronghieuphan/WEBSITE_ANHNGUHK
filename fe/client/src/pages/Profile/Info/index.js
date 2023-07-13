@@ -140,7 +140,7 @@ function InfoUser(props) {
                                     <div>{user?.firstName + " " + user?.lastName}</div>
                                 </p>
                                 <p className=" col-md-5">
-                                    <div className="fw-bold">Giới tính:</div> &nbsp;{" "}
+                                    <div className="fw-bold">Giới tính:</div> &nbsp;
                                     <div>{user?.gender ? "Nữ" : "Nam"}</div>
                                 </p>
                             </div>
@@ -197,7 +197,7 @@ function InfoUser(props) {
                                         <div>{user?.specialize}</div>
                                     </p>
                                     <p>
-                                        <div className="fw-bold">Mô tả:</div> &nbsp;{" "}
+                                        <div className="fw-bold">Mô tả:</div> &nbsp;
                                         <div
                                             dangerouslySetInnerHTML={{
                                                 __html: user?.description,
@@ -211,7 +211,7 @@ function InfoUser(props) {
                             {user?.typeUser === "3" ? (
                                 <>
                                     <p>
-                                        <div className="fw-bold">Vị trí:</div> &nbsp;{" "}
+                                        <div className="fw-bold">Vị trí:</div> &nbsp;
                                         <div>{user?.position}</div>
                                     </p>
                                     <p>
@@ -290,23 +290,60 @@ function InfoUser(props) {
                                                 {point === null ? (
                                                     "Khóa học chưa cập nhập điểm"
                                                 ) : (
-                                                    <div className="box-point">
-                                                        <div>{point?.numberPoint}</div>
-                                                        <div>
-                                                            Đánh giá:
-                                                            <span
-                                                                className={
-                                                                    point?.result === "1"
-                                                                        ? "text-success"
-                                                                        : "text-danger"
-                                                                }
-                                                            >
-                                                                {point?.result === "1"
-                                                                    ? " Đạt"
-                                                                    : "Không đạt"}
-                                                            </span>
+                                                    <>
+                                                        <div className="box-point">
+                                                            <div>{point?.numberPoint}</div>
+                                                            <div>
+                                                                Đánh giá:
+                                                                <span
+                                                                    className={
+                                                                        point?.result === "1"
+                                                                            ? "text-success"
+                                                                            : "text-danger"
+                                                                    }
+                                                                >
+                                                                    {point?.result === "1"
+                                                                        ? " Đạt"
+                                                                        : "Không đạt"}
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                        <hr />
+                                                        <p className="text-center fw-bold">
+                                                            Điểm chi tiết từng kỹ năng
+                                                        </p>
+                                                        <div className="d-flex justify-content-around fs-6">
+                                                            {point?.skillReading !== 0 ? (
+                                                                <div>
+                                                                    Reading: {point?.skillReading}
+                                                                </div>
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                            {point?.skillListening !== 0 ? (
+                                                                <div>
+                                                                    Listening:{" "}
+                                                                    {point?.skillListening}
+                                                                </div>
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                            {point?.skillWriting !== 0 ? (
+                                                                <div>
+                                                                    Writing: {point?.skillWriting}
+                                                                </div>
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                            {point?.skillSpeaking !== 0 ? (
+                                                                <div>
+                                                                    Speaking: {point?.skillSpeaking}
+                                                                </div>
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                        </div>
+                                                    </>
                                                 )}
                                             </Modal>
                                         </div>

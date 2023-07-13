@@ -195,13 +195,16 @@ function StudentClassesList() {
                                 <FontAwesomeIcon icon={faRectangleList} className="text-dark" />
                             </Button>
                         </Tooltip>
-                        <Button className="bg-light" onClick={handleSendMailAll}>
-                            <FontAwesomeIcon icon={faEnvelope} className="text-dark" />
-                        </Button>
-                        <Button className="bg-light mx-2" onClick={handleExportFile}>
-                            <FontAwesomeIcon icon={faFileExport} className="text-dark" />
-                        </Button>
-
+                        <Tooltip placement="top" title="Gửi lịch học">
+                            <Button className="bg-light" onClick={handleSendMailAll}>
+                                <FontAwesomeIcon icon={faEnvelope} className="text-dark" />
+                            </Button>
+                        </Tooltip>
+                        <Tooltip placement="top" title="Xuất danh sách">
+                            <Button className="bg-light mx-2" onClick={handleExportFile}>
+                                <FontAwesomeIcon icon={faFileExport} className="text-dark" />
+                            </Button>
+                        </Tooltip>
                         <hr className="w-100 " />
                         <div className="row">
                             <div className="col-md-12">
