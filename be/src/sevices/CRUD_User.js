@@ -197,7 +197,6 @@ let getUserBy = async (data) => {
 let createUser = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log("data: ", data);
             let condition1 = await db.user.findAll({
                 where: {
                     phone: data.phone,
@@ -284,7 +283,6 @@ const sendPasswordMail = async (data) => {
 let createUserAdmin = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log("data: ", data);
             let condition1 = await db.user.findAll({
                 where: {
                     phone: data.phone,
@@ -442,7 +440,6 @@ let updateUser = async (data) => {
 let updateActive = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data);
             let update = await db.user.update(
                 {
                     active: 1,
@@ -577,8 +574,6 @@ let forgetPassword = (data) => {
                     email: data.email,
                 },
             });
-            console.log("find: ", find);
-
             if (find != null) {
                 let codeEmail = await verifyCode(find);
                 resolve({ message: "Find Successfully", data: find, codeEmail });

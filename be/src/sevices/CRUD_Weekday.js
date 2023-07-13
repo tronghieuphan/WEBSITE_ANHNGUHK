@@ -49,7 +49,6 @@ let createWeekday = async (data) => {
 let deleteWeekday = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data.id);
             let del = await db.weekday.destroy({
                 where: {
                     id: data.id,
@@ -77,7 +76,6 @@ let updateWeekday = async (data) => {
                     },
                 }
             );
-            console.log(update);
             resolve({ message: "Update Successfully", data: update });
         } catch (e) {
             reject(e);

@@ -2,6 +2,7 @@ import express from "express";
 import db from "../models/index";
 import randomId from "./randomId";
 import { where, Op } from "sequelize";
+import emailService from "./sendEmail";
 
 //Hiển thị
 let getAllPoint = async () => {
@@ -26,7 +27,6 @@ let getAllPoint = async () => {
 let createPoint = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data);
             let listStudent = await db.detailClassesStudent.findAll({
                 where: {
                     classesId: data.data,
@@ -69,10 +69,21 @@ let deletePoint = async (data) => {
 let updatePoint = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            let pointtotal =
+                new Number(data.skillSpeaking ? data.skillSpeaking : 0) +
+                new Number(data.skillReading ? data.skillReading : 0) +
+                new Number(data.skillWriting ? data.skillWriting : 0) +
+                new Number(data.skillListening ? data.skillListening : 0);
+
+            console.log("pointtotal: ", pointtotal);
             let update = await db.point.update(
                 {
-                    numberPoint: data.numberPoint,
+                    numberPoint: pointtotal,
                     result: data.result,
+                    skillListening: data.skillListening,
+                    skillReading: data.skillReading,
+                    skillSpeaking: data.skillSpeaking,
+                    skillWriting: data.skillWriting,
                     studentId: data.studentId,
                     classesId: data.classesId,
                 },
@@ -82,7 +93,6 @@ let updatePoint = async (data) => {
                     },
                 }
             );
-            console.log(update);
             resolve({ message: "Update Successfully", data: update });
         } catch (e) {
             reject(e);
@@ -130,6 +140,45 @@ let getListPointClass = (datafind) => {
         }
     });
 };
+
+//Tìm theo tên hoặc loại
+let sendMailPoint = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let find = await db.point.findAll({
+                where: {
+                    classesId: data.id,
+                },
+                include: [
+                    {
+                        model: db.classes,
+                        attributes: ["nameClasses"],
+                    },
+                    { model: db.user, attributes: ["firstName", "lastName", "email"] },
+                ],
+            });
+            find.map(async (item) => {
+                let obj = {
+                    numberPoint: item.numberPoint,
+                    result: 1 ? "Đạt" : "Không đạt",
+                    skillReading: item.skillReading,
+                    skillListening: item.skillListening,
+                    skillWriting: item.skillWriting,
+                    skillSpeaking: item.skillSpeaking,
+                    nameClasses: item.class.nameClasses,
+                    name: item.user.firstName + " " + item.user.lastName,
+                    email: item.user.email,
+                };
+                await emailService.sendPoint(obj);
+            });
+
+            resolve({ data: find, message: "Send Successfully" });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 let findPointStudent = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -178,4 +227,5 @@ module.exports = {
     findPoint,
     getListPointClass,
     findPointStudent,
+    sendMailPoint,
 };

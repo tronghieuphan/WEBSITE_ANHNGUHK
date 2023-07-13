@@ -84,7 +84,6 @@ let getAllClasses = async () => {
 let getAllClassesByTeacher = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data);
             let userLec = await db.user.findOne({
                 where: {
                     id: data.id,

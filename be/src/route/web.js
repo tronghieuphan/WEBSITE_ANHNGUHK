@@ -93,10 +93,13 @@ let initWebRotes = (app) => {
 
     //TƯ VẤN ĐĂNG KÝ
     router.post("/create-consult", consultController.create_Consult);
-    router.get("/getall-consult", consultController.getAll_Consult);
+    router.post("/getall-consult", consultController.getAll_Consult);
     router.post("/accept-consult", consultController.accept_Consult);
-    router.post("/datewait-consult", consultController.dateWait_Consult);
+    router.post("/accept-resconsult", consultController.accept_ResConsult);
 
+    router.get("/datewait-consult", consultController.dateWait_Consult);
+    router.post("/checkstaff-consult", consultController.get_CheckStaffConsult);
+    router.put("/update-consult", consultController.update_Consult);
     //PHIẾU ĐĂNG KÝ
     router.post("/create-registration", registrationController.create_Registration);
     router.get("/getall-registration", registrationController.getAll_Registration);
@@ -125,6 +128,7 @@ let initWebRotes = (app) => {
     router.post("/getby-point", pointController.find_Point);
     router.post("/getlist-pointclass", pointController.get_ListPointClass);
     router.post("/find-pointstudent", pointController.find_PointStudent);
+    router.post("/send-mailpoint", pointController.send_MailPoint);
 
     //ĐÁNH GIÁ
     router.get("/getall-review", reviewController.getAll_Review);

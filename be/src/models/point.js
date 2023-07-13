@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         {
             numberPoint: DataTypes.FLOAT,
             result: DataTypes.STRING(20),
+            skillReading: DataTypes.FLOAT,
+            skillListening: DataTypes.FLOAT,
+            skillWriting: DataTypes.FLOAT,
+            skillSpeaking: DataTypes.FLOAT,
             studentId: DataTypes.STRING(8),
             classesId: DataTypes.STRING(8),
         },

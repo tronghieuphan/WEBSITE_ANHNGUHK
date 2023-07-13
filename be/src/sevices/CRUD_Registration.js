@@ -150,7 +150,6 @@ let createRegistration = async (data) => {
                     });
 
                     data.courseId.map(async (a) => {
-                        console.log("a: ", a);
                         const info = await db.course.findOne({
                             where: {
                                 id: a,
@@ -185,32 +184,23 @@ let createRegistration = async (data) => {
 let updateRegistration = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            // let update = await db.registration.update(
-            //     {
-            //         total: data.total,
-            //         method: data.method,
-            //         studentId: data.studentId,
-            //         staffId: data.staffId,
-            //         active: data.active,
-            //     },
-            //     {
-            //         where: {
-            //             id: data.id,
-            //         },
-            //     }
-            // );
-            // let detailClassesStudent = await db.detailClassesStudent.create({
-            //     studentId: data.studentId,
-            //     classes: data.classesId,
-            // });
-            // let Point = await db.point.create({
-            //     id: randomId.randomId("D_"),
-            //     studentId: data.studentId,
-            //     classesId: data.classesId,
-            //     numberPoint: 0,
-            // });
-            // console.log(update);
-            // resolve({ message: "Update Successfully", data: update });
+            console.log(data);
+            let findDetail = await db.detailRegistration.destroy({
+                where: {
+                    registerId: data.id,
+                },
+            });
+
+            let updateres = db.registration.update(
+                {
+                    total: (data.total * 20) / 100,
+                    activeCancel: 1,
+                },
+                {
+                    where: { id: data.id },
+                }
+            );
+            resolve({ message: "Update Successfully" });
         } catch (e) {
             reject(e);
         }

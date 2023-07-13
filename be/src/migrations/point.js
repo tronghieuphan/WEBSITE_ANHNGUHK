@@ -17,6 +17,22 @@ module.exports = {
                 type: Sequelize.STRING(20),
                 allowNull: false,
             },
+            skillReading: {
+                type: Sequelize.FLOAT,
+                allowNull: false,
+            },
+            skillListening: {
+                type: Sequelize.FLOAT,
+                allowNull: false,
+            },
+            skillWriting: {
+                type: Sequelize.FLOAT,
+                allowNull: false,
+            },
+            skillSpeaking: {
+                type: Sequelize.FLOAT,
+                allowNull: false,
+            },
             studentId: {
                 type: Sequelize.STRING(8),
                 allowNull: false,

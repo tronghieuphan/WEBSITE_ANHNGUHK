@@ -33,7 +33,6 @@ let getAllCourse = async () => {
 let createCourse = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data);
             let Course = await db.course.findOrCreate({
                 where: {
                     nameCourse: data.nameCourse,

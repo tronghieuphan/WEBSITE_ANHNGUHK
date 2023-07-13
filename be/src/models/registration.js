@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
             registration.belongsTo(models.user, { foreignKey: "studentId" });
             registration.belongsTo(models.registration, { foreignKey: "staffRegis" });
             registration.belongsTo(models.registration, { foreignKey: "staffPayment" });
-
             registration.belongsToMany(models.course, {
                 through: models.detailRegistration,
                 foreignKey: "registerId",
@@ -26,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
             total: DataTypes.INTEGER,
             active: DataTypes.BOOLEAN,
             note: DataTypes.TEXT,
+            activeCancel: DataTypes.BOOLEAN,
             method: DataTypes.STRING(50),
             studentId: DataTypes.STRING(8),
             staffRegis: DataTypes.STRING(8),

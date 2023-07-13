@@ -22,12 +22,24 @@ module.exports = {
                 allowNull: false,
             },
             timeArrive: {
-                type: Sequelize.TIME,
+                type: Sequelize.STRING(50),
                 allowNull: false,
             },
             active: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
+            },
+            note: {
+                type: Sequelize.TEXT,
+            },
+            pointTest: {
+                type: Sequelize.STRING(20),
+            },
+            level: {
+                type: Sequelize.STRING(25),
+            },
+            checkRes: {
+                type: Sequelize.BOOLEAN,
             },
             userId: {
                 type: Sequelize.STRING(8),

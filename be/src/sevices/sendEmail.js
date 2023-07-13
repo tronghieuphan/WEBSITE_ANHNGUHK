@@ -234,11 +234,10 @@ let sendForgetPassword = async (dataSend) => {
     });
 };
 let AlertDateConsult = async (dataSend) => {
-    console.log(dataSend.email);
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
-        secure: false, // true for 465, false for other ports
+        secure: false,
         auth: {
             user: process.env.EMAIL_APP,
             pass: process.env.EMAIL_APP_PASSWORRD,
@@ -248,7 +247,7 @@ let AlertDateConsult = async (dataSend) => {
     let info = await transporter.sendMail({
         from: '"Anh Ngữ HK" <hkeducation.090801@gmail.com>', // sender address
         to: dataSend.email, // list of receivers
-        subject: "HK EDU GỬI MÃ XÁC NHẬN QUÊN MẬT KHẨU", // Subject line
+        subject: "THÔNG BÁO LỊCH HẸN ĐẾN TƯ VẤN", // Subject line
         html: `
         <div style="width: 100%">
         <div
@@ -313,7 +312,6 @@ let AlertDateConsult = async (dataSend) => {
     });
 };
 let CancelConsult = async (dataSend) => {
-    console.log(dataSend.email);
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
@@ -327,7 +325,7 @@ let CancelConsult = async (dataSend) => {
     let info = await transporter.sendMail({
         from: '"Anh Ngữ HK" <hkeducation.090801@gmail.com>', // sender address
         to: dataSend.email, // list of receivers
-        subject: "HK EDU GỬI MÃ XÁC NHẬN QUÊN MẬT KHẨU", // Subject line
+        subject: "HK EDU THÔNG BÁO HỦY LỊCH HẸN", // Subject line
         html: `
         <div style="width: 100%">
         <div
@@ -531,6 +529,73 @@ let sendCalenderClass = async (dataSend) => {
     });
 };
 
+let sendPoint = async (dataSend) => {
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: process.env.EMAIL_APP,
+            pass: process.env.EMAIL_APP_PASSWORRD,
+        },
+    });
+    let info = await transporter.sendMail({
+        from: '"Anh Ngữ HK" <hkeducation.090801@gmail.com>', // sender address
+        to: dataSend.email, // list of receivers
+        subject: "THÔNG BÁO ĐIỂM SỐ", // Subject line
+        html: `
+      
+        <div
+        style="
+            width: 100%;
+            border: 1px solid black;
+            border-radius: 10px;
+            display: block;
+            margin: 0px auto;
+        "
+    >
+        <img
+            src="https://res.cloudinary.com/dt2bxtoc3/image/upload/v1685297009/img-web/logo_rba9o7.png"
+            style="
+                width: 150px;
+                height: 70px;
+                margin: 20px auto;
+                display: block;
+            "
+            alt=""
+        />
+        <hr style="width: 90%; margin: 0px auto"   />
+        <div style="text-align:center; margin:10px; font-size:20px; font-weight:bold; ">THÔNG BÁO ĐIỂM SỐ KHÓA HỌC</div>
+        <div style=" padding: 0 6%">
+           <div style="padding:10px 0px"> Xin chào <span style="font-weight:bold"> ${dataSend.name} </span> !  </div>
+            <div
+                style="
+                    width: fit-content;
+                    display: block;
+                    line-height:30px
+                "
+            >
+               Chúng tôi xin thông báo điểm của khóa học ${dataSend.nameClasses} đến bạn!
+               </div>
+
+<div style="font-weight:bold"> Điểm tổng: </div> <div style="font-size:30px; font-weight:bold; text-align:center; border:1px solid black; padding:10px"> ${dataSend.numberPoint} <br> <span style="font-size:20px">${dataSend.result}</span></div>
+<div style="margin:10px 0px;font-weight:bold"> Điểm chi tiết: </div>
+         <ul>
+         <li>Listening <span style="color:red; font-weight:bold">${dataSend.skillListening}</span> </li>
+         <li>Reading: <span style="color:red; font-weight:bold">${dataSend.skillReading}</span></li>
+         <li>Writing:<span style=" font-weight:bold">${dataSend.skillWriting}</span> </li>
+         <li>Speaking:<span style="color:red; font-weight:bold">${dataSend.skillSpeaking}</span> </li>
+ 
+         </ul>
+         </div>
+           <div style="padding-left:6%; font-style:italic"> Chúc bạn sẽ có những trãi nghiệm tuyệt vời tại trung tâm của chúng tôi.</div>
+           <p style="padding-left:6%; font-weight:bold; font-style:italic">Trận trọng !</p>
+           </div>
+    
+
+        `,
+    });
+};
 module.exports = {
     sendPassEmail,
     sendConsultRes,
@@ -540,4 +605,5 @@ module.exports = {
     sendCalenderClass,
     AlertDateConsult,
     CancelConsult,
+    sendPoint,
 };

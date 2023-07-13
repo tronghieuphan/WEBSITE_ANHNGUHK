@@ -30,6 +30,10 @@ let find_PointStudent = async (req, res) => {
     let Point = await CRUD_Point.findPointStudent(req.body);
     res.status(200).json(Point);
 };
+let send_MailPoint = async (req, res) => {
+    let Point = await CRUD_Point.sendMailPoint(req.body);
+    res.status(200).json(Point);
+};
 
 module.exports = {
     create_Point,
@@ -39,4 +43,5 @@ module.exports = {
     find_Point,
     get_ListPointClass,
     find_PointStudent,
+    send_MailPoint,
 };

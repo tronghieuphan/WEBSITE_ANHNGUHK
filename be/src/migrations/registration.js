@@ -24,6 +24,10 @@ module.exports = {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
             },
+            activeCancel: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+            },
             method: {
                 type: Sequelize.STRING(50),
                 allowNull: false,

@@ -19,7 +19,6 @@ let uploadImage = async (dataImage, nameImage) => {
                 (err, result) => {
                     if (err) console.log(err);
                     if (result) {
-                        console.log(result);
                         resolve(result);
                     }
                 }

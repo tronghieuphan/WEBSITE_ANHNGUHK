@@ -90,7 +90,6 @@ let updateOutstanding = async (data) => {
                     },
                 }
             );
-            console.log(update);
             resolve({ message: "Update Successfully", data: update });
         } catch (e) {
             reject(e);
