@@ -575,7 +575,7 @@ let sendPoint = async (dataSend) => {
                     line-height:30px
                 "
             >
-               Chúng tôi xin thông báo điểm của khóa học ${dataSend.nameClasses} đến bạn!
+               Chúng tôi xin thông báo điểm của khóa học ${dataSend.ameClasses} đến bạn!
                </div>
 
 <div style="font-weight:bold"> Điểm tổng: </div> <div style="font-size:30px; font-weight:bold; text-align:center; border:1px solid black; padding:10px"> ${dataSend.numberPoint} <br> <span style="font-size:20px">${dataSend.result}</span></div>
