@@ -1,10 +1,12 @@
-import { Table, Button, Tooltip } from "antd";
+import { Table, Button, Tooltip, Modal } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faPlus,
     faFileExport,
     faRectangleList,
     faEnvelope,
+    faArrowRightArrowLeft,
+    faL,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -13,11 +15,18 @@ import classesAPI from "../../../services/classesAPI";
 import handleOnExport from "../../../utils/exportXLSX";
 import { info, successInfo } from "../../../components/Dialog/Dialog";
 import pointAPI from "../../../services/pointAPI";
+import CardClassesMove from "../../../components/Card/CardClassesMove";
+import Swal from "sweetalert2";
 
 function StudentClassesList() {
     const [loading, setLoading] = useState(true);
     const [listStudent, setListStudent] = useState([]);
     const [infoClasses, setInfoClasses] = useState();
+    const [open, setOpen] = useState(false);
+    const [open1, setOpen1] = useState(false);
+
+    const [detailStudent, setDetailStudent] = useState("");
+    const [listClassesActive, setListClassesActive] = useState([]);
 
     const { idClasses } = useParams();
     const navigate = useNavigate();
@@ -49,6 +58,50 @@ function StudentClassesList() {
         } else {
             info("Danh sách gặp trục trặc");
         }
+    };
+
+    const handCancel = () => {
+        Swal.fire({
+            title: "Bạn có chắc chắn ?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                let obj = {
+                    code: "3",
+                    studentId: detailStudent.id,
+                    classesId: idClasses,
+                };
+                let data = await classesAPI.move(obj);
+                if (data.data.message === "Cancel Successfully") {
+                    successInfo("Bạn đã hủy phiếu đăng ký");
+                    setOpen1(false);
+                    getAllStudentClasses();
+                }
+            }
+        });
+    };
+    const handleShow = async (record) => {
+        setDetailStudent(record);
+        let data = await classesAPI.move({ code: "1", idClasses: idClasses });
+        setListClassesActive(data.data.data);
+        setOpen1(true);
+    };
+    const handleMove = async (obj) => {
+        let info = {
+            code: "2",
+            idStudent: detailStudent.id,
+            idClassesOld: idClasses,
+            ...obj,
+        };
+        let data = await classesAPI.move(info);
+        if (data.data.message === "Move Successfully") {
+            successInfo("Đã thay đổi lớp học cho học viên");
+        }
+        getAllStudentClasses();
     };
     useEffect(() => {
         getAllStudentClasses();
@@ -164,6 +217,17 @@ function StudentClassesList() {
                 </div>
             ),
         },
+        {
+            title: "Chuyển lớp",
+            dataIndex: "",
+            align: "center",
+            fixed: "right",
+            render: (record) => (
+                <Button className="bg-light" onClick={() => handleShow(record)}>
+                    <FontAwesomeIcon icon={faArrowRightArrowLeft} className="text-dark" />
+                </Button>
+            ),
+        },
     ];
 
     return (
@@ -205,6 +269,92 @@ function StudentClassesList() {
                                 <FontAwesomeIcon icon={faFileExport} className="text-dark" />
                             </Button>
                         </Tooltip>
+                        <Modal
+                            title={
+                                <>
+                                    <div className="fs-4 fw-bold text-center">Xử lý thông tin</div>
+                                    <hr />
+                                </>
+                            }
+                            centered
+                            open={open1}
+                            okButtonProps={{
+                                style: {
+                                    display: "none",
+                                },
+                            }}
+                            cancelButtonProps={{
+                                style: {
+                                    visibility: "hidden",
+                                },
+                            }}
+                            className="my-1 "
+                            onCancel={() => setOpen1(false)}
+                            width={500}
+                        >
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <Button
+                                        className="mx-1 w-100"
+                                        type="primary"
+                                        danger
+                                        onClick={handCancel}
+                                    >
+                                        Hủy đăng ký
+                                    </Button>
+                                </div>
+                                <div className="col-md-6">
+                                    <Button
+                                        className="mx-1 w-100"
+                                        type="primary"
+                                        onClick={() => setOpen(true)}
+                                    >
+                                        Chuyển lớp
+                                    </Button>
+                                </div>
+                            </div>
+                        </Modal>
+                        <Modal
+                            title={
+                                <>
+                                    <div className="fs-4 fw-bold">Danh sách lớp học đang mở</div>
+                                    <hr />
+                                </>
+                            }
+                            centered
+                            open={open}
+                            okButtonProps={{
+                                style: {
+                                    display: "none",
+                                },
+                            }}
+                            cancelButtonProps={{
+                                style: {
+                                    visibility: "hidden",
+                                },
+                            }}
+                            className="my-3 "
+                            onCancel={() => {
+                                setOpen(false);
+                                setOpen1(false);
+                            }}
+                            width={1000}
+                        >
+                            <div className="row">
+                                {listClassesActive.map((item) => {
+                                    return (
+                                        <>
+                                            <div className="col-md-3" key={item.id}>
+                                                <CardClassesMove
+                                                    classesActive={item}
+                                                    handleMove={handleMove}
+                                                />
+                                            </div>
+                                        </>
+                                    );
+                                })}
+                            </div>
+                        </Modal>
                         <hr className="w-100 " />
                         <div className="row">
                             <div className="col-md-12">

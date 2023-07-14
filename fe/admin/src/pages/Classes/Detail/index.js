@@ -112,7 +112,6 @@ function DetailClasses(props) {
     };
 
     const handleTime = (e) => {
-        console.log(e.target.value - timeStart);
         if (e.target.value < timeStart) {
             info("Thời gian không hợp lý !");
             setTime(false);
@@ -273,7 +272,6 @@ function DetailClasses(props) {
                                 placeholder="Chọn buổi học"
                                 optionFilterProp="children"
                                 mode="tags"
-                                onChange={handleChange}
                                 onSearch={onSearch}
                                 filterOption={(input, option) =>
                                     (option?.label ?? "")
@@ -315,7 +313,6 @@ function DetailClasses(props) {
                                 showSearch
                                 placeholder="Chọn khóa học"
                                 optionFilterProp="children"
-                                onChange={handleChange}
                                 onSearch={onSearch}
                                 filterOption={(input, option) =>
                                     (option?.label ?? "")
@@ -370,7 +367,9 @@ function DetailClasses(props) {
                         <>
                             <div className="text-center fs-6">
                                 Lịch giảng dạy của giảng viên <br />
-                                <div className="text-center fs-4 fw-bold">{listCalenderLec?.lecture}</div>
+                                <div className="text-center fs-4 fw-bold">
+                                    {listCalenderLec?.lecture}
+                                </div>
                             </div>
                             <hr className="w-100" />
                         </>

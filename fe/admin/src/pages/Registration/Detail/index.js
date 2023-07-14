@@ -120,7 +120,6 @@ function DetailRegistration(props) {
                 //UPDATE
                 if (registration.id) {
                     handleUpdate(data);
-
                     form.resetFields();
                 }
                 //CREATE

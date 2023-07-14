@@ -1,0 +1,25 @@
+.box-classes {
+    background-image: url("https://res.cloudinary.com/dt2bxtoc3/image/upload/v1685183960/img-web/128x128_wiuznp.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    z-index: 0;
+    span {
+        font-weight: 700;
+    }
+
+    .content {
+        text-align: center;
+        background-color: rgb(255, 255, 255, 0.86);
+        border-radius: 10px;
+        max-height: fit-content;
+        div {
+            margin: 5px 0;
+            color: black;
+        }
+        h5 {
+            padding: 20px 0;
+            font-weight: bold;
+        }
+    }
+}

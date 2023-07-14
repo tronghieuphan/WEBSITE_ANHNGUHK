@@ -27,6 +27,8 @@ const classesAPI = {
     sendMailAll: (obj) => {
         return axios.post(`http://localhost:9000/send-emailcalender`, obj);
     },
+    move: (obj) => {
+        return axios.post(`http://localhost:9000/move-student`, obj);
+    },
 };
-
 export default classesAPI;

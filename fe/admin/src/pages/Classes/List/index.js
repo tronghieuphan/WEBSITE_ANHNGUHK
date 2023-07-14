@@ -12,6 +12,7 @@ import DetailClasses from "../Detail";
 
 function ClassesList() {
     const [listClasses, setListClasses] = useState([]);
+    console.log("listClasses: ", listClasses);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
 
@@ -177,23 +178,17 @@ function ClassesList() {
             render: (quantityRes) => <div style={{ width: "50px" }}>{quantityRes}</div>,
         },
         {
-            title: "Trạng thái ",
-            dataIndex: "active",
-            fixed: "right",
-            render: (active, record) => (
-                <div>
-                    <Switch
-                        defaultChecked={active}
-                        onClick={(checked) => handleUpdateActive(checked, record)}
-                    />
-                </div>
+            title: "Tối thiểu",
+            dataIndex: "quantityMin",
+            align: "center",
+            render: (quantityMin) => (
+                <div style={{ width: "50px" }}>{quantityMin}</div>
             ),
         },
         {
             title: "Xóa",
             dataIndex: "",
             align: "center",
-            fixed: "right",
             render: (_, record) => (
                 <Popconfirm title="Bạn có muốn xóa?" onConfirm={() => handleDelete(record)}>
                     <Button className="bg-light">
@@ -206,13 +201,26 @@ function ClassesList() {
             title: "Xem",
             dataIndex: "",
             align: "center",
-            fixed: "right",
             render: (record) => (
                 <Button className="bg-light" onClick={() => handleAddStore(record)}>
                     <FontAwesomeIcon icon={faEdit} className="text-dark" />
                 </Button>
             ),
         },
+        {
+            title: "Trạng thái ",
+            dataIndex: "active",
+            fixed: "right",
+            render: (active, record) => (
+                <div>
+                    <Switch
+                        defaultChecked={active}
+                        onClick={(checked) => handleUpdateActive(checked, record)}
+                    />
+                </div>
+            ),
+        },
+
         {
             title: "DSHV",
             dataIndex: "",
