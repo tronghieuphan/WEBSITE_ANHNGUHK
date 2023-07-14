@@ -63,7 +63,9 @@ let initWebRotes = (app) => {
     router.post("/get-liststudentclasses", classesController.get_ListStudentClasses);
     router.post("/send-emailcalender", classesController.send_EmailCalender);
     router.post("/getall-classesteacher", classesController.getAll_ByTeacher);
+    router.post("/move-student", classesController.move_Student);
 
+    
     //NỔI BẬT
     router.post("/create-outstanding", outstandingController.create_Outstanding);
     router.get("/getall-outstanding", outstandingController.getAll_Outstanding);

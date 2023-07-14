@@ -34,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
             endHour: DataTypes.TIME,
             quantity: DataTypes.INTEGER,
             quantityRes: DataTypes.INTEGER,
+            quantityMin: DataTypes.INTEGER,
             active: DataTypes.BOOLEAN,
             courseId: DataTypes.STRING(8),
             lectureId: DataTypes.STRING(8),

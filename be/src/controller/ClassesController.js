@@ -31,7 +31,10 @@ let getAll_ByTeacher = async (req, res) => {
     let Classes = await CRUD_Classes.getAllClassesByTeacher(req.body);
     res.status(200).json(Classes);
 };
-
+let move_Student = async (req, res) => {
+    let Classes = await CRUD_Classes.moveStudent(req.body);
+    res.status(200).json(Classes);
+};
 module.exports = {
     create_Classes,
     getAll_Classes,
@@ -41,4 +44,5 @@ module.exports = {
     get_ListStudentClasses,
     send_EmailCalender,
     getAll_ByTeacher,
+    move_Student,
 };

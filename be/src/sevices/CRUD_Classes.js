@@ -59,6 +59,7 @@ let getAllClasses = async () => {
                     endHour: item.endHour,
                     quantity: item.quantity,
                     quantityRes: item.quantityRes,
+                    quantityMin: item.quantityMin,
                     active: item.active,
                     courseId: item.courseId,
                     lectureId: item.lectureId,
@@ -89,7 +90,6 @@ let getAllClassesByTeacher = async (data) => {
                     id: data.id,
                 },
             });
-
             if (userLec.typeUser === "2") {
                 let listClassesLec = await db.classes.findAll({
                     where: { lectureId: data.id },
@@ -191,50 +191,34 @@ let getAllClassesByTeacher = async (data) => {
 let createClasses = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let checkHour = await db.classes.findAll({
+            let Classes = await db.classes.findOrCreate({
                 where: {
+                    nameClasses: data.nameClasses,
+                },
+                defaults: {
+                    id: randomId.randomId("LH"),
+                    startDate: data.startDate,
+                    endDate: data.endDate,
+                    startHour: data.startHour,
+                    endHour: data.endHour,
+                    quantity: data.quantity,
+                    quantityRes: 0,
+                    active: 1,
+                    courseId: data.courseId,
                     lectureId: data.lectureId,
                 },
             });
-            let check;
-            // checkHour.map((item) => {
-            //     if (
-            //         (item.startHour <= data.startHour && data.endHour <= item.endHour) ||
-            //         (item.endHour >= data.startHour)||(item. >= data.startHour)
-            //     ) {
-            //         check = true;
-            //     }
-            // });
-            resolve({ data: check });
-            // let Classes = await db.classes.findOrCreate({
-            //     where: {
-            //         nameClasses: data.nameClasses,
-            //     },
-            //     defaults: {
-            //         id: randomId.randomId("LH"),
-            //         startDate: data.startDate,
-            //         endDate: data.endDate,
-            //         startHour: data.startHour,
-            //         endHour: data.endHour,
-            //         quantity: data.quantity,
-            //         quantityRes: 0,
-            //         active: 1,
-            //         courseId: data.courseId,
-            //         lectureId: data.lectureId,
-            //     },
-            // });
-
-            // if (Classes[1]) {
-            //     data.nameWeekday.map(async (a) => {
-            //         await db.detailClassesWeek.create({
-            //             weekdayId: a,
-            //             classesId: Classes[0].id,
-            //         });
-            //     });
-            //     resolve({ message: "Create Successfully", data: Classes[0] });
-            // } else {
-            //     resolve({ message: "Classes Exist" });
-            // }
+            if (Classes[1]) {
+                data.nameWeekday.map(async (a) => {
+                    await db.detailClassesWeek.create({
+                        weekdayId: a,
+                        classesId: Classes[0].id,
+                    });
+                });
+                resolve({ message: "Create Successfully", data: Classes[0] });
+            } else {
+                resolve({ message: "Classes Exist" });
+            }
         } catch (e) {
             reject(e);
         }
@@ -402,7 +386,148 @@ let sendCalender = (data) => {
         }
     });
 };
+let moveStudent = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (data.code === "1") {
+                let find = await db.classes.findOne({
+                    where: {
+                        id: data.idClasses,
+                    },
+                });
+                let findClasses = await db.classes.findAll({
+                    where: {
+                        courseId: find.courseId,
+                        active: true,
+                        id: { [Op.not]: data.idClasses },
+                    },
+                    include: [
+                        {
+                            model: db.weekday,
+                            attributes: ["nameWeekday"],
+                        },
+                    ],
 
+                    nest: true,
+                });
+
+                let list = [];
+
+                findClasses.map((item) => {
+                    let listWeekday = [];
+                    item.weekdays.map((item1) => {
+                        listWeekday.push(item1.nameWeekday);
+                    });
+                    list.push(listWeekday);
+                });
+
+                let listCalender = [];
+                let obj = {};
+                findClasses.map((item, index) => {
+                    obj = {
+                        id: item.id,
+                        nameClasses: item.nameClasses,
+                        startDate: item.startDate,
+                        endDate: item.endDate,
+                        startHour: item.startHour,
+                        endHour: item.endHour,
+                        quantity: item.quantity,
+                        quantityRes: item.quantityRes,
+                        quantityMin: item.quantityMin,
+                        active: item.active,
+                        courseId: item.courseId,
+                        lectureId: item.lectureId,
+                        weekdayId: list[index],
+                    };
+                    listCalender.push(obj);
+                });
+                resolve({ data: listCalender });
+            } else if (data.code === "2") {
+                await db.detailClassesStudent.update(
+                    {
+                        classesId: data.id,
+                    },
+                    {
+                        where: {
+                            classesId: data.idClassesOld,
+                            studentId: data.idStudent,
+                        },
+                    }
+                );
+
+                resolve({ message: "Move Successfully" });
+            } else if (data.code === "3") {
+                await db.detailClassesStudent.destroy({
+                    where: {
+                        studentId: data.studentId,
+                        classesId: data.classesId,
+                    },
+                });
+                let a = await db.user.findOne({
+                    include: [
+                        {
+                            model: db.registration,
+                            include: [{ model: db.course }],
+                        },
+                    ],
+
+                    where: {
+                        id: data.studentId,
+                    },
+                });
+                let findCourse = await db.classes.findOne({
+                    where: {
+                        id: data.classesId,
+                    },
+                });
+                let obj;
+                a.registrations.map((item) => {
+                    item.courses.map((item1) => {
+                        if (item1.id === findCourse.courseId) {
+                            obj = item;
+                        }
+                    });
+                });
+                await db.detailRegistration.destroy({
+                    where: {
+                        registerId: obj.id,
+                        courseId: obj.courses[0].id,
+                    },
+                });
+
+                let up = await db.detailRegistration.findAll({
+                    where: {
+                        registerId: obj.id,
+                    },
+                });
+                let total = 0;
+                up.forEach((item) => {
+                    let temp = item.amountCourse + item.priceDiscount;
+                    total = total + temp;
+                });
+                if (total > 0) {
+                    let updateres = await db.registration.update(
+                        {
+                            total: total,
+                        },
+                        {
+                            where: { id: obj.id },
+                        }
+                    );
+                } else {
+                    await db.registration.destroy({
+                        where: {
+                            id: obj.id,
+                        },
+                    });
+                }
+                resolve({ message: "Cancel Successfully", data: total });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
 module.exports = {
     createClasses,
     getAllClasses,
@@ -413,4 +538,5 @@ module.exports = {
     listStudentClasses,
     sendEmailCalenderClass,
     getAllClassesByTeacher,
+    moveStudent,
 };

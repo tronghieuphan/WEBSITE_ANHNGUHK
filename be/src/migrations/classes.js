@@ -36,6 +36,10 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },
+            quantityMin: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
             active: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
