@@ -1,4 +1,4 @@
-import { Table, Button, Popconfirm, Switch } from "antd";
+import { Table, Button, Popconfirm, Switch, Checkbox } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
@@ -8,6 +8,7 @@ import reviewAPI from "../../../services/reviewAPI";
 
 function ReviewList() {
     const [listReview, setListReview] = useState([]);
+    console.log("listReview: ", listReview);
     const [loading, setLoading] = useState(false);
 
     const getAllReview = async () => {
@@ -60,19 +61,33 @@ function ReviewList() {
             title: "Người dùng đánh giá",
             align: "center",
             dataIndex: "user",
-            render: (user) => <div>{user?.firstName + " " + user?.lastName}</div>,
+            render: (user, record) => (
+                <div>
+                    {record.activeHidden ? "***********" : user?.firstName + " " + user?.lastName}
+                </div>
+            ),
         },
         {
             title: "Nội dung",
             dataIndex: "description",
-            render: (description) => <div style={{ width: "300px" }}>{description}</div>,
+            render: (description) => <div style={{ width: "500px" }}>{description}</div>,
         },
         {
             title: "Sao",
             dataIndex: "star",
             align: "center",
         },
+        {
+            title: "Trạng thái ẩn danh",
+            dataIndex: "activeHidden",
+            align: "center",
 
+            render: (activeHidden) => (
+                <div className="d-flex justify-content-center">
+                    <Checkbox checked={activeHidden} />
+                </div>
+            ),
+        },
         {
             title: "Trạng thái",
             dataIndex: "active",
@@ -83,6 +98,7 @@ function ReviewList() {
                     <Switch
                         defaultChecked={active}
                         onClick={(checked) => handleCheck(checked, record)}
+                        disabled={record.activeHidden ? true : false}
                     />
                 </div>
             ),
@@ -99,16 +115,7 @@ function ReviewList() {
                 </Popconfirm>
             ),
         },
-        {
-            title: "Lưu",
-            dataIndex: "",
-            align: "center",
-            render: (record) => (
-                <Button className="bg-light">
-                    <FontAwesomeIcon icon={faEdit} className="text-dark" />
-                </Button>
-            ),
-        },
+       
     ];
 
     return (
@@ -130,6 +137,7 @@ function ReviewList() {
                                     dataSource={listReview}
                                     bordered={true}
                                     loading={loading}
+                                    scroll={{ x: true }}
                                 />
                             </div>
                         </div>

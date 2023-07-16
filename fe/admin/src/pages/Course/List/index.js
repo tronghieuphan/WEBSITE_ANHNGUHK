@@ -311,7 +311,7 @@ function CourseList() {
             title: "Trạng thái",
             dataIndex: "active",
             align: "center",
-            render: (active) => (
+            render: (active, record) => (
                 <div
                     style={{
                         width: "100px",
@@ -367,7 +367,6 @@ function CourseList() {
                             <div className="col-md-4 text-end">
                                 <Select
                                     defaultValue="Chọn loại khóa học"
-                                   
                                     onChange={handleChange}
                                     options={items.map((item) => ({
                                         label: item.nameType,

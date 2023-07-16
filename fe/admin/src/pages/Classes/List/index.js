@@ -1,4 +1,4 @@
-import { Table, Button, Popconfirm, Switch } from "antd";
+import { Table, Button, Popconfirm, Switch, Select } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit, faPlus, faListUl } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
@@ -9,12 +9,15 @@ import { useDispatch } from "react-redux";
 import classesAPI from "../../../services/classesAPI";
 import { setDataClasses } from "../../../slices/dataAdd";
 import DetailClasses from "../Detail";
+import courseAPI from "../../../services/courseAPI";
 
 function ClassesList() {
     const [listClasses, setListClasses] = useState([]);
-    console.log("listClasses: ", listClasses);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
+
+    const [allCourseBelongType, setAllCourseBelongType] = useState([]);
+    console.log("allCourseBelongType: ", allCourseBelongType);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -30,8 +33,13 @@ function ClassesList() {
         }
     };
 
+    const getCourseByBelong = async () => {
+        const data = await courseAPI.getCourseBeLongType({ code: "admin" });
+        setAllCourseBelongType(data.data.data);
+    };
     useEffect(() => {
         getAllClasses();
+        getCourseByBelong();
     }, []);
 
     // XỬ LÝ DELETE
@@ -73,6 +81,10 @@ function ClassesList() {
         dispatch(setDataClasses(record));
         setOpen(true);
     };
+    const handleChangeClass = async (e) => {
+        let data = await classesAPI.findAllClasses({ courseId: e });
+        setListClasses(data.data.data);
+    };
     const handleUpdateActive = async (checked, record) => {
         let obj = {
             id: record.id,
@@ -80,6 +92,7 @@ function ClassesList() {
         };
         await handleUpdate(obj);
     };
+
     const columns = [
         {
             title: "ID",
@@ -181,9 +194,7 @@ function ClassesList() {
             title: "Tối thiểu",
             dataIndex: "quantityMin",
             align: "center",
-            render: (quantityMin) => (
-                <div style={{ width: "50px" }}>{quantityMin}</div>
-            ),
+            render: (quantityMin) => <div style={{ width: "50px" }}>{quantityMin}</div>,
         },
         {
             title: "Xóa",
@@ -249,10 +260,39 @@ function ClassesList() {
                 <div className="text-muted">
                     <div className="">
                         <p className="fs-4 fw-bold">DANH SÁCH LỚP HỌC</p>
-                        <Button className="bg-light" onClick={handleDataCreate}>
-                            <FontAwesomeIcon icon={faPlus} className="text-dark" />
-                        </Button>
-
+                        <div className="row w-100">
+                            <div className="col-md-7">
+                                <Button className="bg-light" onClick={handleDataCreate}>
+                                    <FontAwesomeIcon icon={faPlus} className="text-dark" />
+                                </Button>
+                            </div>
+                            <div className="col-md-1">
+                                <Button className="bg-light" onClick={getAllClasses}>
+                                    Tất cả
+                                </Button>
+                            </div>
+                            <div className="col-md-4 text-end">
+                                <Select
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={(input, option) =>
+                                        (option?.label ?? "")
+                                            .toLowerCase()
+                                            .includes(input.toLowerCase())
+                                    }
+                                    onChange={handleChangeClass}
+                                    className="w-100 text-center"
+                                    placeholder="Chọn khóa học"
+                                    options={allCourseBelongType?.map((item) => ({
+                                        label: item?.nameType,
+                                        options: item?.courses.map((item1) => ({
+                                            label: item1.nameCourse,
+                                            value: item1.id,
+                                        })),
+                                    }))}
+                                />
+                            </div>
+                        </div>
                         <DetailClasses
                             handleCreate={handleCreate}
                             handleUpdate={handleUpdate}

@@ -30,5 +30,8 @@ const classesAPI = {
     move: (obj) => {
         return axios.post(`http://localhost:9000/move-student`, obj);
     },
+    findAllClasses: (obj) => {
+        return axios.post(`http://localhost:9000/findall-classe`, obj);
+    },
 };
 export default classesAPI;

@@ -112,6 +112,7 @@ function DetailClasses(props) {
     };
 
     const handleTime = (e) => {
+        console.log(e);
         if (e.target.value < timeStart) {
             info("Thời gian không hợp lý !");
             setTime(false);
@@ -225,7 +226,7 @@ function DetailClasses(props) {
                         <Form.Item
                             label="Tên lớp học"
                             name="nameClasses"
-                            className="col-md-10"
+                            className="col-md-8"
                             rules={[{ required: true, message: "Vui lòng nhập thông tin !" }]}
                         >
                             <Input />
@@ -236,7 +237,15 @@ function DetailClasses(props) {
                             className="col-md-2"
                             rules={[{ required: true, message: "Vui lòng nhập thông tin !" }]}
                         >
-                            <Input type="number" />
+                            <Input type="number" min={0} />
+                        </Form.Item>
+                        <Form.Item
+                            label="Số lượng tối thiệu"
+                            name="quantityMin"
+                            className="col-md-2"
+                            rules={[{ required: true, message: "Vui lòng nhập thông tin !" }]}
+                        >
+                            <Input type="number" min={0} />
                         </Form.Item>
                     </div>
                     <div className="row d-flex justify-content-between">
