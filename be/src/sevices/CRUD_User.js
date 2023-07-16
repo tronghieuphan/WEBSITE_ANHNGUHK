@@ -134,7 +134,9 @@ let hashPasswordAccount = (password) => {
 let getAllUser = async () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let listUser = await db.user.findAll();
+            let listUser = await db.user.findAll({
+                order: [["createdAt", "ASC"]],
+            });
             if (listUser.length > 0) {
                 resolve({
                     message: "List Successfully",
@@ -155,7 +157,7 @@ let getAllUserByType = async (data) => {
             let listUser = await db.user.findAll({
                 where: {
                     typeUser: data.typeUser,
-                },
+                },  order: [["createdAt", "ASC"]],
             });
             if (listUser.length > 0) {
                 resolve({

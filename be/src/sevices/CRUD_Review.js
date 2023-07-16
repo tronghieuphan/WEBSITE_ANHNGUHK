@@ -13,6 +13,7 @@ let createReview = async (data) => {
                 description: data.description,
                 star: data.star,
                 active: 0,
+                activeHidden: data.activeHidden,
                 studentId: data.studentId,
             });
 
@@ -32,8 +33,9 @@ let getAllReview = async () => {
             let listReview = await db.review.findAll({
                 include: [
                     { model: db.user, attributes: ["firstName", "lastName", "workPlace", "image"] },
-                ],
+                ],  order: [["createdAt", "ASC"]],
             });
+
             if (listReview.length > 0) {
                 resolve({
                     message: "List Successfully",

@@ -10,7 +10,8 @@ let getAllOutstanding = async () => {
             let listOutstanding = await db.outstanding.findAll({
                 include: [{ model: db.type }, { model: db.user }],
                 nest: true,
-                raw: true,
+                raw: true,                order: [["createdAt", "ASC"]],
+
             });
 
             if (listOutstanding.length > 0) {

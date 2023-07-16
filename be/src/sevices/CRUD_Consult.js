@@ -13,6 +13,8 @@ let getAllConsult = async (data) => {
                     { model: db.classes, attributes: ["nameClasses"] },
                 ],
                 where: {},
+                order: [["createdAt", "ASC"]],
+
                 nest: true,
                 raw: true,
             });

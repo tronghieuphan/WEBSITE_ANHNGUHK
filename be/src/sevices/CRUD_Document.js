@@ -13,6 +13,8 @@ let getAllDocument = async () => {
             let listDocument = await db.document.findAll({
                 include: [{ model: db.type }],
                 raw: true,
+                order: [["createdAt", "ASC"]],
+
             });
             if (listDocument.length > 0) {
                 resolve({

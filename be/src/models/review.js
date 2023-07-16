@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
             description: DataTypes.TEXT,
             active: DataTypes.BOOLEAN,
             star: DataTypes.FLOAT,
+            activeHidden: DataTypes.BOOLEAN,
             studentId: DataTypes.STRING(8),
         },
         {

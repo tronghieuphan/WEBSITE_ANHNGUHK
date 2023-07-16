@@ -14,6 +14,9 @@ let getAllCourse = async () => {
                     { model: db.type },
                     { model: db.classify },
                 ],
+                order: [["createdAt", "ASC"]],
+
+
             });
             if (listCourse.length > 0) {
                 resolve({
@@ -209,12 +212,20 @@ let getCourseBy = (datafind) => {
 let getCourseBeLongType = (datafind) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let data = await db.course.findAll({
-                include: [{ model: db.discount, attribute: ["percent"] }, { model: db.type }],
-                where: {
-                    typeId: datafind.datafind,
-                },
-            });
+            let data;
+            if (datafind.code === "admin") {
+                data = await db.type.findAll({
+                    include: [{ model: db.course }],
+                });
+            } else {
+                data = await db.course.findAll({
+                    include: [{ model: db.discount, attribute: ["percent"] }, { model: db.type }],
+                    where: {
+                        typeId: datafind.datafind,
+                        active: 1,
+                    },
+                });
+            }
             if (data) {
                 resolve({ message: "Find Successfully", data: data });
             } else {
@@ -225,6 +236,7 @@ let getCourseBeLongType = (datafind) => {
         }
     });
 };
+
 module.exports = {
     createCourse,
     getAllCourse,

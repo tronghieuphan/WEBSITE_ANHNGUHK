@@ -11,7 +11,7 @@ let getAllRegistration = async () => {
             let listRegistration = await db.registration.findAll({
                 include: [{ model: db.user, attributes: ["firstName", "lastName"] }],
                 nest: true,
-                raw: true,
+                raw: true,  order: [["createdAt", "ASC"]],
             });
             if (listRegistration.length > 0) {
                 resolve({

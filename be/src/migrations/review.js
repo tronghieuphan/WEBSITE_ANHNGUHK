@@ -21,6 +21,10 @@ module.exports = {
                 type: Sequelize.FLOAT,
                 allowNull: false,
             },
+            activeHidden: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+            },
             studentId: {
                 type: Sequelize.STRING(8),
                 allowNull: false,

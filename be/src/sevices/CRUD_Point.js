@@ -8,7 +8,9 @@ import emailService from "./sendEmail";
 let getAllPoint = async () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let listPoint = await db.point.findAll();
+            let listPoint = await db.point.findAll(
+                {  order: [["createdAt", "ASC"]],}
+            );
             if (listPoint.length > 0) {
                 resolve({
                     message: "List Successfully",

@@ -6,7 +6,9 @@ import randomId from "./randomId";
 let getAllDiscount = async () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let listDiscount = await db.discount.findAll();
+            let listDiscount = await db.discount.findAll({
+                order: [["createdAt", "ASC"]],
+            });
             if (listDiscount.length > 0) {
                 resolve({
                     message: "List Successfully",

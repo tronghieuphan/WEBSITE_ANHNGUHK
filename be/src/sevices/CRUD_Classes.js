@@ -15,6 +15,87 @@ let getAllClasses = async () => {
                         attributes: ["nameWeekday"],
                     },
                 ],
+                order: [["createdAt", "ASC"]],
+                nest: true,
+            });
+
+            let list = [];
+            let lecture = await db.user.findAll({
+                where: {
+                    typeUser: "2",
+                },
+            });
+
+            let lectureClass = [];
+            listClasses.map((item) => {
+                lecture.map((item1) => {
+                    if (item.lectureId === item1.id) {
+                        let obj = {
+                            classesId: item.id,
+                            nameLecture: item1.firstName + item1.lastName,
+                        };
+                        lectureClass.push(obj);
+                    }
+                });
+            });
+
+            listClasses.map((item) => {
+                let listWeekday = [];
+                item.weekdays.map((item1) => {
+                    listWeekday.push(item1.nameWeekday);
+                });
+                list.push(listWeekday);
+            });
+
+            let listCalender = [];
+            let obj = {};
+            listClasses.map((item, index) => {
+                obj = {
+                    id: item.id,
+                    nameClasses: item.nameClasses,
+                    startDate: item.startDate,
+                    endDate: item.endDate,
+                    startHour: item.startHour,
+                    endHour: item.endHour,
+                    quantity: item.quantity,
+                    quantityRes: item.quantityRes,
+                    quantityMin: item.quantityMin,
+                    active: item.active,
+                    courseId: item.courseId,
+                    lectureId: item.lectureId,
+                    nameLecture: lectureClass[index].nameLecture,
+                    weekdayId: list[index],
+                };
+                listCalender.push(obj);
+            });
+
+            if (listClasses.length > 0) {
+                resolve({
+                    message: "List Successfully",
+                    data: listCalender,
+                });
+            } else {
+                resolve({ message: "List null" });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+let getFindAllClasses = async (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            console.log(data);
+            let listClasses = await db.classes.findAll({
+                where: {
+                    courseId: data.courseId,
+                },
+                include: [
+                    {
+                        model: db.weekday,
+                        attributes: ["nameWeekday"],
+                    },
+                ],
 
                 nest: true,
             });
@@ -203,6 +284,7 @@ let createClasses = async (data) => {
                     endHour: data.endHour,
                     quantity: data.quantity,
                     quantityRes: 0,
+                    quantityMin: data.quantityMin,
                     active: 1,
                     courseId: data.courseId,
                     lectureId: data.lectureId,
@@ -253,6 +335,7 @@ let updateClasses = async (data) => {
                     startHour: data.startHour,
                     endHour: data.endHour,
                     quantity: data.quantity,
+                    quantityMin: data.quantityMin,
                     courseId: data.courseId,
                     lectureId: data.lectureId,
                     active: data.active,
@@ -535,6 +618,7 @@ module.exports = {
     updateClasses,
     findClasses,
     findInfoClasses,
+    getFindAllClasses,
     listStudentClasses,
     sendEmailCalenderClass,
     getAllClassesByTeacher,
