@@ -52,17 +52,22 @@ function BtnRegister(props) {
             setCheckStaff(a.data.data);
         }
     };
+
+    //Xy ly hien thị so luong đc đki tu vấn
     let handleAddKey = [];
+    // Duêtỵ tạo khóa cho khung giờ key
     timeDataArrive.map((item) => {
         let slip = item.split(":");
         let x = parseInt(slip[0] + slip[2]);
         handleAddKey.push({ key: x, time: item });
     });
-    let listTime = [];
 
+    let listTime = [];
+//kiểm tra nếu nếu dữ liệu lấy ra có độ dài bằng 0 thì lất tất 
     if (checkStaff.length === 0) {
         listTime = handleAddKey;
     } else {
+        //nếu khác 0 thì duyệt lấy các phần tử khác 
         checkStaff.map((item) => {
             handleAddKey.map((item1) => {
                 if (item.key != item1.key) {
@@ -71,7 +76,20 @@ function BtnRegister(props) {
             });
         });
     }
+    // mảng gồm các mã do be xuất lên 
+    let existKey = checkStaff.map(function (item) {
+        return item.key;
+    });
+    let filterArray = listTime.filter(function (item) {
+        return existKey.indexOf(item.key) === -1;
+    });
 
+    // gộp các dữ liệu trùng 
+    const uniqueSet = new Set(filterArray);
+
+    const listEx = [...uniqueSet];
+
+    // /////////////////////////////
     const handleSubmit = (e) => {
         if (date === false) {
             info("Ngày chọn không hợp lý");
@@ -246,7 +264,7 @@ function BtnRegister(props) {
                                                             .toLowerCase()
                                                             .includes(input.toLowerCase())
                                                     }
-                                                    options={listTime.map((item) => ({
+                                                    options={listEx.map((item) => ({
                                                         label: item.time,
                                                         value: item.time,
                                                     }))}

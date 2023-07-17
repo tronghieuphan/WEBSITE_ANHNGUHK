@@ -7,8 +7,6 @@ import userAPI from "../../../services/userAPI";
 import setCookie from "../../../cookie/setCookie";
 import getCookie from "../../../cookie/getCookie";
 import removeCookie from "../../../cookie/removeCookie";
-// import { useEffect } from "react";
-// import google from "google-one-tap";
 function LoginPage() {
     const navigate = useNavigate();
     const document = getCookie("document") ? JSON.parse(getCookie("document")) : null;
@@ -17,7 +15,7 @@ function LoginPage() {
 
     const handleSubmit = async (e) => {
         let checkType = await userAPI.findBy({ datafind: e.userName });
-        if (checkType.data.data[0].typeUser === "4") {
+        if (checkType.data.data[0]?.typeUser === "4") {
             toast.error("Tài khoản không tồn tại !");
         } else {
             if (e.userName === undefined || e.passWord === undefined) {

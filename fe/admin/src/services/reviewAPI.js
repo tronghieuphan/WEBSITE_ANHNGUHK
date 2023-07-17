@@ -15,6 +15,9 @@ const reviewAPI = {
     delete: (id) => {
         return axios.delete(`http://localhost:9000/delete-review/${id}`);
     },
+    find: (obj) => {
+        return axios.post(`http://localhost:9000/find-review`, obj);
+    },
 };
 
 export default reviewAPI;

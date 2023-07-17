@@ -14,12 +14,12 @@ function ConsultList() {
     const [loading, setLoading] = useState(false);
     const [optineDate, setOptionDate] = useState(false);
     const [open, setOpen] = useState(false);
+    const [chooseSeq, setChoose] = useState(1);
     const dispatch = useDispatch();
-
-    const getAllConsult = async () => {
+    const getAllConsult = async (obj) => {
         try {
             setLoading(true);
-            const response = await consultAPI.getAll({ choose: 1 });
+            const response = await consultAPI.getAll({ choose: obj });
             setListConsult(response.data.data);
             setLoading(false);
         } catch (err) {
@@ -31,18 +31,19 @@ function ConsultList() {
         const data = await consultAPI.accept(obj);
         if (data.data.message === "Update Successfully") {
             successInfo("Xử lý thành công");
-            getAllConsult();
+            getAllConsult(chooseSeq);
         }
     };
     const acceptResConsult = async (obj) => {
         const data = await consultAPI.acceptRes(obj);
         if (data.data.message === "Update Successfully") {
             successInfo("Xử lý thành công");
-            getAllConsult();
+            getAllConsult(chooseSeq);
         }
     };
     const handleAcceptConsult = (active, record) => {
         acceptConsult(record);
+        getAllConsult(chooseSeq);
     };
     const handleAcceptRes = (active, record) => {
         acceptResConsult(record);
@@ -52,6 +53,7 @@ function ConsultList() {
         if (a.data.message === "Handle Successfully") {
             successInfo("Xử lý thành công");
         }
+        getAllConsult(chooseSeq);
     };
 
     const handleChooseDetail = async (e) => {
@@ -67,6 +69,7 @@ function ConsultList() {
         setListConsult(a.data.data);
     };
     const handChangeOptionDate = async (e) => {
+        setChoose(e);
         if (e === 4) {
             setOptionDate(true);
         } else {
@@ -82,12 +85,12 @@ function ConsultList() {
         const data = await consultAPI.update(obj);
         if (data.data.message === "Update Successfully") {
             successDialog();
-            getAllConsult();
+            getAllConsult(chooseSeq);
         }
         setOpen(false);
     };
     useEffect(() => {
-        getAllConsult();
+        getAllConsult(chooseSeq);
     }, []);
 
     const columns = [

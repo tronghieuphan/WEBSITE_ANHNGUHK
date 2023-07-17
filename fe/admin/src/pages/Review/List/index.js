@@ -1,4 +1,4 @@
-import { Table, Button, Popconfirm, Switch, Checkbox } from "antd";
+import { Table, Button, Popconfirm, Switch, Checkbox, Select } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
@@ -43,7 +43,14 @@ function ReviewList() {
             getAllReview();
         }
     };
-
+    const findTypeReview = async (e) => {
+        if (e === 3) {
+            getAllReview();
+        } else {
+            let data = await reviewAPI.find({ activeHidden: e });
+            setListReview(data.data.data);
+        }
+    };
     const handleCheck = (checked, record) => {
         let obj = {
             id: record.id,
@@ -115,7 +122,6 @@ function ReviewList() {
                 </Popconfirm>
             ),
         },
-       
     ];
 
     return (
@@ -126,10 +132,39 @@ function ReviewList() {
                 exit={{ opacity: 0, transition: { duration: 0.8 } }}
             >
                 <div className="text-muted">
-                    <div className="">
-                        <p className="fs-4 fw-bold">DANH SÁCH ĐÁNH GIÁ</p>
-
+                    <div className="row">
+                        <div className="col-md-8">
+                            <p className="fs-4 fw-bold">DANH SÁCH ĐÁNH GIÁ</p>
+                        </div>
+                        <div className="col-md-4 text-end">
+                            <Select
+                                showSearch
+                                placeholder="Lọc thông tin"
+                                optionFilterProp="children"
+                                onChange={findTypeReview}
+                                filterOption={(input, option) =>
+                                    (option?.label ?? "")
+                                        .toLowerCase()
+                                        .includes(input.toLowerCase())
+                                }
+                                options={[
+                                    {
+                                        value: 3,
+                                        label: "Tất cả",
+                                    },
+                                    {
+                                        value: 0,
+                                        label: "Công khai",
+                                    },
+                                    {
+                                        value: 1,
+                                        label: "Ẩn danh",
+                                    },
+                                ]}
+                            />
+                        </div>
                         <hr className="w-100 " />
+
                         <div className="row">
                             <div className="col-md-12">
                                 <Table
