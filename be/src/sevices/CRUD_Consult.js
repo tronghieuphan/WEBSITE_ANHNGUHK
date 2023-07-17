@@ -109,7 +109,6 @@ let createConsult = async (data) => {
 let updateConsult = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data);
             let Consult = await db.consult.update(
                 {
                     note: data.note,
@@ -256,6 +255,9 @@ const handleCheckCounsut = async (data) => {
                     exDateTime.push({ key: x, time: item1, length: length });
                 }
             });
+
+          
+
             resolve({ data: exDateTime });
         } catch (e) {
             reject(e);

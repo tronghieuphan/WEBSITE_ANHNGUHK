@@ -22,10 +22,16 @@ let update_Review = async (req, res) => {
     res.status(200).json(Review);
 };
 
+let find_Review = async (req, res) => {
+    let Review = await CRUD_Review.findReview(req.body);
+    res.status(200).json(Review);
+};
+
 module.exports = {
     getAll_Review,
     get_Review,
     create_Review,
     delete_Review,
     update_Review,
+    find_Review,
 };

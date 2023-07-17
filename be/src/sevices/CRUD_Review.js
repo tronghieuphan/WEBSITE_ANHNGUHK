@@ -33,7 +33,34 @@ let getAllReview = async () => {
             let listReview = await db.review.findAll({
                 include: [
                     { model: db.user, attributes: ["firstName", "lastName", "workPlace", "image"] },
-                ],  order: [["createdAt", "ASC"]],
+                ],
+                order: [["createdAt", "ASC"]],
+            });
+
+            if (listReview.length > 0) {
+                resolve({
+                    message: "List Successfully",
+                    data: listReview,
+                });
+            } else {
+                resolve({ message: "List null" });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+let findReview = async (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let listReview = await db.review.findAll({
+                where: {
+                    activeHidden: data.activeHidden,
+                },
+                include: [
+                    { model: db.user, attributes: ["firstName", "lastName", "workPlace", "image"] },
+                ],
+                order: [["createdAt", "ASC"]],
             });
 
             if (listReview.length > 0) {
@@ -120,4 +147,5 @@ module.exports = {
     createReview,
     deleteReview,
     updateReview,
+    findReview,
 };

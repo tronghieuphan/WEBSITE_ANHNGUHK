@@ -538,8 +538,15 @@ let moveStudent = (data) => {
                     }
                 );
 
+                await db.classes.increment({ quantityRes: 1 }, { where: { id: data.id } });
+                await db.classes.decrement(
+                    { quantityRes: 1 },
+                    { where: { id: data.idClassesOld } }
+                );
+
                 resolve({ message: "Move Successfully" });
             } else if (data.code === "3") {
+                console.log(data);
                 await db.detailClassesStudent.destroy({
                     where: {
                         studentId: data.studentId,

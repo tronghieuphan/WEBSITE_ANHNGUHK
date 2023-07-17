@@ -66,7 +66,6 @@ let initWebRotes = (app) => {
     router.post("/move-student", classesController.move_Student);
     router.post("/findall-classe", classesController.getFindAll_Classes);
 
-    
     //NỔI BẬT
     router.post("/create-outstanding", outstandingController.create_Outstanding);
     router.get("/getall-outstanding", outstandingController.getAll_Outstanding);
@@ -139,6 +138,7 @@ let initWebRotes = (app) => {
     router.put("/update-review", reviewController.update_Review);
     router.post("/create-review", reviewController.create_Review);
     router.get("/get-review", reviewController.get_Review);
+    router.post("/find-review", reviewController.find_Review);
 
     //Dashboard
     router.get("/getall", dashboardController.getAll);
