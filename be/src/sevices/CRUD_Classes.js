@@ -82,6 +82,35 @@ let getAllClasses = async () => {
         }
     });
 };
+let updateActive = async () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.classes.findAll();
+            data.map(async (item) => {
+                let now = new Date();
+                let dateStart = new Date(item.startDate);
+                if (
+                    now.getDate() === dateStart.getDate() &&
+                    now.getMonth() === dateStart.getMonth() &&
+                    now.getFullYear() === dateStart.getFullYear() &&
+                    item.active === true
+                ) {
+                    await db.classes.update(
+                        {
+                            active: false,
+                        },
+                        {
+                            where: { id: item.id },
+                        }
+                    );
+                }
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 let getFindAllClasses = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {

@@ -76,6 +76,7 @@ let createConsult = async (data) => {
                 timeComplete: data.timeComplete,
                 dateArrive: data.dateArrive,
                 timeArrive: data.timeArrive,
+                checkRes: 0,
                 active: 0,
                 classesId: data.classesId,
                 userId: data.userId,
@@ -201,22 +202,23 @@ let handleDateWait = async () => {
                         classes: classesid.nameClasses,
                     };
                     await emailService.AlertDateConsult(objmail);
-                } else if (
-                    (datefuture.getDate() < datenow.getDate() ||
-                        datefuture.getMonth() < datenow.getMonth()) &&
-                    item.active === false
-                ) {
-                    let objmail = {
-                        fullname: item.user.firstName + " " + item.user.lastName,
-                        email: item.user.email,
-                    };
-                    await db.consult.destroy({
-                        where: {
-                            id: item.id,
-                        },
-                    });
-                    await emailService.CancelConsult(objmail);
                 }
+                // else if (
+                //     (datefuture.getDate() < datenow.getDate() ||
+                //         datefuture.getMonth() < datenow.getMonth()) &&
+                //     item.active === false
+                // ) {
+                //     let objmail = {
+                //         fullname: item.user.firstName + " " + item.user.lastName,
+                //         email: item.user.email,
+                //     };
+                //     await db.consult.destroy({
+                //         where: {
+                //             id: item.id,
+                //         },
+                //     });
+                //     await emailService.CancelConsult(objmail);
+                // }
             });
             resolve({ message: "Handle Successfully", data: data });
         } catch (e) {
@@ -255,8 +257,6 @@ const handleCheckCounsut = async (data) => {
                     exDateTime.push({ key: x, time: item1, length: length });
                 }
             });
-
-          
 
             resolve({ data: exDateTime });
         } catch (e) {

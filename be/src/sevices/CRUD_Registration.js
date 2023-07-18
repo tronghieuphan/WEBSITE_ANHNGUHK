@@ -11,7 +11,8 @@ let getAllRegistration = async () => {
             let listRegistration = await db.registration.findAll({
                 include: [{ model: db.user, attributes: ["firstName", "lastName"] }],
                 nest: true,
-                raw: true,  order: [["createdAt", "ASC"]],
+                raw: true,
+                order: [["createdAt", "ASC"]],
             });
             if (listRegistration.length > 0) {
                 resolve({
@@ -184,13 +185,32 @@ let createRegistration = async (data) => {
 let updateRegistration = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data);
-            let findDetail = await db.detailRegistration.destroy({
+            await db.detailRegistration.destroy({
                 where: {
                     registerId: data.id,
                 },
             });
+            let classesFind = await db.registration.findOne({
+                include: [
+                    {
+                        model: db.user,
+                        attributes: ["id", "lastName"],
+                        include: [{ model: db.classes }],
+                    },
+                ],
+                where: {
+                    id: data.id,
+                },
+            });
 
+            classesFind.user.classes.map(async (item) => {
+                await db.detailClassesStudent.destroy({
+                    where: {
+                        classesId: item.id,
+                        studentId: classesFind.user.id,
+                    },
+                });
+            });
             let updateres = db.registration.update(
                 {
                     total: (data.total * 20) / 100,
