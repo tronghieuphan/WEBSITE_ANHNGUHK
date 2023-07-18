@@ -129,10 +129,11 @@ function DetailClasses(props) {
             endDate: classes.endDate,
             courseId: classes.courseId,
             lectureId: classes.lectureId,
-            weekDayID: classes.weekdayId,
+            nameWeekday: classes.weekdayId,
             startHour: classes.startHour,
             endHour: classes.endHour,
             quantity: classes.quantity,
+            quantityMin: classes.quantityMin,
         });
     }, [classes]);
 

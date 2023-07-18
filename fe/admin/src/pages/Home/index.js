@@ -9,7 +9,7 @@ function Content() {
                         TRUNG TÂM ANH NGỮ HK
                     </p>
                     <p className="fs-4">Môn học: Luận văn tốt nghiệp</p>
-                    <p className="fs-4">Giảng viên hướng dẫn: T.S Nguyễn Trường Hải</p>
+                    <p className="fs-4">Giảng viên hướng dẫn: ThS. Nguyễn Trường Hải</p>
                     <p className="fs-5">Họ và tên sinh viên:</p>
                     <p className="fs-5">Phan Trọng Hiếu - DH51903591</p>
                 </div>

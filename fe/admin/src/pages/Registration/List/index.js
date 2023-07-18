@@ -151,6 +151,34 @@ function RegistrationList() {
             render: (total) => <div style={{ width: "150px" }}>{VND.format(total)}</div>,
         },
         {
+            title: "Hủy đăng ký",
+            dataIndex: "activeCancel",
+            align: "center",
+            render: (activeCancel, record) => (
+                <div
+                    style={{
+                        width: "120px",
+                    }}
+                    className="mx-auto"
+                >
+                    {activeCancel ? (
+                        <Button type="dashed" danger>
+                            Đã hủy
+                        </Button>
+                    ) : (
+                        <Popconfirm
+                            title="Bạn có muốn hủy đăng ký?"
+                            onConfirm={(activeCancel) => handleCancel(activeCancel, record)}
+                        >
+                            <Button type="primary" danger>
+                                Hủy
+                            </Button>
+                        </Popconfirm>
+                    )}
+                </div>
+            ),
+        },
+        {
             title: "Thanh toán",
             dataIndex: "active",
             align: "center",
@@ -179,35 +207,6 @@ function RegistrationList() {
             ),
         },
         ,
-        {
-            title: "Hủy đăng ký",
-            dataIndex: "activeCancel",
-            align: "center",
-            fixed: "right",
-            render: (activeCancel, record) => (
-                <div
-                    style={{
-                        width: "120px",
-                    }}
-                    className="mx-auto"
-                >
-                    {activeCancel ? (
-                        <Button type="dashed" danger>
-                            Đã hủy
-                        </Button>
-                    ) : (
-                        <Popconfirm
-                            title="Bạn có muốn hủy đăng ký?"
-                            onConfirm={(activeCancel) => handleCancel(activeCancel, record)}
-                        >
-                            <Button type="primary" danger>
-                                Hủy
-                            </Button>
-                        </Popconfirm>
-                    )}
-                </div>
-            ),
-        },
         {
             title: "Xem",
             dataIndex: "",
