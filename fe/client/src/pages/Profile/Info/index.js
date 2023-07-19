@@ -257,13 +257,13 @@ function InfoUser(props) {
                                     {studentCourseRes?.map((item) => (
                                         <div
                                             className="row d-flex box-registed mx-2 my-4 p-3 justify-content-between"
-                                            key={item.studentCourse.id}
+                                            key={item?.studentCourse?.id}
                                         >
                                             <div className="col-md-4 d-flex align-items-center">
-                                                {item.studentCourse.nameCourse}
+                                                {item?.studentCourse?.nameCourse}
                                             </div>
                                             <div className="col-md-6 d-flex align-items-center">
-                                                {handleDatetime(item.dateRes)}
+                                                {handleDatetime(item?.dateRes)}
                                             </div>
                                             <div className="col-md-2">
                                                 <Button

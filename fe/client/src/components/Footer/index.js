@@ -35,7 +35,7 @@ function Footer() {
                         <p>-----</p>
                         <div style={{ fontWeight: "600" }}>
                             <p className="mb-2 font-weight-bold">Giảng viên hướng dẫn</p>
-                            <p className="mb-4">ThS. </p>
+                            <p className="mb-4">TS. Nguyễn Trường Hải </p>
                             <p className="mb-2 font-weight-bold">Sinh viên thực hiện:</p>
                             <p className="mb-2">Phan Trọng Hiếu - DH51903591</p>
                         </div>
