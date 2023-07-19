@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     consult.init(
         {
             target: DataTypes.STRING(50),
-            timeComplete: DataTypes.STRING(20),
+            timeComplete: DataTypes.STRING(100),
             active: DataTypes.BOOLEAN,
             dateArrive: DataTypes.DATEONLY,
             timeArrive: DataTypes.STRING(50),

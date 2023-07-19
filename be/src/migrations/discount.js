@@ -29,7 +29,6 @@ module.exports = {
                 type: Sequelize.DATEONLY,
                 allowNull: false,
             },
-           
             description: {
                 type: Sequelize.TEXT,
                 allowNull: false,
