@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { successDialog, deleteSuccess, exist } from "../../../components/Dialog/Dialog";
+import { successDialog, deleteSuccess, exist, errorInfo } from "../../../components/Dialog/Dialog";
 import { useDispatch } from "react-redux";
 import { setDataUser } from "../../../slices/dataAdd";
 import userAPI from "../../../services/userAPI";
@@ -78,9 +78,14 @@ function UserList() {
     // THÊM
     const handleCreate = async (obj) => {
         const data = await userAPI.create(obj);
-        if (data.data.message === "Type Exist") {
-            exist();
+        if (data.data.message === "Phone Exist") {
+            errorInfo("Số điện thoại đã tồn tại");
+        } else if (data.data.message === "Email Exist") {
+            errorInfo("Email đã tồn tại");
+        } else if (data.data.message === "Username Exist") {
+            errorInfo("Tên đăng nhập đã tồn tại");
         } else if (data.data.message === "Create Successfully") {
+
             successDialog();
             getAll_TypeUser(typeUser);
         }

@@ -56,6 +56,11 @@ function RegistrationList() {
         const data = await registrationAPI.create(obj);
         if (data.data.message === "Resgister Only Class Belong Course") {
             info("Bạn chỉ được đăng ký một lớp học thuộc khóa học này ");
+        } else if (data.data.message === "Time Exits") {
+            errorInfo(
+                "Thời gian không phù hợp",
+                "Khóa học bạn đăng ký đang bị trùng thời gian với khóa học bạn đăng ký trước đó!"
+            );
         } else if (data.data.message === "Course Registed") {
             errorInfo("Dữ liệu tồn tại", "Khóa học này đã được đăng ký trước đó !");
         } else if (data.data.message === "Exits") {

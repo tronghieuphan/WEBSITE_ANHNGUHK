@@ -37,7 +37,7 @@ const userAPI = {
         return axios.post(`http://localhost:9000/student-res`, obj);
     },
     findBy: (obj) => {
-        return axios.post(`http://localhost:9000/find-user`, obj);
-    },
+       return axios.post(`http://localhost:9000/find-user`, obj);
+    }, 
 };
 export default userAPI;

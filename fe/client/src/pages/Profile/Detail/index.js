@@ -9,7 +9,6 @@ import addressAPI from "../../../services/addressAPI";
 import "./style.scss";
 import convertBase64Img from "../../../utils/convertBase64Img";
 import { errorInfo } from "../../../components/Dialog/Dialog";
-import userAPI from "../../../services/userAPI";
 function Detail(props) {
     const { open, handleUpdate, setOpen } = props;
     const { user } = useSelector((state) => state.dataAdd);

@@ -34,7 +34,7 @@ function PointList() {
                     <div className="">
                         <p className="fs-4 fw-bold">DANH SÁCH ĐIỂM</p>
                         <>
-                            <div className="d-flex flex-wrap">
+                            <div className="d-flex flex-wrap m-auto">
                                 {listClasses?.data?.map((values) => (
                                     <div key={values.id}>
                                         <CardClasses value={values} setIdClasses={setIdClasses} />

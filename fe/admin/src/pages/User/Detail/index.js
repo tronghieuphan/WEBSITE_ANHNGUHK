@@ -507,7 +507,7 @@ function DetailUser(props) {
                         >
                             <Input readOnly={user.id ? true : false} />
                         </Form.Item>
-                        {user?.id != null ? (
+                        {user?.id != null || typeUserDetail === "1" ? (
                             ""
                         ) : (
                             <Form.Item
@@ -598,7 +598,11 @@ function DetailUser(props) {
                                     />
                                 </Form.Item>
                             </>
-                        ) : typeUserDetail === "3" || typeUserDetail === "4" ? (
+                        ) : typeUserDetail === "3" ||
+                          typeUserDetail === "4" ||
+                          typeUserDetail === "Tư vấn" ||
+                          typeUserDetail === "Đào tạo" ||
+                          typeUserDetail === "Quản trị" ? (
                             <>
                                 <div className="row">
                                     <Form.Item

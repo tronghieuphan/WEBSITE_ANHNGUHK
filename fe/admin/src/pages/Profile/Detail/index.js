@@ -8,6 +8,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import addressAPI from "../../../services/addressAPI";
 import "./style.scss";
 import convertBase64Img from "../../../utils/convertBase64Img";
+import { errorInfo } from "../../../components/Dialog/Dialog";
 function Detail(props) {
     const { open, handleUpdate, setOpen } = props;
     const { user } = useSelector((state) => state.dataAdd);
@@ -87,25 +88,6 @@ function Detail(props) {
             throw new Error(err);
         }
     };
-
-    useEffect(() => {
-        setDiscription(user?.description);
-        getAllCity();
-    }, []);
-    const onChange = (e, obj) => {
-        getAllDistrict(obj.id);
-    };
-    const onChangeDistrict = (e, obj) => {
-        getAllWard(obj.id);
-    };
-    const onSearch = (value) => {
-        console.log("search:", value);
-    };
-
-    const handleTypeUser = (value) => {
-        setTypeUserDetail(value);
-    };
-
     const handleDateBirth = (e) => {
         let date = new Date().getTime();
         let dateBirthPick = new Date(e.target.value).getTime();
@@ -124,6 +106,24 @@ function Detail(props) {
             setDateBirth(true);
         }
     };
+
+    const onChange = (e, obj) => {
+        getAllDistrict(obj.id);
+    };
+    const onChangeDistrict = (e, obj) => {
+        getAllWard(obj.id);
+    };
+    const onSearch = (value) => {
+        console.log("search:", value);
+    };
+    useEffect(() => {
+        setDiscription(user?.description);
+        getAllCity();
+    }, []);
+    const handleTypeUser = (value) => {
+        setTypeUserDetail(value);
+    };
+
     // Lấy API Thành Phố
     let arraycity = [];
     let arraydistrict = [];
@@ -133,15 +133,7 @@ function Detail(props) {
     ward.map((values, index) => arrayward.push({ name: values.name, code: values.code }));
     const handleSubmit = async (e) => {
         if (!dateBirth) {
-            Swal.fire({
-                icon: "error",
-                title: "Ngày sinh không hợp lệ",
-                showConfirmButton: false,
-                timer: 1000,
-                customClass: {
-                    title: "fs-5 text-erorr",
-                },
-            });
+            errorInfo("Ngày sinh không hợp lệ");
         } else {
             let obj = {};
             if (!user.id) {
@@ -171,7 +163,6 @@ function Detail(props) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     //UPDATE
-
                     handleUpdate(obj);
                 }
             });

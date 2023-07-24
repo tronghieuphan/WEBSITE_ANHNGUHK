@@ -70,6 +70,7 @@ function DetailClasses(props) {
     }, []);
 
     const handleStartDate = (e) => {
+        
         let start_Date = new Date(e.target.value).getTime();
         let date_Current = new Date().getTime();
         if (
@@ -112,7 +113,6 @@ function DetailClasses(props) {
     };
 
     const handleTime = (e) => {
-        console.log(e);
         if (e.target.value < timeStart) {
             info("Thời gian không hợp lý !");
             setTime(false);
@@ -288,7 +288,7 @@ function DetailClasses(props) {
                                         .toLowerCase()
                                         .includes(input.toLowerCase())
                                 }
-                                options={Weekday.map((item) => ({
+                                options={Weekday?.map((item) => ({
                                     value: item.id,
                                     label: item.name,
                                 }))}
@@ -329,7 +329,7 @@ function DetailClasses(props) {
                                         .toLowerCase()
                                         .includes(input.toLowerCase())
                                 }
-                                options={Course.map((item) => ({
+                                options={Course?.map((item) => ({
                                     value: item.id,
                                     label: item.name,
                                 }))}
@@ -353,7 +353,7 @@ function DetailClasses(props) {
                                         .toLowerCase()
                                         .includes(input.toLowerCase())
                                 }
-                                options={listLecture.map((item) => ({
+                                options={listLecture?.map((item) => ({
                                     value: item.id,
                                     label: item.firstName + " " + item.lastName,
                                 }))}

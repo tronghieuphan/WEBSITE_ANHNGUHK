@@ -10,6 +10,7 @@ import classesAPI from "../../../services/classesAPI";
 import { setDataClasses } from "../../../slices/dataAdd";
 import DetailClasses from "../Detail";
 import courseAPI from "../../../services/courseAPI";
+import Swal from "sweetalert2";
 
 function ClassesList() {
     const [listClasses, setListClasses] = useState([]);
@@ -17,7 +18,6 @@ function ClassesList() {
     const [open, setOpen] = useState(false);
 
     const [allCourseBelongType, setAllCourseBelongType] = useState([]);
-    console.log("allCourseBelongType: ", allCourseBelongType);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -78,8 +78,26 @@ function ClassesList() {
         dispatch(setDataClasses([]));
     };
     const handleAddStore = (record) => {
-        dispatch(setDataClasses(record));
-        setOpen(true);
+        if (!record.active) {
+            Swal.fire({
+                title: "Bạn có chắc?",
+                text: "Lớp học này đang được thực hiện bạn có chắc muôn sửa thông tin",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Tôi đồng ý",
+                cancelButtonText: "Hủy",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    dispatch(setDataClasses(record));
+                    setOpen(true);
+                }
+            });
+        } else {
+            dispatch(setDataClasses(record));
+            setOpen(true);
+        }
     };
     const handleChangeClass = async (e) => {
         let data = await classesAPI.findAllClasses({ courseId: e });
@@ -212,6 +230,7 @@ function ClassesList() {
             title: "Xem",
             dataIndex: "",
             align: "center",
+            fixed: "right",
             render: (record) => (
                 <Button className="bg-light" onClick={() => handleAddStore(record)}>
                     <FontAwesomeIcon icon={faEdit} className="text-dark" />

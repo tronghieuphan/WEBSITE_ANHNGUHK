@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Input, Form, Modal, Button, Badge } from "antd";
-import { deleteSuccess, errorInfo, successDialog, info } from "../../../components/Dialog/Dialog";
+import { errorInfo, info, successInfo, successDialog } from "../../../components/Dialog/Dialog";
 import "./style.scss";
 import Detail from "../Detail";
 import { useNavigate } from "react-router-dom";
@@ -15,29 +15,14 @@ import removeCookie from "../../../cookie/removeCookie";
 function InfoUser(props) {
     const { user, setValue } = props;
     const [load, setLoad] = useState(true);
-
     const [open, setOpen] = useState(false);
+
     const [open1, setOpen1] = useState(false);
     const [form] = Form.useForm();
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const showModal = () => {
         setOpen1(true);
-    };
-
-    const handleUpdate = async (obj) => {
-        const data = await userAPI.update(obj);
-        setCookie("useradmin", JSON.stringify(data.data.data));
-        if (data.data.message === "Update Successfully") {
-            successDialog();
-        }
-        setOpen(false);
-        setValue(!load);
-    };
-    const updateUser = () => {
-        setOpen(true);
-        dispatch(setDataUser(user));
     };
 
     const handleCancel = (e) => {
@@ -48,7 +33,6 @@ function InfoUser(props) {
             ...e,
             userName: user.userName,
         };
-        console.log(obj);
         if (e.passWord !== e.reNewPassword) {
             info("Thông tin không hợp lệ", "Mật khẩu nhập lại không trùng khớp !");
         } else {
@@ -60,13 +44,31 @@ function InfoUser(props) {
             } else if (data.data.message === "Not Change") {
                 errorInfo("Lỗi thông tin", "Mật khẩu mới trùng với mật khẩu cũ");
             } else {
-                deleteSuccess("Đổi mật khẩu thành công !");
-                form.resetFields();
+                successInfo("Đổi mật khẩu thành công !");
                 setOpen1(false);
                 removeCookie("useradmin");
-                navigate("/");
+                navigate("/login");
+                form.resetFields();
             }
         }
+    };
+    const handleUpdate = async (obj) => {
+        const data = await userAPI.update(obj);
+        if (data.data.message === "Update Successfully") {
+            setCookie("useradmin", JSON.stringify(data.data.data));
+            successDialog();
+        }
+        const find = await userAPI.findById({ id: obj?.id });
+        if (find.data.message === "Find Successfully") {
+            setCookie("useradmin", JSON.stringify(find.data.data));
+        }
+        setOpen(false);
+        setValue(!load);
+    };
+
+    const updateUser = () => {
+        setOpen(true);
+        dispatch(setDataUser(user));
     };
 
     return (
@@ -75,30 +77,32 @@ function InfoUser(props) {
                 <Badge.Ribbon
                     text={
                         <div>
-                            {user.typeUser === "1"
+                            {user?.typeUser === "0"
+                                ? "Thành viên"
+                                : user?.typeUser === "1"
                                 ? "Học viên"
-                                : user.typeUser === "2"
+                                : user?.typeUser === "2"
                                 ? "Giảng viên"
-                                : user.typeUser === "3"
+                                : user?.typeUser === "3"
                                 ? "Nhân viên"
-                                : user.typeUser === "4"
+                                : user?.typeUser === "4"
                                 ? "ADMIN"
                                 : ""}
                         </div>
                     }
                     color={
-                        user.typeUser === "1"
+                        user?.typeUser === "1"
                             ? "blue"
-                            : user.typeUser === "2"
+                            : user?.typeUser === "2"
                             ? "yellow"
-                            : user.typeUser === "3"
+                            : user?.typeUser === "3"
                             ? "green"
-                            : user.typeUser === "4"
+                            : user?.typeUser === "4"
                             ? "red"
                             : ""
                     }
                 >
-                    <img src={user.image} alt="" style={{ width: "100%", height: "100%" }} />
+                    <img src={user?.image} alt="" className="w-100 h-100 border" />
                 </Badge.Ribbon>
             </div>
 
@@ -109,75 +113,70 @@ function InfoUser(props) {
                             <div className="row">
                                 <p className=" col-md-7">
                                     <div className="fw-bold">Tên người dùng:</div> &nbsp;
-                                    <div>{user.firstName + " " + user.lastName}</div>
+                                    <div>{user?.firstName + " " + user?.lastName}</div>
                                 </p>
                                 <p className=" col-md-5">
-                                    <div className="fw-bold">Giới tính:</div> &nbsp;{" "}
-                                    <div>{user.gender ? "Nữ" : "Nam"}</div>
+                                    <div className="fw-bold">Giới tính:</div> &nbsp;
+                                    <div>{user?.gender ? "Nữ" : "Nam"}</div>
                                 </p>
                             </div>
                             <div className="row">
                                 <p className="col-md-7">
                                     <div className="fw-bold">Ngày sinh:</div> &nbsp;
-                                    <div>{user.dateBirth}</div>
+                                    <div>{user?.dateBirth}</div>
                                 </p>
                                 <p className="col-md-5">
                                     <div className="fw-bold">Số điện thoại:</div> &nbsp;
-                                    <div>{user.phone}</div>
+                                    <div>{user?.phone}</div>
                                 </p>
                             </div>
 
                             <p>
                                 <div className="fw-bold">Email:</div> &nbsp;
-                                <div>{user.email}</div>
+                                <div>{user?.email}</div>
                             </p>
 
                             <p>
-                                <div
-                                    className="fw-bold"
-                                    style={{ textAlign: "justify", paddingLeft: "10px" }}
-                                >
-                                    Địa chỉ:
-                                </div>
+                                <div className="fw-bold">Địa chỉ:</div>
                                 &nbsp;
                                 <div>
-                                    {(user.street === null ? " " : user.street + ", ") +
-                                        user.ward +
+                                    {(user?.street === null ? " " : user?.street + ", ") +
+                                        user?.ward +
                                         ", " +
-                                        user.district +
+                                        user?.district +
                                         ", " +
-                                        user.city}
+                                        user?.city}
                                 </div>
                             </p>
-                            {user.typeUser === "1" ? (
+                            {user?.typeUser === "1" ? (
                                 <>
                                     <p>
                                         <div className="fw-bold">Nơi công tác:</div> &nbsp;
-                                        <div>{user.workPlace}</div>
+                                        <div>{user?.workPlace}</div>
                                     </p>
                                 </>
                             ) : (
                                 ""
                             )}
-                            {user.typeUser === "2" ? (
+                            {user?.typeUser === "2" ? (
                                 <>
                                     <p>
                                         <div className="fw-bold">Bằng cấp:</div> &nbsp;
-                                        <div>{user.degree}</div>
+                                        <div>{user?.degree}</div>
                                     </p>
                                     <p>
                                         <div className="fw-bold">Kinh nghiệm:</div> &nbsp;
-                                        <div>{user.experience}</div>
+                                        <div>{user?.experience}</div>
                                     </p>
                                     <p>
                                         <div className="fw-bold">Chuyên môn:</div> &nbsp;
-                                        <div>{user.specialize}</div>
+                                        <div>{user?.specialize}</div>
                                     </p>
                                     <p>
-                                        <div className="fw-bold">Mô tả:</div> &nbsp;{" "}
+                                        <div className="fw-bold">Mô tả:</div> &nbsp;
                                         <div
                                             dangerouslySetInnerHTML={{
-                                                __html: user.description,
+                                                __html: user?.description,
                                             }}
                                         ></div>
                                     </p>
@@ -185,15 +184,15 @@ function InfoUser(props) {
                             ) : (
                                 ""
                             )}
-                            {user.typeUser === "3" ? (
+                            {user?.typeUser === "3" || user?.typeUser === "4" ? (
                                 <>
                                     <p>
-                                        <div className="fw-bold">Vị trí:</div> &nbsp;{" "}
-                                        <div>{user.position}</div>
+                                        <div className="fw-bold">Vị trí:</div> &nbsp;
+                                        <div>{user?.position}</div>
                                     </p>
                                     <p>
                                         <div className="fw-bold">Phòng ban:</div> &nbsp;
-                                        <div>{user.department}</div>
+                                        <div>{user?.department}</div>
                                     </p>
                                 </>
                             ) : (
@@ -202,16 +201,17 @@ function InfoUser(props) {
                         </div>
                         <div></div>
 
-                        <div className="row">
+                        <div className="d-flex">
                             <Button
-                                className=" col-md-1"
+                                className="mx-2"
                                 onClick={() => {
                                     navigate("/home");
                                 }}
                             >
                                 <FontAwesomeIcon icon={faArrowLeft} />
                             </Button>
-                            <div className=" col-md-5 text-end">
+
+                            <div className="mx-2">
                                 <Button type="primary" onClick={showModal}>
                                     ĐỔI MẬT KHẤU
                                 </Button>
@@ -254,7 +254,7 @@ function InfoUser(props) {
                                     </Form>
                                 </Modal>
                             </div>
-                            <Button type="primary" onClick={updateUser} className=" col-md-5">
+                            <Button type="primary" onClick={updateUser} className="mx-2">
                                 Cập nhập thông tin
                             </Button>
                         </div>
