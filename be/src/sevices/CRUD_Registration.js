@@ -4,6 +4,7 @@ import randomId from "./randomId";
 import uploadImage from "./uploadImage";
 import emailService from "./sendEmail";
 import userCRUD from "./CRUD_User";
+import { where } from "sequelize";
 //Hiển thị tất cả
 let getAllRegistration = async () => {
     return new Promise(async (resolve, reject) => {
@@ -55,8 +56,11 @@ let getRegistrationBy = async (data) => {
 let createRegistration = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            console.log(data);
+
             const id = await randomId.randomId("DK");
             const datenow = new Date();
+
             let classesStudent;
 
             let listClass = await db.classes.findAll({
@@ -64,6 +68,62 @@ let createRegistration = async (data) => {
                     id: data.classesId,
                 },
             });
+            let lengthClass = 0;
+            let studentClass = await db.user.findOne({
+                where: {
+                    id: data.studentId,
+                },
+                attributes: ["id", "firstName", "lastName"],
+                include: [
+                    {
+                        model: db.classes,
+                        attributes: ["nameClasses", "startDate", "endDate"],
+                        include: [{ model: db.weekday, attributes: ["id"] }],
+                    },
+                ],
+            });
+            let customWeekday = [];
+            studentClass.classes.map((item) => {
+                let a = [];
+                item.weekdays.map((item1) => {
+                    a.push({ id: item1.id });
+                });
+                customWeekday.push(a);
+            });
+
+            let handWeekRes = await db.classes.findOne({
+                where: {
+                    id: data.classesId,
+                },
+                include: [{ model: db.weekday, attributes: ["id"] }],
+            });
+            let flag = 0;
+            listClass.map((item) => {
+                let startdateres = new Date(item.startDate);
+                let enddateres = new Date(item.endDate);
+                studentClass.classes.map((item1) => {
+                    let startdateregisted = new Date(item1.startDate);
+                    let enddateregisted = new Date(item1.endDate);
+                    if (
+                        (startdateregisted <= startdateres && startdateres <= enddateregisted) ||
+                        (startdateregisted <= enddateres && enddateres <= enddateregisted) ||
+                        (startdateres <= startdateregisted && startdateregisted <= enddateres) ||
+                        (enddateres <= enddateregisted && enddateregisted <= enddateres)
+                    ) {
+                        handWeekRes.weekdays.map((item) => {
+                            customWeekday.map((item1) => {
+                                item1.map((item2) => {
+                                    if (item.id === item2.id) {
+                                        flag = 1;
+                                    }
+                                });
+                            });
+                        });
+                    }
+                });
+            });
+            if (flag === 1) resolve({ message: "Time Exits" });
+            else {
             let temp = 0;
             listClass.forEach((item) => {
                 if (item.courseId === data.courseId[0]) {
@@ -174,7 +234,7 @@ let createRegistration = async (data) => {
                     await userCRUD.updateActive({ id: data.studentId });
                     resolve({ message: "Create Successfully", data: Registration[0] });
                 }
-            }
+            }}
         } catch (e) {
             reject(e);
         }

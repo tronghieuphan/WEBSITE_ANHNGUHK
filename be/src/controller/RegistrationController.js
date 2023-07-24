@@ -41,7 +41,6 @@ let check_Classes = async (req, res) => {
     res.status(200).json(Registrafind);
 };
 
-
 module.exports = {
     create_Registration,
     getAll_Registration,
@@ -53,5 +52,4 @@ module.exports = {
     send_MailRegis,
     check_ClassesCourse,
     check_Classes,
-
 };

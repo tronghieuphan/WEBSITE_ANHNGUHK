@@ -575,16 +575,16 @@ let sendPoint = async (dataSend) => {
                     line-height:30px
                 "
             >
-               Chúng tôi xin thông báo điểm của khóa học ${dataSend.nameClasses} đến bạn!
+               Chúng tôi xin thông báo điểm của khóa học <span style="font-weight:bold; font-size:22px"> ${dataSend.nameClasses} </span> đến bạn!
                </div>
 
 <div style="font-weight:bold"> Điểm tổng: </div> <div style="font-size:30px; font-weight:bold; text-align:center; border:1px solid black; padding:10px"> ${dataSend.numberPoint} <br> <span style="font-size:20px">${dataSend.result}</span></div>
 <div style="margin:10px 0px;font-weight:bold"> Điểm chi tiết: </div>
          <ul>
-         <li>Listening <span style="color:red; font-weight:bold">${dataSend.skillListening}</span> </li>
-         <li>Reading: <span style="color:red; font-weight:bold">${dataSend.skillReading}</span></li>
+         <li>Listening <span style=" font-weight:bold">${dataSend.skillListening}</span> </li>
+         <li>Reading: <span style="font-weight:bold">${dataSend.skillReading}</span></li>
          <li>Writing:<span style=" font-weight:bold">${dataSend.skillWriting}</span> </li>
-         <li>Speaking:<span style="color:red; font-weight:bold">${dataSend.skillSpeaking}</span> </li>
+         <li>Speaking:<span style=" font-weight:bold">${dataSend.skillSpeaking}</span> </li>
  
          </ul>
          </div>

@@ -157,7 +157,8 @@ let getAllUserByType = async (data) => {
             let listUser = await db.user.findAll({
                 where: {
                     typeUser: data.typeUser,
-                },  order: [["createdAt", "ASC"]],
+                },
+                order: [["createdAt", "ASC"]],
             });
             if (listUser.length > 0) {
                 resolve({
@@ -295,10 +296,17 @@ let createUserAdmin = async (data) => {
                     email: data.email,
                 },
             });
+            let condition3 = await db.user.findAll({
+                where: {
+                    userName: data.userName,
+                },
+            });
             if (condition1.length > 0) {
                 resolve({ message: "Phone Exist" });
             } else if (condition2.length > 0) {
                 resolve({ message: "Email Exist" });
+            } else if (condition3.length > 0) {
+                resolve({ message: "Username Exist" });
             } else {
                 let sendMail;
                 let pass;
@@ -312,6 +320,9 @@ let createUserAdmin = async (data) => {
                     pass = await hashPasswordAccount(data.passWord);
                 } else if (data.typeUser === "3") {
                     codeid = "NV";
+                    pass = await hashPasswordAccount(data.passWord);
+                } else if (data.typeUser === "4") {
+                    codeid = "AD";
                     pass = await hashPasswordAccount(data.passWord);
                 }
                 let id = await randomId.randomId(codeid);
@@ -345,6 +356,7 @@ let createUserAdmin = async (data) => {
                         active: 1,
                     },
                 });
+                console.log(user[1]);
                 if (user[1]) {
                     resolve({ message: "Create Successfully", data: user[0] });
                 } else {

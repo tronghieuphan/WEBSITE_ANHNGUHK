@@ -13,7 +13,7 @@ module.exports = {
                 allowNull: false,
                 primaryKey: true,
             },
-           
+
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

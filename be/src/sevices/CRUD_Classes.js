@@ -64,7 +64,7 @@ let getAllClasses = async () => {
                     courseId: item.courseId,
                     lectureId: item.lectureId,
                     nameLecture: lectureClass[index].nameLecture,
-                    weekdayId: list[index],
+                    weekdayId: list[index].sort(),
                 };
                 listCalender.push(obj);
             });
@@ -200,7 +200,7 @@ let getAllClassesByTeacher = async (data) => {
                     id: data.id,
                 },
             });
-            if (userLec.typeUser === "2") {
+            if (userLec?.typeUser === "2") {
                 let listClassesLec = await db.classes.findAll({
                     where: { lectureId: data.id },
                     include: [
@@ -242,7 +242,7 @@ let getAllClassesByTeacher = async (data) => {
                     listCalender.push(obj);
                 });
                 let objEx = {
-                    lecture: userLec.firstName + userLec.lastName,
+                    lecture: userLec?.firstName + userLec?.lastName,
                     data: listCalender,
                 };
                 resolve({ message: "Successfully", data: objEx });
@@ -375,6 +375,17 @@ let updateClasses = async (data) => {
                     },
                 }
             );
+            await db.detailClassesWeek.destroy({
+                where: {
+                    classesId: data.id,
+                },
+            });
+            data.nameWeekday.map(async (a) => {
+                await db.detailClassesWeek.create({
+                    weekdayId: a,
+                    classesId: data.id,
+                });
+            });
             resolve({ message: "Update Successfully", data: update });
         } catch (e) {
             reject(e);
