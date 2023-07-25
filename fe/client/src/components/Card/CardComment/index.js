@@ -30,8 +30,8 @@ function CardComment(props) {
                             </div>
                             <div className="title-uni">{data?.user?.workPlace}</div>
                         </div>
-                        <div className="col-md-2">
-                            {" "}
+                        <div className="col-md-2 btn-view">
+                            
                             <Button className="text-end mt-2" onClick={showModal}>
                                 Xem
                             </Button>

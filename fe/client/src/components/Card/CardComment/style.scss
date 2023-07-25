@@ -52,4 +52,26 @@
     .w-rem {
         width: 26rem;
     }
+    .infor-comment {
+        .star {
+            font-size: 20px;
+            display: block;
+            margin: 0px auto;
+        }
+        .title-name {
+            font-size: 17px;
+            font-weight: bold;
+        }
+        .title-uni {
+            color: #044dae;
+            font-size: 15px;
+        }
+        text-align: center;
+    }
+    ul.ant-rate.star.css-dev-only-do-not-override-yp8pcc.ant-rate-disabled {
+        display: block;
+    }
+    .btn-view {
+        text-align: center;
+    }
 }
