@@ -28,6 +28,7 @@
         }
     }
 }
+
 @media only screen and (max-width: 730px) {
     ul.ant-rate.p-none.m-none.css-dev-only-do-not-override-yp8pcc.ant-rate-disabled {
         display: flex;
@@ -39,13 +40,18 @@
         line-height: 25px;
     }
 }
-
 .width {
-    width: 25rem;
+    width: 23rem;
 }
 .size-img-document {
     width: 160px;
 }
+@media only screen and (max-width: 1397px) {
+    .width {
+        width: 25rem;
+    }
+}
+
 @media only screen and (max-width: 500px) {
     .width {
         width: 20rem;

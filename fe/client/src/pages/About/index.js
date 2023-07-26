@@ -19,7 +19,7 @@ function About() {
         <>
             <TitlePage data={tilte} />
             <div className="m-5 text-center">
-                <p className="fs-2 fw-bold">TRUNG TÂM ANH NGỮ HK EDU</p>
+                <p className="fs-2 fw-bold">TRUNG TÂM ANH NGỮ HK EDU</p><br/>
                 <cite className="text-muted">
                     Liên hệ HK EDU để được tư vấn lộ trình học phù hợp dành cho bạn.
                 </cite>

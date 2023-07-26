@@ -434,7 +434,7 @@ function Detail(props) {
                         >
                             <Input readOnly={user.id ? true : false} />
                         </Form.Item>
-                        {typeUserDetail === "1" || typeUserDetail === undefined ? (
+                        {typeUserDetail === "0"||typeUserDetail === "1" || typeUserDetail === undefined ? (
                             <Form.Item
                                 label="Nơi công tác"
                                 name="workPlace"

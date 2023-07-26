@@ -103,7 +103,7 @@ function Document() {
                     // className="d-flex flex-wrap justify-content-center p-3"
                 >
                     {listDocument?.map((value) => (
-                        <div className="col-md-4 " key={value.id}>
+                        <div className="col-xxl-4  col-xl-6 col-lg-6 col-md-12" key={value.id}>
                             <CardDocument data={value} />
                         </div>
                     ))}

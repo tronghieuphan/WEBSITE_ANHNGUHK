@@ -83,7 +83,7 @@ function LoginPage() {
                             <Form.Item
                                 name="userName"
                                 label={<span className="fs-6">Tên đăng nhập</span>}
-                                className="fw-bold"
+                                className="fw-bold col-md-12"
                             >
                                 <Input className="w-100 py-2" id="standard-basic" />
                             </Form.Item>
@@ -91,7 +91,7 @@ function LoginPage() {
                             <Form.Item
                                 name="passWord"
                                 label={<span className="fs-6">Mật khẩu</span>}
-                                className="fw-bold"
+                                className="fw-bold col-md-12"
                             >
                                 <Input className="w-100 py-2" type="password" />
                             </Form.Item>
