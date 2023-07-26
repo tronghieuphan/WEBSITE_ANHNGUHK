@@ -34,7 +34,7 @@ let getAllReview = async () => {
                 include: [
                     { model: db.user, attributes: ["firstName", "lastName", "workPlace", "image"] },
                 ],
-                order: [["createdAt", "ASC"]],
+                order: [["createdAt", "DESC"]],
             });
 
             if (listReview.length > 0) {
@@ -60,7 +60,7 @@ let findReview = async (data) => {
                 include: [
                     { model: db.user, attributes: ["firstName", "lastName", "workPlace", "image"] },
                 ],
-                order: [["createdAt", "ASC"]],
+                order: [["createdAt", "DESC"]],
             });
 
             if (listReview.length > 0) {
