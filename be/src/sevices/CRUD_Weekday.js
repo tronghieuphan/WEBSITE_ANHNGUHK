@@ -49,13 +49,22 @@ let createWeekday = async (data) => {
 let deleteWeekday = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let del = await db.weekday.destroy({
+            let dk = await db.detailClassesWeek.findAll({
                 where: {
-                    id: data.id,
+                    weekdayId: data.id,
                 },
             });
-            if (del === 1) {
-                resolve({ message: "Delete Successfully" });
+            if (dk.length > 0) {
+                resolve({ message: "Exits" });
+            } else {
+                let del = await db.weekday.destroy({
+                    where: {
+                        id: data.id,
+                    },
+                });
+                if (del === 1) {
+                    resolve({ message: "Delete Successfully" });
+                }
             }
         } catch (e) {
             reject(e);

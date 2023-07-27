@@ -91,16 +91,25 @@ let deleteDiscount = async (data) => {
                     id: data.id,
                 },
             });
-            if (find.active) {
-                resolve({ message: "Couldn't Delete" });
+            let dk = await db.course.findAll({
+                where: {
+                    discountId: data.id,
+                },
+            });
+            if (dk.length > 0) {
+                resolve({ message: "Exits" });
             } else {
-                let del = await db.discount.destroy({
-                    where: {
-                        id: data.id,
-                    },
-                });
-                if (del === 1) {
-                    resolve({ message: "Delete Successfully" });
+                if (find.active) {
+                    resolve({ message: "Couldn't Delete" });
+                } else {
+                    let del = await db.discount.destroy({
+                        where: {
+                            id: data.id,
+                        },
+                    });
+                    if (del === 1) {
+                        resolve({ message: "Delete Successfully" });
+                    }
                 }
             }
         } catch (e) {

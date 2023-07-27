@@ -54,13 +54,32 @@ let createType = async (data) => {
 let deleteType = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let del = await db.type.destroy({
+            let dkcourse = await db.course.findAll({
                 where: {
-                    id: data.id,
+                    typeId: data.id,
                 },
             });
-            if (del === 1) {
-                resolve({ message: "Delete Successfully" });
+            let dkdocument = await db.document.findAll({
+                where: {
+                    typeId: data.id,
+                },
+            });
+            let dkout = await db.outstanding.findAll({
+                where: {
+                    typeId: data.id,
+                },
+            });
+            if (dkcourse.length > 0 || dkdocument.length > 0 || dkout.length > 0) {
+                resolve({ message: "Exits" });
+            } else {
+                let del = await db.type.destroy({
+                    where: {
+                        id: data.id,
+                    },
+                });
+                if (del === 1) {
+                    resolve({ message: "Delete Successfully" });
+                }
             }
         } catch (e) {
             reject(e);

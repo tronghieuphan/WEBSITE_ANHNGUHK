@@ -39,6 +39,10 @@ let getFindAll_Classes = async (req, res) => {
     let Classes = await CRUD_Classes.getFindAllClasses(req.body);
     res.status(200).json(Classes);
 };
+let upload_AcitiveClasses = async (req, res) => {
+    let Classes = await CRUD_Classes.updateActiveClasses(req.body);
+    res.status(200).json(Classes);
+};
 
 module.exports = {
     create_Classes,
@@ -51,4 +55,5 @@ module.exports = {
     getAll_ByTeacher,
     move_Student,
     getFindAll_Classes,
+    upload_AcitiveClasses,
 };

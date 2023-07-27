@@ -339,13 +339,22 @@ let createClasses = async (data) => {
 let deleteClasses = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let del = await db.classes.destroy({
+            let dk = await db.detailClassesStudent.findAll({
                 where: {
-                    id: data.id,
+                    classesId: data.id,
                 },
             });
-            if (del === 1) {
-                resolve({ message: "Delete Successfully" });
+            if (dk.length > 0) {
+                resolve({ message: "Exits" });
+            } else {
+                let del = await db.classes.destroy({
+                    where: {
+                        id: data.id,
+                    },
+                });
+                if (del === 1) {
+                    resolve({ message: "Delete Successfully" });
+                }
             }
         } catch (e) {
             reject(e);
@@ -392,7 +401,25 @@ let updateClasses = async (data) => {
         }
     });
 };
-
+let updateActiveClasses = async (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let classes = await db.classes.update(
+                {
+                    active: data.active,
+                },
+                {
+                    where: {
+                        id: data.id,
+                    },
+                }
+            );
+            resolve({ message: "Update Successfully" });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
 //Tìm theo tên
 let findClasses = (datafind) => {
     return new Promise(async (resolve, reject) => {
@@ -670,4 +697,5 @@ module.exports = {
     sendEmailCalenderClass,
     getAllClassesByTeacher,
     moveStudent,
+    updateActiveClasses,
 };

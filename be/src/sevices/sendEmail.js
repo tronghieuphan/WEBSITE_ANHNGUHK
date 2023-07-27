@@ -413,7 +413,7 @@ let sendUpdateUser = async (dataSend) => {
     let info = await transporter.sendMail({
         from: '"Anh Ngữ HK" <hkeducation.090801@gmail.com>', // sender address
         to: dataSend.email, // list of receivers
-        subject: "THÔNG BÁO PHIẾU ĐĂNG KÝ KHÓA HỌC", // Subject line
+        subject: "THÔNG BÁO NÂNG CẤP THÀNH VIÊN", // Subject line
         html: `
         <div style="width: 80%">
         <div
@@ -478,7 +478,7 @@ let sendCalenderClass = async (dataSend) => {
     let info = await transporter.sendMail({
         from: '"Anh Ngữ HK" <hkeducation.090801@gmail.com>', // sender address
         to: dataSend.list, // list of receivers
-        subject: "THÔNG BÁO PHIẾU ĐĂNG KÝ KHÓA HỌC", // Subject line
+        subject: "THÔNG BÁO THỜI KHÓA BIỂU LỚP HỌC", // Subject line
         html: `
         <div
         style="

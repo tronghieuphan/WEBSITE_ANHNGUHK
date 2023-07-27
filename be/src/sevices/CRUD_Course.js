@@ -15,8 +15,6 @@ let getAllCourse = async () => {
                     { model: db.classify },
                 ],
                 order: [["createdAt", "ASC"]],
-
-
             });
             if (listCourse.length > 0) {
                 resolve({
@@ -74,13 +72,22 @@ let createCourse = async (data) => {
 let deleteCourse = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let del = await db.course.destroy({
+            let dk = await db.classes.findAll({
                 where: {
-                    id: data.id,
+                    courseId: data.id,
                 },
             });
-            if (del === 1) {
-                resolve({ message: "Delete Successfully" });
+            if (dk.length > 0) {
+                resolve({ message: "Exits" });
+            } else {
+                let del = await db.course.destroy({
+                    where: {
+                        id: data.id,
+                    },
+                });
+                if (del === 1) {
+                    resolve({ message: "Delete Successfully" });
+                }
             }
         } catch (e) {
             reject(e);

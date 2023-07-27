@@ -49,6 +49,14 @@ let createClassify = async (data) => {
 let deleteClassify = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            let dk = await db.course.findAll({
+                where: {
+                    classifyId: data.id,
+                },
+            });
+            if (dk.length > 0) {
+                resolve({ message: "Exits" });
+            } else {
             let del = await db.classify.destroy({
                 where: {
                     id: data.id,
@@ -56,7 +64,7 @@ let deleteClassify = async (data) => {
             });
             if (del === 1) {
                 resolve({ message: "Delete Successfully" });
-            }
+            }}
         } catch (e) {
             reject(e);
         }
