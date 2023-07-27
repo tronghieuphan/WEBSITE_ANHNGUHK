@@ -15,7 +15,7 @@ const Slide = () => {
                             <span className="fw-bold">Cơ sở vật chất hiện đại</span> <br />
                             <div className="fs-6 w-75 d-block m-auto">
                                 Với trung trâm anh ngữ HK EDU thì trung tâm sẽ đầu tư trang thiết bị
-                                hiện đại đễ hổ trợ tốt nhất cho các học viên tham gia học tập.
+                                hiện đại.
                             </div>
                         </div>
                     </p>
@@ -26,8 +26,7 @@ const Slide = () => {
                             <span className="fw-bold">Tự tin giao tiếp trong mọi nơi</span> <br />
                             <div className="fs-6 w-75 d-block m-auto">
                                 Sau các khoa học trung tâm đảm bảo các học viên sẽ có được nhưng
-                                kiến thức nên tảng trang bị cho bản thân có thể tự tin giao tiếp
-                                vưới người bản xứ
+                                kiến thức nên tảng trang bị cho bản thân.
                             </div>
                         </div>
                     </p>
@@ -45,8 +44,7 @@ const Slide = () => {
                             <span className="fw-bold">Nhiều giảng viên nhiệt tình và tận tâm</span>{" "}
                             <br />
                             <div className="fs-6 w-75 d-block m-auto">
-                                Trung tâm luôn tâm trong thể phục vụ tốt nhất cho học viên nên các
-                                giảng viên tại trung tâm sẽ nhiệt tình giúp đữo mỗi khi học viên cần
+                                Trung tâm luôn phục vụ tốt nhất cho học viên.
                             </div>
                         </div>
                     </p>

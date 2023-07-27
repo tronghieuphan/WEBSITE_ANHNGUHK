@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { successDialog, deleteSuccess, exist } from "../../../components/Dialog/Dialog";
+import { successDialog, deleteSuccess, exist, errorInfo } from "../../../components/Dialog/Dialog";
 import weekdayAPI from "../../../services/weekdayAPI";
 import DetailWeekday from "../Detail";
 import { useDispatch } from "react-redux";
@@ -37,6 +37,8 @@ function WeekdayList() {
         if (data.data.message === "Delete Successfully") {
             deleteSuccess();
             getAllWeekday();
+        } else if(data.data.message==="Exits"){
+            errorInfo("Dữ liệu này đang có lớp sử dụng")
         }
     };
     // THÊM

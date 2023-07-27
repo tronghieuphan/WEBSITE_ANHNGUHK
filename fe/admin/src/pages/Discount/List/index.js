@@ -4,7 +4,7 @@ import { faTrashAlt, faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
-import { successDialog, deleteSuccess, exist } from "../../../components/Dialog/Dialog";
+import { successDialog, deleteSuccess, exist, errorInfo } from "../../../components/Dialog/Dialog";
 import { useDispatch } from "react-redux";
 import discountAPI from "../../../services/discountAPI";
 import { setDataDiscount } from "../../../slices/dataAdd";
@@ -44,6 +44,8 @@ function DiscountList() {
         } else if (data.data.message === "Delete Successfully") {
             deleteSuccess();
             getAllDiscount();
+        } else if (data.data.message === "Exits") {
+            errorInfo("Khuyến mãi đang được áp dụng cho khóa học ");
         }
     };
     // THÊM

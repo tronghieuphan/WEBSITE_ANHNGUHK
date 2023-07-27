@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { successDialog, deleteSuccess, exist } from "../../../components/Dialog/Dialog";
+import { successDialog, deleteSuccess, exist, errorInfo } from "../../../components/Dialog/Dialog";
 import { useDispatch } from "react-redux";
 import { setDataType } from "../../../slices/dataAdd";
 import DetailType from "../Detail";
@@ -32,11 +32,12 @@ function TypeList() {
 
     // XỬ LÝ DELETE
     const handleDelete = async (record) => {
-        console.log(record);
         const data = await typeAPI.delete(record.id);
-        if (data.data.message == "Delete Successfully") {
+        if (data.data.message === "Delete Successfully") {
             deleteSuccess();
             getAllType();
+        } else if (data.data.message === "Exits") {
+            errorInfo("Dữ liệu đang tồn tại trong bảng dữ liệu khác");
         }
     };
     // THÊM

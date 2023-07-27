@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { successDialog, deleteSuccess, exist } from "../../../components/Dialog/Dialog";
+import { successDialog, deleteSuccess, exist, errorInfo } from "../../../components/Dialog/Dialog";
 import { useDispatch } from "react-redux";
 import courseAPI from "../../../services/courseAPI";
 import { setDataCourse } from "../../../slices/dataAdd";
@@ -50,6 +50,8 @@ function CourseList() {
         if (data.data.message === "Delete Successfully") {
             deleteSuccess();
             getAllCourse();
+        } else if (data.data.message === "Exits") {
+            errorInfo("Khóa học đang có lớp học");
         }
     };
 

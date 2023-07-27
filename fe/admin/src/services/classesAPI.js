@@ -33,5 +33,8 @@ const classesAPI = {
     findAllClasses: (obj) => {
         return axios.post(`http://localhost:9000/findall-classe`, obj);
     },
+    uploadActive: (obj) => {
+        return axios.post(`http://localhost:9000/upload-active`, obj);
+    },
 };
 export default classesAPI;

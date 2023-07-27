@@ -4,7 +4,7 @@ import { faTrashAlt, faEdit, faPlus, faListUl } from "@fortawesome/free-solid-sv
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { successDialog, deleteSuccess, exist } from "../../../components/Dialog/Dialog";
+import { successDialog, deleteSuccess, exist, errorInfo } from "../../../components/Dialog/Dialog";
 import { useDispatch } from "react-redux";
 import classesAPI from "../../../services/classesAPI";
 import { setDataClasses } from "../../../slices/dataAdd";
@@ -48,6 +48,8 @@ function ClassesList() {
         if (data.data.message === "Delete Successfully") {
             deleteSuccess();
             getAllClasses();
+        } else if (data.data.message === "Exits") {
+            errorInfo("Lớp học đang có sinh viên tham gia");
         }
     };
 
@@ -72,6 +74,13 @@ function ClassesList() {
             getAllClasses();
         }
         setOpen(false);
+    };
+    const handleUpdateActiveClass = async (obj) => {
+        const data = await classesAPI.uploadActive(obj);
+        if (data.data.message === "Update Successfully") {
+            successDialog();
+            getAllClasses();
+        }
     };
     const handleDataCreate = () => {
         setOpen(true);
@@ -108,7 +117,7 @@ function ClassesList() {
             id: record.id,
             active: checked,
         };
-        await handleUpdate(obj);
+        await handleUpdateActiveClass(obj);
     };
 
     const columns = [

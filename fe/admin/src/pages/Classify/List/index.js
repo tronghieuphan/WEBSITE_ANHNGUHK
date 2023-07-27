@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { successDialog, deleteSuccess, exist } from "../../../components/Dialog/Dialog";
+import { successDialog, deleteSuccess, exist, errorInfo } from "../../../components/Dialog/Dialog";
 import { useDispatch } from "react-redux";
 import classifyAPI from "../../../services/classifyAPI";
 import { setDataClassify } from "../../../slices/dataAdd";
@@ -32,11 +32,12 @@ function ClassifyList() {
 
     // XỬ LÝ DELETE
     const handleDelete = async (record) => {
-        console.log(record);
         const data = await classifyAPI.delete(record.id);
         if (data.data.message == "Delete Successfully") {
             deleteSuccess();
             getAllClassify();
+        } else if (data.data.message == "Exits") {
+            errorInfo("Đang có khóa học thuộc đối tượng này ");
         }
     };
     // THÊM
@@ -129,7 +130,6 @@ function ClassifyList() {
                                     bordered={true}
                                     loading={loading}
                                     scroll={{ x: true }}
-
                                 />
                             </div>
                         </div>
