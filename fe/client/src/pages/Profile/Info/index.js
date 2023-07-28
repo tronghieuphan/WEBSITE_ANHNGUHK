@@ -22,6 +22,7 @@ function InfoUser(props) {
     const [openCouserRes, setOpenCoursRes] = useState(false);
     const [openPoint, setOpenPoint] = useState(false);
     const [point, setPoint] = useState();
+    const [loading, setLoading] = useState(false);
     const [studentCourseRes, setStudentCourseRes] = useState();
     const [form] = Form.useForm();
     const dispatch = useDispatch();
@@ -66,7 +67,9 @@ function InfoUser(props) {
         }
     };
     const handleUpdate = async (obj) => {
+        setLoading(true);
         const data = await userAPI.update(obj);
+        setLoading(false);
         if (data.data.message === "Update Successfully") {
             setCookie("user", JSON.stringify(data.data.data));
             successDialog();
@@ -403,6 +406,7 @@ function InfoUser(props) {
                             setOpen={setOpen}
                             user={user}
                             handleUpdate={handleUpdate}
+                            loading={loading}
                         />
                     </div>
                 </div>

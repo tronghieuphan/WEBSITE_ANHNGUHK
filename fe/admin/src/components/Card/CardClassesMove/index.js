@@ -9,7 +9,7 @@ function CardClassesMove(props) {
         handleMove(classesActive);
     };
     return (
-        <Card style={{ width: "10rem" }} className="m-3">
+        <Card style={{ width: "13rem" }} className="m-3">
             <div className=" box-classes">
                 <div className="p-2 content">
                     <h5 className="text-center" style={{ minHeight: "120px" }}>

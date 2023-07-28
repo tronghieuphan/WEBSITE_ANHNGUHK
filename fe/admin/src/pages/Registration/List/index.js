@@ -23,6 +23,7 @@ function RegistrationList() {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [open1, setOpen1] = useState(false);
+    const [spin, setSpin] = useState(false);
 
     const [regisById, setRegisById] = useState();
 
@@ -72,7 +73,9 @@ function RegistrationList() {
     };
     // SỬA
     const handleUpdate = async (obj) => {
+        setSpin(true);
         const data = await registrationAPI.update(obj);
+        setSpin(false);
         if (data.data.message === "Update Successfully") {
             successDialog();
             getAllRegistration();
@@ -244,6 +247,7 @@ function RegistrationList() {
                             handleUpdate={handleUpdate}
                             open={open}
                             setOpen={setOpen}
+                            loadspin={spin}
                         />
                         <hr className="w-100 " />
                         <div className="row">

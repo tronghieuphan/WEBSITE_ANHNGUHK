@@ -85,14 +85,15 @@ function UserList() {
         } else if (data.data.message === "Username Exist") {
             errorInfo("Tên đăng nhập đã tồn tại");
         } else if (data.data.message === "Create Successfully") {
-
             successDialog();
             getAll_TypeUser(typeUser);
         }
     };
     // SỬA
     const handleUpdate = async (obj) => {
+        setLoading(true);
         const data = await userAPI.update(obj);
+        setLoading(false);
         if (data.data.message === "Update Successfully") {
             successDialog();
             getAll_TypeUser(typeUser);
@@ -269,6 +270,7 @@ function UserList() {
                             handleUpdate={handleUpdate}
                             open={open}
                             setOpen={setOpen}
+                            loading={loading}
                         />
                         <Tabs
                             defaultActiveKey="1"

@@ -26,7 +26,6 @@ function Dashboard() {
     //Set UseState
 
     const [value, setValue] = useState();
-    console.log("value: ", value);
 
     //
 
