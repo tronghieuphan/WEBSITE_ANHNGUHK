@@ -8,9 +8,7 @@ import emailService from "./sendEmail";
 let getAllPoint = async () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let listPoint = await db.point.findAll(
-                {  order: [["createdAt", "ASC"]],}
-            );
+            let listPoint = await db.point.findAll({ order: [["createdAt", "ASC"]] });
             if (listPoint.length > 0) {
                 resolve({
                     message: "List Successfully",
@@ -29,6 +27,7 @@ let getAllPoint = async () => {
 let createPoint = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            // console.log(data);
             let listStudent = await db.detailClassesStudent.findAll({
                 where: {
                     classesId: data.data,
@@ -71,31 +70,34 @@ let deletePoint = async (data) => {
 let updatePoint = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let pointtotal =
-                new Number(data.skillSpeaking ? data.skillSpeaking : 0) +
-                new Number(data.skillReading ? data.skillReading : 0) +
-                new Number(data.skillWriting ? data.skillWriting : 0) +
-                new Number(data.skillListening ? data.skillListening : 0);
+            if (data.skillListening < 0) {
+                resolve({ message: "error" });
+            } else {
+                let pointtotal =
+                    new Number(data.skillSpeaking ? data.skillSpeaking : 0) +
+                    new Number(data.skillReading ? data.skillReading : 0) +
+                    new Number(data.skillWriting ? data.skillWriting : 0) +
+                    new Number(data.skillListening ? data.skillListening : 0);
 
-            console.log("pointtotal: ", pointtotal);
-            let update = await db.point.update(
-                {
-                    numberPoint: pointtotal,
-                    result: data.result,
-                    skillListening: data.skillListening,
-                    skillReading: data.skillReading,
-                    skillSpeaking: data.skillSpeaking,
-                    skillWriting: data.skillWriting,
-                    studentId: data.studentId,
-                    classesId: data.classesId,
-                },
-                {
-                    where: {
-                        id: data.id,
+                let update = await db.point.update(
+                    {
+                        numberPoint: pointtotal,
+                        result: data.result,
+                        skillListening: data.skillListening,
+                        skillReading: data.skillReading,
+                        skillSpeaking: data.skillSpeaking,
+                        skillWriting: data.skillWriting,
+                        studentId: data.studentId,
+                        classesId: data.classesId,
                     },
-                }
-            );
-            resolve({ message: "Update Successfully", data: update });
+                    {
+                        where: {
+                            id: data.id,
+                        },
+                    }
+                );
+                resolve({ message: "Update Successfully", data: update });
+            }
         } catch (e) {
             reject(e);
         }
