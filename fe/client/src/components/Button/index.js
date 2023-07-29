@@ -33,6 +33,8 @@ function BtnRegister(props) {
     };
 
     const handleDateArrive = async (e) => {
+        // let datenow = new Date().getTime();
+        // let datechoose = new Date(e.target.value).getTime();
         let datenow = new Date();
         let datechoose = new Date(e.target.value);
         let datenow_day = datenow.getDate();
@@ -41,18 +43,38 @@ function BtnRegister(props) {
         let datechoose_day = datechoose.getDate();
         let datechoose_month = datechoose.getMonth();
         let datechoose_year = datechoose.getFullYear();
-        if (
-            datenow_day > datechoose_day ||
-            datenow_month > datechoose_month ||
-            datenow_year > datechoose_year
-        ) {
-            info("Ngày hẹn không hợp lý");
-            setDate(false);
+        if (datenow_month === datechoose_month) {
+            if (
+                datenow_day > datechoose_day ||
+                // datenow_month > datechoose_month ||
+                datenow_year > datechoose_year
+                // datechoose < datenow
+            ) {
+                info("Ngày hẹn không hợp lý");
+                setDate(false);
+            } else {
+                setDate(true);
+                let a = await consultAPI.checkStaff({ dateArrive: e.target.value });
+                setCheckStaff(a.data.data);
+            }
         } else {
             setDate(true);
             let a = await consultAPI.checkStaff({ dateArrive: e.target.value });
             setCheckStaff(a.data.data);
         }
+        // if (
+        //     datenow_day > datechoose_day ||
+        //     // datenow_month > datechoose_month ||
+        //     datenow_year > datechoose_year
+        //     // datechoose < datenow
+        // ) {
+        //     info("Ngày hẹn không hợp lý");
+        //     setDate(false);
+        // } else {
+        //     setDate(true);
+        //     let a = await consultAPI.checkStaff({ dateArrive: e.target.value });
+        //     setCheckStaff(a.data.data);
+        // }
     };
 
     //Xy ly hien thị so luong đc đki tu vấn

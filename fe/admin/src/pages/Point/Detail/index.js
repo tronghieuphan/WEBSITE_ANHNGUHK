@@ -75,6 +75,7 @@ function DetailPoint(props) {
                 //CREATE
                 else {
                     handleCreate(e);
+                
                 }
             }
         });
@@ -152,7 +153,7 @@ function DetailPoint(props) {
                             name="skillReading"
                             rules={[{ required: true, message: "Vui lòng nhập thông tin !" }]}
                         >
-                            <Input type="number" />
+                            <Input type="number"/>
                         </Form.Item>
                     ) : (
                         ""

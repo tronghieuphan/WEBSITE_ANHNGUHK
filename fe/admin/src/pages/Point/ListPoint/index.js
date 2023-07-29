@@ -15,6 +15,7 @@ import {
     deleteSuccess,
     exist,
     successInfo,
+    errorInfo,
 } from "../../../components/Dialog/Dialog";
 import { useDispatch } from "react-redux";
 import pointAPI from "../../../services/pointAPI";
@@ -86,7 +87,9 @@ function PointListClass() {
     // SỬA
     const handleUpdate = async (obj) => {
         const data = await pointAPI.update(obj);
-        if (data.data.message === "Update Successfully") {
+        if (data.data.message === "error") {
+            errorInfo("Điểm nhập không hợp lệ ");
+        } else if (data.data.message === "Update Successfully") {
             successDialog();
             getAllPointClass();
         }
